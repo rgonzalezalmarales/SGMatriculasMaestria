@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31105.61
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGMatriculasMaestria", "SGMatriculasMaestria\SGMatriculasMaestria.csproj", "{F1C31E66-631B-43A7-A1E3-18E2D1F4449B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1C31E66-631B-43A7-A1E3-18E2D1F4449B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1C31E66-631B-43A7-A1E3-18E2D1F4449B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1C31E66-631B-43A7-A1E3-18E2D1F4449B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1C31E66-631B-43A7-A1E3-18E2D1F4449B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9F526BC7-348C-4D48-A4CA-470DD287DCF0}
+	EndGlobalSection
+EndGlobal
