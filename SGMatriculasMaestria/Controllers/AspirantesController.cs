@@ -46,6 +46,11 @@ namespace SGMatriculasMaestria.Controllers
         // GET: Aspirantes/Create
         public IActionResult Create()
         {
+            ViewBag.Especialidades = _context.EspecGraduados.ToList();
+            ViewBag.Ces = _context.Ces.ToList();
+            ViewBag.Pais = _context.Paises.ToList();
+            ViewBag.Municipios = _context.Municipios.ToList();
+            ViewBag.Generos = new List<Sexo> {Sexo.Femenino,Sexo.Masculino};
             return View();
         }
 
