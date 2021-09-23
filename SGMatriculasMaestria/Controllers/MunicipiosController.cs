@@ -26,9 +26,9 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: Municipios/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
@@ -46,6 +46,7 @@ namespace SGMatriculasMaestria.Controllers
         // GET: Municipios/Create
         public IActionResult Create()
         {
+            ViewBag.Provincias = _context.Provincia.ToList();
             return View();
         }
 
@@ -54,8 +55,9 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre")] Municipio municipio)
+        public async Task<IActionResult> Create(Municipio municipio)
         {
+            municipio.Provincia = await _context.Provincia.FindAsync(municipio.Provincia.Id);
             if (ModelState.IsValid)
             {
                 _context.Add(municipio);
@@ -86,7 +88,7 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Nombre")] Municipio municipio)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre")] Municipio municipio)
         {
             if (id != municipio.Id)
             {
@@ -117,9 +119,9 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: Municipios/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
@@ -145,7 +147,7 @@ namespace SGMatriculasMaestria.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MunicipioExists(string id)
+        private bool MunicipioExists(int id)
         {
             return _context.Municipios.Any(e => e.Id == id);
         }

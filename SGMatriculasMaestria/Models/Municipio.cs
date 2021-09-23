@@ -7,7 +7,7 @@ namespace SGMatriculasMaestria.Models
 {
     public class Municipio
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Nombre { get; set; }
         public Provincia Provincia { get; set; }
         public List<CentroTrabajo> CentroTrabajos { get; set; }

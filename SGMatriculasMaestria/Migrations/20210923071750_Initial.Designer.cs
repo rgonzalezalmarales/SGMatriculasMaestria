@@ -7,18 +7,18 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SGMatriculasMaestria.Data;
 
-namespace SGMatriculasMaestria.Data.Migrations
+namespace SGMatriculasMaestria.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210912224927_InitialMigratio")]
-    partial class InitialMigratio
+    [Migration("20210923071750_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.8")
+                .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -220,7 +220,8 @@ namespace SGMatriculasMaestria.Data.Migrations
             modelBuilder.Entity("SGMatriculasMaestria.Models.Aspirante", b =>
                 {
                     b.Property<string>("CI")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
 
                     b.Property<int?>("CesId")
                         .HasColumnType("int");
@@ -240,8 +241,8 @@ namespace SGMatriculasMaestria.Data.Migrations
                     b.Property<int>("Folio")
                         .HasColumnType("int");
 
-                    b.Property<string>("MunicipioId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("MunicipioId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
@@ -305,8 +306,8 @@ namespace SGMatriculasMaestria.Data.Migrations
                     b.Property<string>("Direccion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MunicipioId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("MunicipioId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
@@ -328,8 +329,8 @@ namespace SGMatriculasMaestria.Data.Migrations
                     b.Property<string>("Descripcion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MunicipioId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("MunicipioId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
@@ -364,6 +365,7 @@ namespace SGMatriculasMaestria.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Nombre")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -382,9 +384,11 @@ namespace SGMatriculasMaestria.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Titulo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Version")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -405,12 +409,12 @@ namespace SGMatriculasMaestria.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("AspiranteCI")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(11)");
 
-                    b.Property<int?>("CategDocenteId")
+                    b.Property<int>("CategDocenteId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CentroTrabajoId")
+                    b.Property<int>("CentroTrabajoId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("FechaCulminacion")
@@ -422,13 +426,14 @@ namespace SGMatriculasMaestria.Data.Migrations
                     b.Property<DateTime>("FechaMatricula")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("MaestriaId")
+                    b.Property<int>("MaestriaId")
                         .HasColumnType("int");
 
                     b.Property<string>("MotivoSolicitud")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SecretarioPostgId")
+                    b.Property<int>("SecretarioPostgId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -448,8 +453,10 @@ namespace SGMatriculasMaestria.Data.Migrations
 
             modelBuilder.Entity("SGMatriculasMaestria.Models.Municipio", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
@@ -622,19 +629,27 @@ namespace SGMatriculasMaestria.Data.Migrations
 
                     b.HasOne("SGMatriculasMaestria.Models.CategDocente", "CategDocente")
                         .WithMany("Matriculas")
-                        .HasForeignKey("CategDocenteId");
+                        .HasForeignKey("CategDocenteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SGMatriculasMaestria.Models.CentroTrabajo", "CentroTrabajo")
                         .WithMany("Matriculas")
-                        .HasForeignKey("CentroTrabajoId");
+                        .HasForeignKey("CentroTrabajoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SGMatriculasMaestria.Models.Maestria", "Maestria")
                         .WithMany("Matriculas")
-                        .HasForeignKey("MaestriaId");
+                        .HasForeignKey("MaestriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SGMatriculasMaestria.Models.SecretarioPostg", "SecretarioPostg")
                         .WithMany("Matriculas")
-                        .HasForeignKey("SecretarioPostgId");
+                        .HasForeignKey("SecretarioPostgId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Aspirante");
 
