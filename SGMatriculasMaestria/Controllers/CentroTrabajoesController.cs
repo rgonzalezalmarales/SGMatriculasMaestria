@@ -46,6 +46,7 @@ namespace SGMatriculasMaestria.Controllers
         // GET: CentroTrabajoes/Create
         public IActionResult Create()
         {
+            ViewBag.Municipios = _context.Municipios.ToList();
             return View();
         }
 

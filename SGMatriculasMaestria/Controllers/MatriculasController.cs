@@ -58,10 +58,17 @@ namespace SGMatriculasMaestria.Controllers
         public async Task<IActionResult> Create(Matricula matricula)
         {
             if (ModelState.IsValid)
-            {                
-                _context.Add(matricula);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+            {
+                var aspirante =await _context.Aspirantes.FindAsync(matricula.Aspirante.CI);
+                if (aspirante is not null)
+                {
+                    matricula.Aspirante = aspirante;
+                    _context.Add(matricula);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                ModelState.AddModelError("no user", "no existe el usuario");
+                
             }
             return View(matricula);
         }

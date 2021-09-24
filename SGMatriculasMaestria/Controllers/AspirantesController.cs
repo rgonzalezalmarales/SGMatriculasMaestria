@@ -49,8 +49,7 @@ namespace SGMatriculasMaestria.Controllers
             ViewBag.Especialidades = _context.EspecGraduados.ToList();
             ViewBag.Ces = _context.Ces.ToList();
             ViewBag.Pais = _context.Paises.ToList();
-            ViewBag.Municipios = _context.Municipios.ToList();
-            ViewBag.Generos = new List<Sexo> {Sexo.Femenino,Sexo.Masculino};
+            ViewBag.Municipios = _context.Municipios.ToList();            
             return View();
         }
 
@@ -62,7 +61,7 @@ namespace SGMatriculasMaestria.Controllers
         public async Task<IActionResult> Create([Bind("CI,Nombre,PrimerApellido,DireccionParticular,Telefono,Email,FechaGraduacion,Tomo,Folio,Numero,Sexo")] Aspirante aspirante)
         {
             if (ModelState.IsValid)
-            {
+            {                
                 _context.Add(aspirante);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -79,6 +78,10 @@ namespace SGMatriculasMaestria.Controllers
             }
 
             var aspirante = await _context.Aspirantes.FindAsync(id);
+            ViewBag.Especialidades = _context.EspecGraduados.ToList();
+            ViewBag.Ces = _context.Ces.ToList();
+            ViewBag.Pais = _context.Paises.ToList();
+            ViewBag.Municipios = _context.Municipios.ToList();
             if (aspirante == null)
             {
                 return NotFound();
