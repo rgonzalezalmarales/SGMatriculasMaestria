@@ -22,7 +22,7 @@ namespace SGMatriculasMaestria.Controllers
         // GET: Matriculas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Matricula.ToListAsync());
+            return View(await _context.Matricula.Include(x=>x.Aspirante).ToListAsync());
         }
 
         // GET: Matriculas/Details/5
@@ -47,6 +47,9 @@ namespace SGMatriculasMaestria.Controllers
         public IActionResult Create()
         {
             ViewBag.Facultades = _context.Facultades.ToList();
+            ViewBag.CategoriasDocentes = _context.CategDocentes.ToList();
+            ViewBag.SecretarioPost = _context.SecretarioPostgrados.ToList();
+            ViewBag.CentrosTrabajo = _context.CentroTrabajos.ToList();
             return View();
         }
 
@@ -57,8 +60,11 @@ namespace SGMatriculasMaestria.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Matricula matricula)
         {
-            if (ModelState.IsValid)
-            {
+            matricula.Maestria = _context.Maestrias.Where(x => x.Id == matricula.Maestria.Id).Include(x => x.Facultad).FirstOrDefault();
+            matricula.CategDocente = _context.CategDocentes.Where(x => x.Id == matricula.CategDocente.Id).FirstOrDefault();
+            matricula.CentroTrabajo = _context.CentroTrabajos.Where(x => x.Id == matricula.CentroTrabajo.Id).FirstOrDefault();
+            matricula.SecretarioPostg = _context.SecretarioPostgrados.Where(x => x.Id == matricula.SecretarioPostg.Id).FirstOrDefault();
+            
                 var aspirante =await _context.Aspirantes.FindAsync(matricula.Aspirante.CI);
                 if (aspirante is not null)
                 {
@@ -69,13 +75,17 @@ namespace SGMatriculasMaestria.Controllers
                 }
                 ModelState.AddModelError("no user", "no existe el usuario");
                 
-            }
+            
             return View(matricula);
         }
 
         // GET: Matriculas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewBag.Facultades = _context.Facultades.ToList();
+            ViewBag.CategoriasDocentes = _context.CategDocentes.ToList();
+            ViewBag.SecretarioPost = _context.SecretarioPostgrados.ToList();
+            ViewBag.CentrosTrabajo = _context.CentroTrabajos.ToList();
             if (id == null)
             {
                 return NotFound();

@@ -94,7 +94,7 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("CI,Nombre,PrimerApellido,DireccionParticular,Telefono,Email,FechaGraduacion,Tomo,Folio,Numero,Sexo")] Aspirante aspirante)
+        public async Task<IActionResult> Edit(string id,Aspirante aspirante)
         {
             if (id != aspirante.CI)
             {

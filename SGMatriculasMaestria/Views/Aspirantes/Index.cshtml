@@ -10,8 +10,9 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
+<div class="table-responsive"></div>
+<table id="tableaspirantes" class="table table-hover table-bordered">
+    <thead class="thead-light">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Nombre)
@@ -47,44 +48,62 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrimerApellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DireccionParticular)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefono)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaGraduacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tomo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Folio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Numero)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sexo)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CI">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CI">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CI">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrimerApellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DireccionParticular)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaGraduacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tomo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Folio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Numero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sexo)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CI">Edit</a> 
+                    <a asp-action="Details" asp-route-id="@item.CI">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.CI">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+@section scripts
+{
+    <script>
+        $(function () {
+            $('#tableaspirantes').DataTable({
+                "order": [[2, 'asc']],
+                'paging': true,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'scrollX': true,
+                'scrollY': true,
+                'autoWidth': true
+            });
+        })
+    </script>
+}

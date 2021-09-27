@@ -1,6 +1,6 @@
 ﻿$("#FacultadesSelect").change(function () {
     var facultad = $("#FacultadesSelect").val();
-    var url = "../Maestrias/GetMaestriasByFacultad";
+    var url = "/Maestrias/GetMaestriasByFacultad";
 
     $.getJSON(url, { facultad: facultad }, function (data) {
         var item = "";
