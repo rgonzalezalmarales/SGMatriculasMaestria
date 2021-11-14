@@ -1,0 +1,97 @@
+﻿@model IEnumerable<SGMatriculasMaestria.Models.Maestria>
+
+@{
+    ViewData["Title"] = "Maestrías";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+
+    <!-- Page Heading -->
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-normal">Listado de Maestrías</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="tablemaestrias" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Titulo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Version)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Facultad)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                      <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Titulo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Version)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Facultad.Nombre)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success btn-circle btn-sm">
+                                        <i class="fas fa-fw fa-wrench"></i>
+                                    </a>
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-circle btn-sm">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-circle btn-sm">
+                                        <i class="fas fa-trash">
+                                        </i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div>
+        <p>
+            <a asp-action="Create" class="btn btn-info btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-plus-circle"></i>
+                </span>
+                <span class="text">Agregar Maestria</span>
+            </a>
+        </p>
+    </div>
+</div>
+@section scripts
+{
+    <script>
+        $(function () {
+            $('#tablemaestrias').DataTable({
+                "order": [[2, 'asc']],
+                'paging': true,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'scrollX': true,
+                'scrollY': true,
+                'autoWidth': true
+            });
+        })
+    </script>
+}
+<!-- /.container-fluid -->
+<!-- End of Main Content -->

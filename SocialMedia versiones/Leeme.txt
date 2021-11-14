@@ -1,0 +1,9 @@
+Video 17
+Adicione prop IsDev en start.cs
+Archivos de confguracion DB local db y IIS
+
+
+
+Video19
+Extenxion metodos
+refactory postrepository (Update)

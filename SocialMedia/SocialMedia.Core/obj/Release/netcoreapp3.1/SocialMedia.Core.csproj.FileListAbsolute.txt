@@ -1,0 +1,9 @@
+D:\Users\ralmarales\source\repos\SocialMedia\SocialMedia.Core\bin\Release\netcoreapp3.1\SocialMedia.Core.deps.json
+D:\Users\ralmarales\source\repos\SocialMedia\SocialMedia.Core\bin\Release\netcoreapp3.1\SocialMedia.Core.dll
+D:\Users\ralmarales\source\repos\SocialMedia\SocialMedia.Core\bin\Release\netcoreapp3.1\SocialMedia.Core.pdb
+D:\Users\ralmarales\source\repos\SocialMedia\SocialMedia.Core\obj\Release\netcoreapp3.1\SocialMedia.Core.csproj.AssemblyReference.cache
+D:\Users\ralmarales\source\repos\SocialMedia\SocialMedia.Core\obj\Release\netcoreapp3.1\SocialMedia.Core.AssemblyInfoInputs.cache
+D:\Users\ralmarales\source\repos\SocialMedia\SocialMedia.Core\obj\Release\netcoreapp3.1\SocialMedia.Core.AssemblyInfo.cs
+D:\Users\ralmarales\source\repos\SocialMedia\SocialMedia.Core\obj\Release\netcoreapp3.1\SocialMedia.Core.csproj.CoreCompileInputs.cache
+D:\Users\ralmarales\source\repos\SocialMedia\SocialMedia.Core\obj\Release\netcoreapp3.1\SocialMedia.Core.dll
+D:\Users\ralmarales\source\repos\SocialMedia\SocialMedia.Core\obj\Release\netcoreapp3.1\SocialMedia.Core.pdb

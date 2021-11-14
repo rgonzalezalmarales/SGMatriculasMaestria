@@ -1,0 +1,920 @@
+Microsoft Windows [Versión 10.0.17763.2061]
+(c) 2018 Microsoft Corporation. Todos los derechos reservados.
+
+C:\Windows\system32>donet -help
+"donet" no se reconoce como un comando interno o externo,
+programa o archivo por lotes ejecutable.
+
+C:\Windows\system32>dotnet -help
+Unknown option: -help
+SDK de .NET (5.0.300)
+Uso: dotnet [runtime-options] [path-to-application] [arguments]
+
+Ejecute una aplicación de .NET.
+
+runtime-options:
+  --additionalprobingpath <path>   Ruta de acceso que contiene la directiva de sondeo y los ensamblados para los que realizar el sondeo.
+  --additional-deps <path>         Ruta de acceso al archivo deps.json adicional.
+  --depsfile                       Ruta de acceso al archivo <aplicación>.deps.json.
+  --fx-version <version>           Versión de la instancia de Shared Framework instalada que se usará para ejecutar la aplicación.
+  --roll-forward <setting>         Reenviar a la versión del marco (LatestPatch, Minor, LatestMinor, Major, LatestMajor, Disable).
+  --runtimeconfig                  Ruta de acceso al archivo <aplicación>.runtimeconfig.json.
+
+path-to-application:
+  La ruta de acceso al archivo .dll de una aplicación que se ejecutará.
+
+Uso: dotnet [sdk-options] [command] [command-options] [arguments]
+
+Ejecute un comando del SDK de .NET.
+
+sdk-options:
+  -d|--diagnostics  Habilita la salida de diagnóstico.
+  -h|--help         Muestra ayuda de la línea de comandos.
+  --info            Muestra la información de .NET.
+  --list-runtimes   Muestra los runtimes instalados.
+  --list-sdks       Muestra los SDK instalados.
+  --version         Muestra la versión del SDK de .NET en uso.
+
+Comandos de SDK:
+  add               Agrega un paquete o una referencia a un proyecto de .NET.
+  build             Compila un proyecto de .NET.
+  build-server      Interactúe con los servidores que inicia una compilación.
+  clean             Limpia los resultados de compilación de un proyecto .NET.
+  help              Muestra ayuda de la línea de comandos.
+  list              Enumera las referencias de proyecto de un proyecto de .NET.
+  msbuild           Ejecuta comandos de Microsoft Build Engine (MSBuild).
+  new               Crea un nuevo archivo o proyecto de .NET.
+  nuget             Proporciona comandos NuGet adicionales.
+  pack              Crea un paquete de NuGet.
+  publish           Publica un proyecto de .NET para implementación.
+  remove            Quita un paquete o una referencia de un proyecto de .NET.
+  restore           Restaura dependencias especificadas en un proyecto de .NET.
+  run               Compila y ejecuta la salida de un proyecto de .NET.
+  sln               Modifica los archivos de la solución de Visual Studio.
+  store             Almacena los ensamblados especificados en el almacén del paquete de tiempo de ejecución.
+  test              Ejecuta pruebas unitarias usando el ejecutor de pruebas especificado en un proyecto de .NET.
+  tool              Instala o administra herramientas que mejoran la experiencia de .NET.
+  vstest            Ejecuta comandos de Microsoft Test Engine (VSTest).
+
+Comandos adicionales para herramientas incluidas:
+  dev-certs         Crea y administra certificados de desarrollo.
+  fsi               Inicie F# interactivo o ejecute scripts de F#.
+  sql-cache         Herramientas de la línea de comandos de la caché de SQL Server.
+  user-secrets      Administra secretos de usuario de desarrollo.
+  watch             Inicia un monitor de archivo que ejecuta un comando cuando los archivos cambian.
+
+Ejecute "dotnet [comando] --help" para más información sobre un comando.
+
+C:\Windows\system32>dotnet --help
+SDK de .NET (5.0.300)
+Uso: dotnet [runtime-options] [path-to-application] [arguments]
+
+Ejecute una aplicación de .NET.
+
+runtime-options:
+  --additionalprobingpath <path>   Ruta de acceso que contiene la directiva de sondeo y los ensamblados para los que realizar el sondeo.
+  --additional-deps <path>         Ruta de acceso al archivo deps.json adicional.
+  --depsfile                       Ruta de acceso al archivo <aplicación>.deps.json.
+  --fx-version <version>           Versión de la instancia de Shared Framework instalada que se usará para ejecutar la aplicación.
+  --roll-forward <setting>         Reenviar a la versión del marco (LatestPatch, Minor, LatestMinor, Major, LatestMajor, Disable).
+  --runtimeconfig                  Ruta de acceso al archivo <aplicación>.runtimeconfig.json.
+
+path-to-application:
+  La ruta de acceso al archivo .dll de una aplicación que se ejecutará.
+
+Uso: dotnet [sdk-options] [command] [command-options] [arguments]
+
+Ejecute un comando del SDK de .NET.
+
+sdk-options:
+  -d|--diagnostics  Habilita la salida de diagnóstico.
+  -h|--help         Muestra ayuda de la línea de comandos.
+  --info            Muestra la información de .NET.
+  --list-runtimes   Muestra los runtimes instalados.
+  --list-sdks       Muestra los SDK instalados.
+  --version         Muestra la versión del SDK de .NET en uso.
+
+Comandos de SDK:
+  add               Agrega un paquete o una referencia a un proyecto de .NET.
+  build             Compila un proyecto de .NET.
+  build-server      Interactúe con los servidores que inicia una compilación.
+  clean             Limpia los resultados de compilación de un proyecto .NET.
+  help              Muestra ayuda de la línea de comandos.
+  list              Enumera las referencias de proyecto de un proyecto de .NET.
+  msbuild           Ejecuta comandos de Microsoft Build Engine (MSBuild).
+  new               Crea un nuevo archivo o proyecto de .NET.
+  nuget             Proporciona comandos NuGet adicionales.
+  pack              Crea un paquete de NuGet.
+  publish           Publica un proyecto de .NET para implementación.
+  remove            Quita un paquete o una referencia de un proyecto de .NET.
+  restore           Restaura dependencias especificadas en un proyecto de .NET.
+  run               Compila y ejecuta la salida de un proyecto de .NET.
+  sln               Modifica los archivos de la solución de Visual Studio.
+  store             Almacena los ensamblados especificados en el almacén del paquete de tiempo de ejecución.
+  test              Ejecuta pruebas unitarias usando el ejecutor de pruebas especificado en un proyecto de .NET.
+  tool              Instala o administra herramientas que mejoran la experiencia de .NET.
+  vstest            Ejecuta comandos de Microsoft Test Engine (VSTest).
+
+Comandos adicionales para herramientas incluidas:
+  dev-certs         Crea y administra certificados de desarrollo.
+  fsi               Inicie F# interactivo o ejecute scripts de F#.
+  sql-cache         Herramientas de la línea de comandos de la caché de SQL Server.
+  user-secrets      Administra secretos de usuario de desarrollo.
+  watch             Inicia un monitor de archivo que ejecuta un comando cuando los archivos cambian.
+
+Ejecute "dotnet [comando] --help" para más información sobre un comando.
+
+C:\Windows\system32>dotnet new --help
+Uso: new [opciones]
+
+Opciones:
+  -h, --help                 Muestra ayuda para este comando.
+  -l, --list                 Muestra las plantillas que contienen el nombre de plantilla especificado. Si no se especifica ningún nombre, muestra todas las plantillas.
+  -n, --name                 Nombre de la salida que se va a crear. Si no se especifica ningún nombre, se usa el nombre del directorio de salida.
+  -o, --output               Ubicación en la que se colocará el resultado generado.
+  -i, --install              Instala un paquete de origen o de plantilla.
+  -u, --uninstall            Desinstala un paquete de origen o de plantilla.
+  --interactive              Permite que el comando interno dotnet restore se detenga y espere la entrada o acción del usuario (por ejemplo, para completar la autenticación).
+  --nuget-source             Especifica un origen de NuGet para usarlo durante la instalación.
+  --type                     Filtra las plantillas en función de los tipos disponibles. Los valores predefinidos son "proyecto" y "elemento".
+  --dry-run                  Muestra un resumen de lo que sucede si se ejecuta la línea de comandos dada si se crea una plantilla.
+  --force                    Fuerza la generación de contenido aunque cambie a los archivos existentes.
+  -lang, --language          Filtra plantillas en función del idioma y especifica el idioma de la plantilla que se va a crear.
+  --update-check             Compruebe si hay actualizaciones para los paquetes de plantillas instalados actualmente.
+  --update-apply             Compruebe si hay actualizaciones para los paquetes de plantillas instalados actualmente e instale las actualizaciones.
+  --search                   Busca las plantillas en NuGet.org.
+  --author <AUTHOR>          Filtra las plantillas en función del autor. Se aplica a --search y --list.
+  --package <PACKAGE>        Filtra las plantillas en función del id. de paquete de NuGet. Se aplica a --search.
+  --columns <COLUMNS_LIST>   Lista de columnas separadas por comas para mostrar los resultados de --list y --search.
+                             Las columnas admitidas son: idioma, etiquetas, autor y tipo.
+  --columns-all              Muestra todas las columnas en los resultados de --list y --search.
+  --tag <TAG>                Filtra las plantillas en función de la etiqueta. Se aplica a --search y --list.
+
+
+
+C:\Windows\system32>dotnet new webapi --help
+Uso: new [opciones]
+
+Opciones:
+  -h, --help                 Muestra ayuda para este comando.
+  -l, --list                 Muestra las plantillas que contienen el nombre de plantilla especificado. Si no se especifica ningún nombre, muestra todas las plantillas.
+  -n, --name                 Nombre de la salida que se va a crear. Si no se especifica ningún nombre, se usa el nombre del directorio de salida.
+  -o, --output               Ubicación en la que se colocará el resultado generado.
+  -i, --install              Instala un paquete de origen o de plantilla.
+  -u, --uninstall            Desinstala un paquete de origen o de plantilla.
+  --interactive              Permite que el comando interno dotnet restore se detenga y espere la entrada o acción del usuario (por ejemplo, para completar la autenticación).
+  --nuget-source             Especifica un origen de NuGet para usarlo durante la instalación.
+  --type                     Filtra las plantillas en función de los tipos disponibles. Los valores predefinidos son "proyecto" y "elemento".
+  --dry-run                  Muestra un resumen de lo que sucede si se ejecuta la línea de comandos dada si se crea una plantilla.
+  --force                    Fuerza la generación de contenido aunque cambie a los archivos existentes.
+  -lang, --language          Filtra plantillas en función del idioma y especifica el idioma de la plantilla que se va a crear.
+  --update-check             Compruebe si hay actualizaciones para los paquetes de plantillas instalados actualmente.
+  --update-apply             Compruebe si hay actualizaciones para los paquetes de plantillas instalados actualmente e instale las actualizaciones.
+  --search                   Busca las plantillas en NuGet.org.
+  --author <AUTHOR>          Filtra las plantillas en función del autor. Se aplica a --search y --list.
+  --package <PACKAGE>        Filtra las plantillas en función del id. de paquete de NuGet. Se aplica a --search.
+  --columns <COLUMNS_LIST>   Lista de columnas separadas por comas para mostrar los resultados de --list y --search.
+                             Las columnas admitidas son: idioma, etiquetas, autor y tipo.
+  --columns-all              Muestra todas las columnas en los resultados de --list y --search.
+  --tag <TAG>                Filtra las plantillas en función de la etiqueta. Se aplica a --search y --list.
+
+
+ASP.NET Core Web API (C#)
+Autor: Microsoft
+Descripción: A project template for creating an ASP.NET Core application with an example Controller for a RESTful HTTP service. This template can also be used for ASP.NET Core MVC Views and Controllers.
+Opciones:                                                                                                               
+  -au|--auth                 The type of authentication to use                                                          
+                                 None             - No authentication                                                   
+                                 IndividualB2C    - Individual authentication with Azure AD B2C                         
+                                 SingleOrg        - Organizational authentication for a single tenant                   
+                                 Windows          - Windows authentication                                              
+                             Predeterminado: None                                                                       
+
+  --aad-b2c-instance         The Azure Active Directory B2C instance to connect to (use with IndividualB2C auth).       
+                             string - Optional                                                                          
+                             Predeterminado: https://login.microsoftonline.com/tfp/                                     
+
+  -ssp|--susi-policy-id      The sign-in and sign-up policy ID for this project (use with IndividualB2C auth).          
+                             string - Optional                                                                          
+
+  --aad-instance             The Azure Active Directory instance to connect to (use with SingleOrg auth).               
+                             string - Optional                                                                          
+                             Predeterminado: https://login.microsoftonline.com/                                         
+
+  --client-id                The Client ID for this project (use with SingleOrg or IndividualB2C auth).                 
+                             string - Optional                                                                          
+                             Predeterminado: 11111111-1111-1111-11111111111111111                                       
+
+  --domain                   The domain for the directory tenant (use with SingleOrg or IndividualB2C auth).            
+                             string - Optional                                                                          
+                             Predeterminado: qualified.domain.name                                                      
+
+  --default-scope            The API scope the client needs to request to provision an access token. (use with IndividualB2C, SingleOrg).
+                             string - Optional                                                                          
+                             Predeterminado: access_as_user                                                             
+
+  --tenant-id                The TenantId ID of the directory to connect to (use with SingleOrg auth).                  
+                             string - Optional                                                                          
+                             Predeterminado: 22222222-2222-2222-2222-222222222222                                       
+
+  -r|--org-read-access       Whether or not to allow this application read access to the directory (only applies to SingleOrg auth).
+                             bool - Optional                                                                            
+                             Predeterminado: false                                                                      
+
+  --exclude-launch-settings  Whether to exclude launchSettings.json in the generated template.                          
+                             bool - Optional                                                                            
+                             Predeterminado: false                                                                      
+
+  --no-https                 Whether to turn off HTTPS. This option only applies if Individual, IndividualB2C, SingleOrg, or MultiOrg aren't used for --auth.
+                             bool - Optional                                                                            
+                             Predeterminado: false                                                                      
+
+  -uld|--use-local-db        Whether to use LocalDB instead of SQLite. This option only applies if --auth Individual or --auth IndividualB2C is specified.
+                             bool - Optional                                                                            
+                             Predeterminado: false                                                                      
+
+  -f|--framework             The target framework for the project.                                                      
+                                 net5.0           - Target net5.0                                                       
+                                 netcoreapp3.1    - Target netcoreapp3.1                                                
+                                 netcoreapp3.0    - Target netcoreapp3.0                                                
+                                 netcoreapp2.2    - Target netcoreapp2.2                                                
+                                 netcoreapp2.1    - Target netcoreapp2.1                                                
+                             Predeterminado: net5.0                                                                     
+
+  --no-restore               If specified, skips the automatic restore of the project on create.                        
+                             bool - Optional                                                                            
+                             Predeterminado: false                                                                      
+
+  --called-api-url           URL of the API to call from the web app. This option only applies if --auth SingleOrg or --auth IndividualB2C is specified.
+                             string - Optional                                                                          
+                             Predeterminado: https://graph.microsoft.com/v1.0                                           
+
+  --calls-graph              Specifies if the web app calls Microsoft Graph. This option only applies if --auth SingleOrg is specified.
+                             bool - Optional                                                                            
+                             Predeterminado: false                                                                      
+
+  --called-api-scopes        Scopes to request to call the API from the web app. This option only applies if --auth SingleOrg or --auth IndividualB2C is specified.
+                             string - Optional                                                                          
+                             Predeterminado: user.read                                                                  
+
+  --no-openapi               Disable OpenAPI (Swagger) support                                                          
+                             bool - Optional                                                                            
+                             Predeterminado: false                                                                      
+
+
+
+C:\Windows\system32>cd /D D:\Users\ralmarales\source\repos
+
+D:\Users\ralmarales\source\repos>dotnet new webapi -f netcoreapp3.1 -o HolaApi
+La plantilla "ASP.NET Core Web API" se creó correctamente.
+
+Procesando acciones posteriores a la creación...
+Ejecutando "dotnet restore" en HolaApi\HolaApi.csproj...
+  Determinando los proyectos que se van a restaurar...
+  Se ha restaurado D:\Users\ralmarales\source\repos\HolaApi\HolaApi.csproj (en 456 ms).
+Restauración realizada correctamente.
+
+
+D:\Users\ralmarales\source\repos>code -r HolaApi
+"code" no se reconoce como un comando interno o externo,
+programa o archivo por lotes ejecutable.
+
+D:\Users\ralmarales\source\repos>Code -v
+"Code" no se reconoce como un comando interno o externo,
+programa o archivo por lotes ejecutable.
+
+D:\Users\ralmarales\source\repos>%~dp0..\Code
+El sistema no puede encontrar la ruta especificada.
+
+D:\Users\ralmarales\source\repos>Code - Insiders -v
+"Code" no se reconoce como un comando interno o externo,
+programa o archivo por lotes ejecutable.
+
+D:\Users\ralmarales\source\repos>"Code - Insiders" -v
+""Code - Insiders"" no se reconoce como un comando interno o externo,
+programa o archivo por lotes ejecutable.
+
+D:\Users\ralmarales\source\repos>cd HolaApi
+
+D:\Users\ralmarales\source\repos\HolaApi>dotnet run
+info: Microsoft.Hosting.Lifetime[0]
+      Now listening on: https://localhost:5001
+info: Microsoft.Hosting.Lifetime[0]
+      Now listening on: http://localhost:5000
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: D:\Users\ralmarales\source\repos\HolaApi
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+
+D:\Users\ralmarales\source\repos\HolaApi>cd ..
+
+D:\Users\ralmarales\source\repos>dotnet new webapi -f netcoreapp3.1 -o Usuarios
+La plantilla "ASP.NET Core Web API" se creó correctamente.
+
+Procesando acciones posteriores a la creación...
+Ejecutando "dotnet restore" en Usuarios\Usuarios.csproj...
+  Determinando los proyectos que se van a restaurar...
+  Se ha restaurado D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj (en 251 ms).
+Restauración realizada correctamente.
+
+
+D:\Users\ralmarales\source\repos>dot net add package Microsoft.EntityFramework.SqlServer
+"dot" no se reconoce como un comando interno o externo,
+programa o archivo por lotes ejecutable.
+
+D:\Users\ralmarales\source\repos>dotnet add package Microsoft.EntityFramework.SqlServer
+No se encuentra ningún proyecto en "D:\Users\ralmarales\source\repos\".
+Uso: dotnet add <PROJECT> package [opciones] <PACKAGE_NAME>
+
+Argumentos:
+  <PROJECT>        Archivo del proyecto sobre el que se va a operar. Si no se especifica un archivo, el comando buscará uno en el directorio actual.
+  <PACKAGE_NAME>   La referencia de paquete para agregar.
+
+Opciones:
+  -h, --help                          Muestra ayuda de la línea de comandos.
+  -v, --version <VERSION>             La versión del paquete para agregar.
+  -f, --framework <FRAMEWORK>         Agrega una referencia solo cuando el destino es una plataforma específica.
+  -n, --no-restore                    Agrega la referencia sin realizar la vista previa de restauración y la comprobación de compatibilidad.
+  -s, --source <SOURCE>               El origen de un paquete de NuGet para usarlo durante la restauración.
+  --package-directory <PACKAGE_DIR>   El directorio en el que se restauran paquetes.
+  --interactive                       Permite que el comando se detenga y espere la entrada o acción del usuario (por ejemplo, para autenticarse).
+  --prerelease                        Permite que se instalen paquetes de versión preliminar.
+
+D:\Users\ralmarales\source\repos>cd Usuarios
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet add package Microsoft.EntityFramework.SqlServer
+  Determinando los proyectos que se van a restaurar...
+  Writing C:\Users\ralmarales\AppData\Local\Temp\tmp35D8.tmp
+info : Agregando PackageReference para el paquete "Microsoft.EntityFramework.SqlServer" al proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+error: No se puede cargar el índice de servicio del origen https://api.nuget.org/v3/index.json.
+error:   Response status code does not indicate success: 407 (Proxy Authentication Required).
+
+
+Usage: NuGet.CommandLine.XPlat.dll package add [options]
+
+Options:
+  -h|--help               Show help information
+  --force-english-output  Fuerza la aplicación a ejecutarse mediante una referencia cultural invariable basada en el inglés.
+  --package               Id. del paquete que se va a agregar.
+  --version               Versión del paquete que se agregará.
+  -d|--dg-file            Ruta de acceso al archivo de gráficos de dependencia que se usará para restaurar la vista previa y comprobar la compatibilidad.
+  -p|--project            Ruta de acceso al archivo de proyecto.
+  -f|--framework          Los marcos de trabajo para los que se debe agregar la referencia de paquete.
+  -n|--no-restore         No realiza la vista previa de restauración y la comprobación de compatibilidad. La referencia de paquete agregada será incondicional.
+  -s|--source             Especifica orígenes de paquete NuGet para usar durante la restauración.
+  --package-directory     Directorio donde restaurar los paquetes.
+  --interactive           Permite usar el comando para bloquear y requerir la acción manual para operaciones como la autenticación.
+  --prerelease            Permite que se instalen paquetes de versión preliminar.
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+  Determinando los proyectos que se van a restaurar...
+  Writing C:\Users\ralmarales\AppData\Local\Temp\tmpB36.tmp
+info : Agregando PackageReference para el paquete "Microsoft.EntityFrameworkCore.SqlServer" al proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+error: No se puede cargar el índice de servicio del origen https://api.nuget.org/v3/index.json.
+error:   Response status code does not indicate success: 407 (Proxy Authentication Required).
+
+
+Usage: NuGet.CommandLine.XPlat.dll package add [options]
+
+Options:
+  -h|--help               Show help information
+  --force-english-output  Fuerza la aplicación a ejecutarse mediante una referencia cultural invariable basada en el inglés.
+  --package               Id. del paquete que se va a agregar.
+  --version               Versión del paquete que se agregará.
+  -d|--dg-file            Ruta de acceso al archivo de gráficos de dependencia que se usará para restaurar la vista previa y comprobar la compatibilidad.
+  -p|--project            Ruta de acceso al archivo de proyecto.
+  -f|--framework          Los marcos de trabajo para los que se debe agregar la referencia de paquete.
+  -n|--no-restore         No realiza la vista previa de restauración y la comprobación de compatibilidad. La referencia de paquete agregada será incondicional.
+  -s|--source             Especifica orígenes de paquete NuGet para usar durante la restauración.
+  --package-directory     Directorio donde restaurar los paquetes.
+  --interactive           Permite usar el comando para bloquear y requerir la acción manual para operaciones como la autenticación.
+  --prerelease            Permite que se instalen paquetes de versión preliminar.
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+  Determinando los proyectos que se van a restaurar...
+  Writing C:\Users\ralmarales\AppData\Local\Temp\tmp458A.tmp
+info : Agregando PackageReference para el paquete "Microsoft.EntityFrameworkCore.SqlServer" al proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+error: No se puede cargar el índice de servicio del origen https://api.nuget.org/v3/index.json.
+error:   The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+
+
+Usage: NuGet.CommandLine.XPlat.dll package add [options]
+
+Options:
+  -h|--help               Show help information
+  --force-english-output  Fuerza la aplicación a ejecutarse mediante una referencia cultural invariable basada en el inglés.
+  --package               Id. del paquete que se va a agregar.
+  --version               Versión del paquete que se agregará.
+  -d|--dg-file            Ruta de acceso al archivo de gráficos de dependencia que se usará para restaurar la vista previa y comprobar la compatibilidad.
+  -p|--project            Ruta de acceso al archivo de proyecto.
+  -f|--framework          Los marcos de trabajo para los que se debe agregar la referencia de paquete.
+  -n|--no-restore         No realiza la vista previa de restauración y la comprobación de compatibilidad. La referencia de paquete agregada será incondicional.
+  -s|--source             Especifica orígenes de paquete NuGet para usar durante la restauración.
+  --package-directory     Directorio donde restaurar los paquetes.
+  --interactive           Permite usar el comando para bloquear y requerir la acción manual para operaciones como la autenticación.
+  --prerelease            Permite que se instalen paquetes de versión preliminar.
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+  Determinando los proyectos que se van a restaurar...
+  Writing C:\Users\ralmarales\AppData\Local\Temp\tmp99DA.tmp
+info : Agregando PackageReference para el paquete "Microsoft.EntityFrameworkCore.SqlServer" al proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+error: No se puede cargar el índice de servicio del origen https://api.nuget.org/v3/index.json.
+error:   The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+
+
+Usage: NuGet.CommandLine.XPlat.dll package add [options]
+
+Options:
+  -h|--help               Show help information
+  --force-english-output  Fuerza la aplicación a ejecutarse mediante una referencia cultural invariable basada en el inglés.
+  --package               Id. del paquete que se va a agregar.
+  --version               Versión del paquete que se agregará.
+  -d|--dg-file            Ruta de acceso al archivo de gráficos de dependencia que se usará para restaurar la vista previa y comprobar la compatibilidad.
+  -p|--project            Ruta de acceso al archivo de proyecto.
+  -f|--framework          Los marcos de trabajo para los que se debe agregar la referencia de paquete.
+  -n|--no-restore         No realiza la vista previa de restauración y la comprobación de compatibilidad. La referencia de paquete agregada será incondicional.
+  -s|--source             Especifica orígenes de paquete NuGet para usar durante la restauración.
+  --package-directory     Directorio donde restaurar los paquetes.
+  --interactive           Permite usar el comando para bloquear y requerir la acción manual para operaciones como la autenticación.
+  --prerelease            Permite que se instalen paquetes de versión preliminar.
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+  Determinando los proyectos que se van a restaurar...
+  Writing C:\Users\ralmarales\AppData\Local\Temp\tmpCB36.tmp
+info : Agregando PackageReference para el paquete "Microsoft.EntityFrameworkCore.SqlServer" al proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+error: No se puede cargar el índice de servicio del origen https://api.nuget.org/v3/index.json.
+error:   Response status code does not indicate success: 407 (Proxy Authentication Required).
+
+
+Usage: NuGet.CommandLine.XPlat.dll package add [options]
+
+Options:
+  -h|--help               Show help information
+  --force-english-output  Fuerza la aplicación a ejecutarse mediante una referencia cultural invariable basada en el inglés.
+  --package               Id. del paquete que se va a agregar.
+  --version               Versión del paquete que se agregará.
+  -d|--dg-file            Ruta de acceso al archivo de gráficos de dependencia que se usará para restaurar la vista previa y comprobar la compatibilidad.
+  -p|--project            Ruta de acceso al archivo de proyecto.
+  -f|--framework          Los marcos de trabajo para los que se debe agregar la referencia de paquete.
+  -n|--no-restore         No realiza la vista previa de restauración y la comprobación de compatibilidad. La referencia de paquete agregada será incondicional.
+  -s|--source             Especifica orígenes de paquete NuGet para usar durante la restauración.
+  --package-directory     Directorio donde restaurar los paquetes.
+  --interactive           Permite usar el comando para bloquear y requerir la acción manual para operaciones como la autenticación.
+  --prerelease            Permite que se instalen paquetes de versión preliminar.
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+  Determinando los proyectos que se van a restaurar...
+  Writing C:\Users\ralmarales\AppData\Local\Temp\tmp918F.tmp
+info : Agregando PackageReference para el paquete "Microsoft.EntityFrameworkCore.SqlServer" al proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+error: No se puede cargar el índice de servicio del origen https://api.nuget.org/v3/index.json.
+error:   El parámetro no es correcto.
+
+
+Usage: NuGet.CommandLine.XPlat.dll package add [options]
+
+Options:
+  -h|--help               Show help information
+  --force-english-output  Fuerza la aplicación a ejecutarse mediante una referencia cultural invariable basada en el inglés.
+  --package               Id. del paquete que se va a agregar.
+  --version               Versión del paquete que se agregará.
+  -d|--dg-file            Ruta de acceso al archivo de gráficos de dependencia que se usará para restaurar la vista previa y comprobar la compatibilidad.
+  -p|--project            Ruta de acceso al archivo de proyecto.
+  -f|--framework          Los marcos de trabajo para los que se debe agregar la referencia de paquete.
+  -n|--no-restore         No realiza la vista previa de restauración y la comprobación de compatibilidad. La referencia de paquete agregada será incondicional.
+  -s|--source             Especifica orígenes de paquete NuGet para usar durante la restauración.
+  --package-directory     Directorio donde restaurar los paquetes.
+  --interactive           Permite usar el comando para bloquear y requerir la acción manual para operaciones como la autenticación.
+  --prerelease            Permite que se instalen paquetes de versión preliminar.
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+  Determinando los proyectos que se van a restaurar...
+  Writing C:\Users\ralmarales\AppData\Local\Temp\tmp94B6.tmp
+info : Agregando PackageReference para el paquete "Microsoft.EntityFrameworkCore.SqlServer" al proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+error: No se puede cargar el índice de servicio del origen https://api.nuget.org/v3/index.json.
+error:   The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+
+
+Usage: NuGet.CommandLine.XPlat.dll package add [options]
+
+Options:
+  -h|--help               Show help information
+  --force-english-output  Fuerza la aplicación a ejecutarse mediante una referencia cultural invariable basada en el inglés.
+  --package               Id. del paquete que se va a agregar.
+  --version               Versión del paquete que se agregará.
+  -d|--dg-file            Ruta de acceso al archivo de gráficos de dependencia que se usará para restaurar la vista previa y comprobar la compatibilidad.
+  -p|--project            Ruta de acceso al archivo de proyecto.
+  -f|--framework          Los marcos de trabajo para los que se debe agregar la referencia de paquete.
+  -n|--no-restore         No realiza la vista previa de restauración y la comprobación de compatibilidad. La referencia de paquete agregada será incondicional.
+  -s|--source             Especifica orígenes de paquete NuGet para usar durante la restauración.
+  --package-directory     Directorio donde restaurar los paquetes.
+  --interactive           Permite usar el comando para bloquear y requerir la acción manual para operaciones como la autenticación.
+  --prerelease            Permite que se instalen paquetes de versión preliminar.
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+  Determinando los proyectos que se van a restaurar...
+  Writing C:\Users\ralmarales\AppData\Local\Temp\tmp29BE.tmp
+info : Agregando PackageReference para el paquete "Microsoft.EntityFrameworkCore.SqlServer" al proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+error: No se puede cargar el índice de servicio del origen https://api.nuget.org/v3/index.json.
+error:   The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+
+
+Usage: NuGet.CommandLine.XPlat.dll package add [options]
+
+Options:
+  -h|--help               Show help information
+  --force-english-output  Fuerza la aplicación a ejecutarse mediante una referencia cultural invariable basada en el inglés.
+  --package               Id. del paquete que se va a agregar.
+  --version               Versión del paquete que se agregará.
+  -d|--dg-file            Ruta de acceso al archivo de gráficos de dependencia que se usará para restaurar la vista previa y comprobar la compatibilidad.
+  -p|--project            Ruta de acceso al archivo de proyecto.
+  -f|--framework          Los marcos de trabajo para los que se debe agregar la referencia de paquete.
+  -n|--no-restore         No realiza la vista previa de restauración y la comprobación de compatibilidad. La referencia de paquete agregada será incondicional.
+  -s|--source             Especifica orígenes de paquete NuGet para usar durante la restauración.
+  --package-directory     Directorio donde restaurar los paquetes.
+  --interactive           Permite usar el comando para bloquear y requerir la acción manual para operaciones como la autenticación.
+  --prerelease            Permite que se instalen paquetes de versión preliminar.
+
+D:\Users\ralmarales\source\repos\Usuarios>nuget.exe config -set http_proxy=http://my.co.cu:3128
+"nuget.exe" no se reconoce como un comando interno o externo,
+programa o archivo por lotes ejecutable.
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet config -set http_proxy=http://my.co.cu:3128
+No se pudo ejecutar porque no se encontró el comando o el archivo especificado.
+Algunas de las posibles causas son :
+  * Escribió mal un comando dotnet integrado.
+  * Pretendía ejecutar un programa .NET, pero dotnet-config no existe.
+  * Pretendía ejecutar una herramienta global, pero no se encontró ningún ejecutable con prefijo dotnet con este nombre en PATH.
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+  Determinando los proyectos que se van a restaurar...
+  Writing C:\Users\ralmarales\AppData\Local\Temp\tmpCA11.tmp
+info : Agregando PackageReference para el paquete "Microsoft.EntityFrameworkCore.SqlServer" al proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+error: No se puede cargar el índice de servicio del origen https://api.nuget.org/v3/index.json.
+error:   The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+
+
+Usage: NuGet.CommandLine.XPlat.dll package add [options]
+
+Options:
+  -h|--help               Show help information
+  --force-english-output  Fuerza la aplicación a ejecutarse mediante una referencia cultural invariable basada en el inglés.
+  --package               Id. del paquete que se va a agregar.
+  --version               Versión del paquete que se agregará.
+  -d|--dg-file            Ruta de acceso al archivo de gráficos de dependencia que se usará para restaurar la vista previa y comprobar la compatibilidad.
+  -p|--project            Ruta de acceso al archivo de proyecto.
+  -f|--framework          Los marcos de trabajo para los que se debe agregar la referencia de paquete.
+  -n|--no-restore         No realiza la vista previa de restauración y la comprobación de compatibilidad. La referencia de paquete agregada será incondicional.
+  -s|--source             Especifica orígenes de paquete NuGet para usar durante la restauración.
+  --package-directory     Directorio donde restaurar los paquetes.
+  --interactive           Permite usar el comando para bloquear y requerir la acción manual para operaciones como la autenticación.
+  --prerelease            Permite que se instalen paquetes de versión preliminar.
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+  Determinando los proyectos que se van a restaurar...
+  Writing C:\Users\ralmarales\AppData\Local\Temp\tmp2800.tmp
+info : Agregando PackageReference para el paquete "Microsoft.EntityFrameworkCore.SqlServer" al proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+error: No se puede cargar el índice de servicio del origen https://api.nuget.org/v3/index.json.
+error:   Host desconocido. (api.nuget.org:443)
+error:   Host desconocido.
+
+
+Usage: NuGet.CommandLine.XPlat.dll package add [options]
+
+Options:
+  -h|--help               Show help information
+  --force-english-output  Fuerza la aplicación a ejecutarse mediante una referencia cultural invariable basada en el inglés.
+  --package               Id. del paquete que se va a agregar.
+  --version               Versión del paquete que se agregará.
+  -d|--dg-file            Ruta de acceso al archivo de gráficos de dependencia que se usará para restaurar la vista previa y comprobar la compatibilidad.
+  -p|--project            Ruta de acceso al archivo de proyecto.
+  -f|--framework          Los marcos de trabajo para los que se debe agregar la referencia de paquete.
+  -n|--no-restore         No realiza la vista previa de restauración y la comprobación de compatibilidad. La referencia de paquete agregada será incondicional.
+  -s|--source             Especifica orígenes de paquete NuGet para usar durante la restauración.
+  --package-directory     Directorio donde restaurar los paquetes.
+  --interactive           Permite usar el comando para bloquear y requerir la acción manual para operaciones como la autenticación.
+  --prerelease            Permite que se instalen paquetes de versión preliminar.
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+  Determinando los proyectos que se van a restaurar...
+  Writing C:\Users\ralmarales\AppData\Local\Temp\tmp73DE.tmp
+info : Agregando PackageReference para el paquete "Microsoft.EntityFrameworkCore.SqlServer" al proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+error: No se puede cargar el índice de servicio del origen https://api.nuget.org/v3/index.json.
+error:   Host desconocido. (api.nuget.org:443)
+error:   Host desconocido.
+
+
+Usage: NuGet.CommandLine.XPlat.dll package add [options]
+
+Options:
+  -h|--help               Show help information
+  --force-english-output  Fuerza la aplicación a ejecutarse mediante una referencia cultural invariable basada en el inglés.
+  --package               Id. del paquete que se va a agregar.
+  --version               Versión del paquete que se agregará.
+  -d|--dg-file            Ruta de acceso al archivo de gráficos de dependencia que se usará para restaurar la vista previa y comprobar la compatibilidad.
+  -p|--project            Ruta de acceso al archivo de proyecto.
+  -f|--framework          Los marcos de trabajo para los que se debe agregar la referencia de paquete.
+  -n|--no-restore         No realiza la vista previa de restauración y la comprobación de compatibilidad. La referencia de paquete agregada será incondicional.
+  -s|--source             Especifica orígenes de paquete NuGet para usar durante la restauración.
+  --package-directory     Directorio donde restaurar los paquetes.
+  --interactive           Permite usar el comando para bloquear y requerir la acción manual para operaciones como la autenticación.
+  --prerelease            Permite que se instalen paquetes de versión preliminar.
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+  Determinando los proyectos que se van a restaurar...
+  Writing C:\Users\ralmarales\AppData\Local\Temp\tmpE303.tmp
+info : Agregando PackageReference para el paquete "Microsoft.EntityFrameworkCore.SqlServer" al proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+error: No se puede cargar el índice de servicio del origen https://api.nuget.org/v3/index.json.
+error:   The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+
+
+Usage: NuGet.CommandLine.XPlat.dll package add [options]
+
+Options:
+  -h|--help               Show help information
+  --force-english-output  Fuerza la aplicación a ejecutarse mediante una referencia cultural invariable basada en el inglés.
+  --package               Id. del paquete que se va a agregar.
+  --version               Versión del paquete que se agregará.
+  -d|--dg-file            Ruta de acceso al archivo de gráficos de dependencia que se usará para restaurar la vista previa y comprobar la compatibilidad.
+  -p|--project            Ruta de acceso al archivo de proyecto.
+  -f|--framework          Los marcos de trabajo para los que se debe agregar la referencia de paquete.
+  -n|--no-restore         No realiza la vista previa de restauración y la comprobación de compatibilidad. La referencia de paquete agregada será incondicional.
+  -s|--source             Especifica orígenes de paquete NuGet para usar durante la restauración.
+  --package-directory     Directorio donde restaurar los paquetes.
+  --interactive           Permite usar el comando para bloquear y requerir la acción manual para operaciones como la autenticación.
+  --prerelease            Permite que se instalen paquetes de versión preliminar.
+
+D:\Users\ralmarales\source\repos\Usuarios><!--Adicionar esta configurcion-->
+La sintaxis del comando no es correcta.
+
+D:\Users\ralmarales\source\repos\Usuarios>  <config>
+La sintaxis del comando no es correcta.
+
+D:\Users\ralmarales\source\repos\Usuarios>    <add key="http_proxy" value="proxy.gases.co.cu:3128" />
+La sintaxis del comando no es correcta.
+
+D:\Users\ralmarales\source\repos\Usuarios><add key="http_proxy.user" value="scu_ralmarales" />
+La sintaxis del comando no es correcta.
+
+D:\Users\ralmarales\source\repos\Usuarios><add key="http_proxy.password" value="Distrito282020*" />
+La sintaxis del comando no es correcta.
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+  Determinando los proyectos que se van a restaurar...
+  Writing C:\Users\ralmarales\AppData\Local\Temp\tmpC40D.tmp
+info : Agregando PackageReference para el paquete "Microsoft.EntityFrameworkCore.SqlServer" al proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+error: No se puede cargar el índice de servicio del origen https://api.nuget.org/v3/index.json.
+error:   The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+
+
+Usage: NuGet.CommandLine.XPlat.dll package add [options]
+
+Options:
+  -h|--help               Show help information
+  --force-english-output  Fuerza la aplicación a ejecutarse mediante una referencia cultural invariable basada en el inglés.
+  --package               Id. del paquete que se va a agregar.
+  --version               Versión del paquete que se agregará.
+  -d|--dg-file            Ruta de acceso al archivo de gráficos de dependencia que se usará para restaurar la vista previa y comprobar la compatibilidad.
+  -p|--project            Ruta de acceso al archivo de proyecto.
+  -f|--framework          Los marcos de trabajo para los que se debe agregar la referencia de paquete.
+  -n|--no-restore         No realiza la vista previa de restauración y la comprobación de compatibilidad. La referencia de paquete agregada será incondicional.
+  -s|--source             Especifica orígenes de paquete NuGet para usar durante la restauración.
+  --package-directory     Directorio donde restaurar los paquetes.
+  --interactive           Permite usar el comando para bloquear y requerir la acción manual para operaciones como la autenticación.
+  --prerelease            Permite que se instalen paquetes de versión preliminar.
+
+D:\Users\ralmarales\source\repos\Usuarios><!--Adicionar esta configurcion-->
+La sintaxis del comando no es correcta.
+
+D:\Users\ralmarales\source\repos\Usuarios>  <config>
+La sintaxis del comando no es correcta.
+
+D:\Users\ralmarales\source\repos\Usuarios>    <add key="http_proxy" value="proxy.gases.co.cu:3128" />
+La sintaxis del comando no es correcta.
+
+D:\Users\ralmarales\source\repos\Usuarios><add key="http_proxy.user" value="scu_ralmarales" />
+La sintaxis del comando no es correcta.
+
+D:\Users\ralmarales\source\repos\Usuarios><add key="http_proxy.password" value="Distrito282020*" />
+La sintaxis del comando no es correcta.
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+  Determinando los proyectos que se van a restaurar...
+  Writing C:\Users\ralmarales\AppData\Local\Temp\tmpEE2B.tmp
+info : Agregando PackageReference para el paquete "Microsoft.EntityFrameworkCore.SqlServer" al proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+error: No se puede cargar el índice de servicio del origen https://api.nuget.org/v3/index.json.
+error:   The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+
+
+Usage: NuGet.CommandLine.XPlat.dll package add [options]
+
+Options:
+  -h|--help               Show help information
+  --force-english-output  Fuerza la aplicación a ejecutarse mediante una referencia cultural invariable basada en el inglés.
+  --package               Id. del paquete que se va a agregar.
+  --version               Versión del paquete que se agregará.
+  -d|--dg-file            Ruta de acceso al archivo de gráficos de dependencia que se usará para restaurar la vista previa y comprobar la compatibilidad.
+  -p|--project            Ruta de acceso al archivo de proyecto.
+  -f|--framework          Los marcos de trabajo para los que se debe agregar la referencia de paquete.
+  -n|--no-restore         No realiza la vista previa de restauración y la comprobación de compatibilidad. La referencia de paquete agregada será incondicional.
+  -s|--source             Especifica orígenes de paquete NuGet para usar durante la restauración.
+  --package-directory     Directorio donde restaurar los paquetes.
+  --interactive           Permite usar el comando para bloquear y requerir la acción manual para operaciones como la autenticación.
+  --prerelease            Permite que se instalen paquetes de versión preliminar.
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+  Determinando los proyectos que se van a restaurar...
+  Writing C:\Users\ralmarales\AppData\Local\Temp\tmp5C18.tmp
+info : Agregando PackageReference para el paquete "Microsoft.EntityFrameworkCore.SqlServer" al proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+error: No se puede cargar el índice de servicio del origen https://api.nuget.org/v3/index.json.
+error:   The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+
+
+Usage: NuGet.CommandLine.XPlat.dll package add [options]
+
+Options:
+  -h|--help               Show help information
+  --force-english-output  Fuerza la aplicación a ejecutarse mediante una referencia cultural invariable basada en el inglés.
+  --package               Id. del paquete que se va a agregar.
+  --version               Versión del paquete que se agregará.
+  -d|--dg-file            Ruta de acceso al archivo de gráficos de dependencia que se usará para restaurar la vista previa y comprobar la compatibilidad.
+  -p|--project            Ruta de acceso al archivo de proyecto.
+  -f|--framework          Los marcos de trabajo para los que se debe agregar la referencia de paquete.
+  -n|--no-restore         No realiza la vista previa de restauración y la comprobación de compatibilidad. La referencia de paquete agregada será incondicional.
+  -s|--source             Especifica orígenes de paquete NuGet para usar durante la restauración.
+  --package-directory     Directorio donde restaurar los paquetes.
+  --interactive           Permite usar el comando para bloquear y requerir la acción manual para operaciones como la autenticación.
+  --prerelease            Permite que se instalen paquetes de versión preliminar.
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet set HTTP_PROXY=http://scu_ralmarales:Distrito282020*@proxy.gases.co.cu:3128
+No se pudo ejecutar porque no se encontró el comando o el archivo especificado.
+Algunas de las posibles causas son :
+  * Escribió mal un comando dotnet integrado.
+  * Pretendía ejecutar un programa .NET, pero dotnet-set no existe.
+  * Pretendía ejecutar una herramienta global, pero no se encontró ningún ejecutable con prefijo dotnet con este nombre en PATH.
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet HTTP_PROXY=http://scu_ralmarales:Distrito282020*@proxy.gases.co.cu:3128
+No se pudo ejecutar porque no se encontró el comando o el archivo especificado.
+Algunas de las posibles causas son :
+  * Escribió mal un comando dotnet integrado.
+  * Pretendía ejecutar un programa .NET, pero dotnet-HTTP_PROXY=http://scu_ralmarales:Distrito282020*@proxy.gases.co.cu:3128 no existe.
+  * Pretendía ejecutar una herramienta global, pero no se encontró ningún ejecutable con prefijo dotnet con este nombre en PATH.
+
+D:\Users\ralmarales\source\repos\Usuarios>set HTTP_PROXY=http://scu_ralmarales:Distrito282020*@proxy.gases.co.cu:3128
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet restore
+  Determinando los proyectos que se van a restaurar...
+  Todos los proyectos están actualizados para la restauración.
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+  Determinando los proyectos que se van a restaurar...
+  Writing C:\Users\ralmarales\AppData\Local\Temp\tmpFD9F.tmp
+info : Agregando PackageReference para el paquete "Microsoft.EntityFrameworkCore.SqlServer" al proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+error: No se puede cargar el índice de servicio del origen https://api.nuget.org/v3/index.json.
+error:   The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+
+
+Usage: NuGet.CommandLine.XPlat.dll package add [options]
+
+Options:
+  -h|--help               Show help information
+  --force-english-output  Fuerza la aplicación a ejecutarse mediante una referencia cultural invariable basada en el inglés.
+  --package               Id. del paquete que se va a agregar.
+  --version               Versión del paquete que se agregará.
+  -d|--dg-file            Ruta de acceso al archivo de gráficos de dependencia que se usará para restaurar la vista previa y comprobar la compatibilidad.
+  -p|--project            Ruta de acceso al archivo de proyecto.
+  -f|--framework          Los marcos de trabajo para los que se debe agregar la referencia de paquete.
+  -n|--no-restore         No realiza la vista previa de restauración y la comprobación de compatibilidad. La referencia de paquete agregada será incondicional.
+  -s|--source             Especifica orígenes de paquete NuGet para usar durante la restauración.
+  --package-directory     Directorio donde restaurar los paquetes.
+  --interactive           Permite usar el comando para bloquear y requerir la acción manual para operaciones como la autenticación.
+  --prerelease            Permite que se instalen paquetes de versión preliminar.
+
+D:\Users\ralmarales\source\repos\Usuarios>nuget --help
+"nuget" no se reconoce como un comando interno o externo,
+programa o archivo por lotes ejecutable.
+
+D:\Users\ralmarales\source\repos\Usuarios>nuget --help
+"nuget" no se reconoce como un comando interno o externo,
+programa o archivo por lotes ejecutable.
+
+D:\Users\ralmarales\source\repos\Usuarios>nuget --help
+"nuget" no se reconoce como un comando interno o externo,
+programa o archivo por lotes ejecutable.
+
+D:\Users\ralmarales\source\repos\Usuarios>nuget.exe
+"nuget.exe" no se reconoce como un comando interno o externo,
+programa o archivo por lotes ejecutable.
+
+D:\Users\ralmarales\source\repos\Usuarios>nuget.exe config -set http_proxy.password=Distrito282020*
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+  Determinando los proyectos que se van a restaurar...
+  Writing C:\Users\ralmarales\AppData\Local\Temp\tmp4570.tmp
+info : Agregando PackageReference para el paquete "Microsoft.EntityFrameworkCore.SqlServer" al proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+info :   GET https://api.nuget.org/v3/registration5-gz-semver2/microsoft.entityframeworkcore.sqlserver/index.json
+info :   OK https://api.nuget.org/v3/registration5-gz-semver2/microsoft.entityframeworkcore.sqlserver/index.json 263 ms 
+info : Restaurando paquetes para D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj...
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore.sqlserver/index.json
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore.sqlserver/index.json 268 ms
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore.sqlserver/5.0.9/microsoft.entityframeworkcore.sqlserver.5.0.9.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore.sqlserver/5.0.9/microsoft.entityframeworkcore.sqlserver.5.0.9.nupkg 140 ms
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore.relational/index.json
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore.relational/index.json 268 ms
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore.relational/5.0.9/microsoft.entityframeworkcore.relational.5.0.9.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore.relational/5.0.9/microsoft.entityframeworkcore.relational.5.0.9.nupkg 123 ms
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore/index.json
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore/index.json 262 ms
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore/5.0.9/microsoft.entityframeworkcore.5.0.9.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore/5.0.9/microsoft.entityframeworkcore.5.0.9.nupkg 123 ms
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore.abstractions/index.json
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore.analyzers/index.json
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore.abstractions/index.json 265 ms
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore.abstractions/5.0.9/microsoft.entityframeworkcore.abstractions.5.0.9.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore.abstractions/5.0.9/microsoft.entityframeworkcore.abstractions.5.0.9.nupkg 122 ms
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore.analyzers/index.json 921 ms
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.extensions.dependencyinjection/index.json
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore.analyzers/5.0.9/microsoft.entityframeworkcore.analyzers.5.0.9.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore.analyzers/5.0.9/microsoft.entityframeworkcore.analyzers.5.0.9.nupkg 122 ms
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.extensions.dependencyinjection/index.json 463 ms
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.extensions.dependencyinjection/5.0.2/microsoft.extensions.dependencyinjection.5.0.2.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.extensions.dependencyinjection/5.0.2/microsoft.extensions.dependencyinjection.5.0.2.nupkg 124 ms
+info : Se instaló Microsoft.EntityFrameworkCore 5.0.9 de https://api.nuget.org/v3/index.json con el hash de contenido mA+W/zpJZMp802xt2D+qBXrme4VFN+FlsrHdU6WG5HKDAnezClRksJhJicUR8XojnSPp9SgZKa1aIAasB5G67g==.
+info : Se instaló Microsoft.EntityFrameworkCore.Analyzers 5.0.9 de https://api.nuget.org/v3/index.json con el hash de contenido eyuPLRFjcF7VWH8qy1uUuMrO02W15n9EXAXnYjCTWgH0SDIeZAa2XZXMZ9U3dvOPtvllMBy0obYA5SSbnpaNoQ==.
+info : Se instaló Microsoft.EntityFrameworkCore.Relational 5.0.9 de https://api.nuget.org/v3/index.json con el hash de contenido rGXoju3HtnxtdYlH7/lOyVlKJ9fZSwORukVCN250Aub2gx9bEmfXlDHeM9Gw9bkeunLEx3OoqL6DAz9VW8YTJA==.
+info : Se instaló Microsoft.EntityFrameworkCore.SqlServer 5.0.9 de https://api.nuget.org/v3/index.json con el hash de contenido WGKYDApx75QRQ8LecGoPi5tvwHM8CvHz383U4c9zfW2Pjz+yUNUL4XAzLRlkg9QyE7USGk4VnAVNS0sTXK4qVQ==.
+info : Se instaló Microsoft.Extensions.DependencyInjection 5.0.2 de https://api.nuget.org/v3/index.json con el hash de contenido xzFW00AZEvOXM1OX+0+AYH5op/Hf3u//e6wszBd/rK72sypD+jx5CtsHxM4BVuFBEs8SajfO4QzSJtrQaHDr4A==.
+info : Se instaló Microsoft.EntityFrameworkCore.Abstractions 5.0.9 de https://api.nuget.org/v3/index.json con el hash de contenido csbpDaXe9iQUkvDS3JZRAFfkgcRA7BlHE3u8feBLlYervmTAS1WIWPBZKMtH0a2GO5njwAABU3j+hZMCPYBrzQ==.
+info : El paquete "Microsoft.EntityFrameworkCore.SqlServer" es compatible con todos los marcos de trabajo especificados del proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+info : Se agregó PackageReference para la versión "5.0.9" del paquete "Microsoft.EntityFrameworkCore.SqlServer" al archivo "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+info : Ejecutando restauración...
+info : Generación de archivo MSBuild D:\Users\ralmarales\source\repos\Usuarios\obj\Usuarios.csproj.nuget.g.props.
+info : Escribiendo el archivo de recursos en el disco. Ruta de acceso: D:\Users\ralmarales\source\repos\Usuarios\obj\project.assets.json
+log  : Se ha restaurado D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj (en 34.37 sec).
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet add package Microsoft.EntityFrameworkCore.InMemory
+  Determinando los proyectos que se van a restaurar...
+  Writing C:\Users\ralmarales\AppData\Local\Temp\tmpA0C0.tmp
+info : Agregando PackageReference para el paquete "Microsoft.EntityFrameworkCore.InMemory" al proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+info :   GET https://api.nuget.org/v3/registration5-gz-semver2/microsoft.entityframeworkcore.inmemory/index.json
+info :   OK https://api.nuget.org/v3/registration5-gz-semver2/microsoft.entityframeworkcore.inmemory/index.json 1802 ms 
+info : Restaurando paquetes para D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj...
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore.inmemory/index.json
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore.inmemory/index.json 764 ms
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore.inmemory/5.0.9/microsoft.entityframeworkcore.inmemory.5.0.9.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore.inmemory/5.0.9/microsoft.entityframeworkcore.inmemory.5.0.9.nupkg 117 ms
+info : Se instaló Microsoft.EntityFrameworkCore.InMemory 5.0.9 de https://api.nuget.org/v3/index.json con el hash de contenido OKlzsZppmrKoJmLc40Fg4wkoMED3G2OHZJfmtulAw6MkMWxe9SV6bKSAeftc4ZTVYIHhym9SJz1p2YCTP0xJDw==.
+info : El paquete "Microsoft.EntityFrameworkCore.InMemory" es compatible con todos los marcos de trabajo especificados del proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+info : Se agregó PackageReference para la versión "5.0.9" del paquete "Microsoft.EntityFrameworkCore.InMemory" al archivo "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+info : Ejecutando restauración...
+info : Escribiendo el archivo de recursos en el disco. Ruta de acceso: D:\Users\ralmarales\source\repos\Usuarios\obj\project.assets.json
+log  : Se ha restaurado D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj (en 8.14 sec).
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet add package Microsoft.EntityFrameworkCore.InMemory --help
+Uso: dotnet add <PROJECT> package [opciones] <PACKAGE_NAME>
+
+Argumentos:
+  <PROJECT>        Archivo del proyecto sobre el que se va a operar. Si no se especifica un archivo, el comando buscará uno en el directorio actual.
+  <PACKAGE_NAME>   La referencia de paquete para agregar.
+
+Opciones:
+  -h, --help                          Muestra ayuda de la línea de comandos.
+  -v, --version <VERSION>             La versión del paquete para agregar.
+  -f, --framework <FRAMEWORK>         Agrega una referencia solo cuando el destino es una plataforma específica.
+  -n, --no-restore                    Agrega la referencia sin realizar la vista previa de restauración y la comprobación de compatibilidad.
+  -s, --source <SOURCE>               El origen de un paquete de NuGet para usarlo durante la restauración.
+  --package-directory <PACKAGE_DIR>   El directorio en el que se restauran paquetes.
+  --interactive                       Permite que el comando se detenga y espere la entrada o acción del usuario (por ejemplo, para autenticarse).
+  --prerelease                        Permite que se instalen paquetes de versión preliminar.
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet add package Microsoft.EntityFrameworkCore.InMemory -v 3.1.0
+  Determinando los proyectos que se van a restaurar...
+  Writing C:\Users\ralmarales\AppData\Local\Temp\tmpF649.tmp
+info : Agregando PackageReference para el paquete "Microsoft.EntityFrameworkCore.InMemory" al proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+info : Restaurando paquetes para D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj...
+info :   CACHE https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore.inmemory/index.json
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore.inmemory/3.1.0/microsoft.entityframeworkcore.inmemory.3.1.0.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.entityframeworkcore.inmemory/3.1.0/microsoft.entityframeworkcore.inmemory.3.1.0.nupkg 1531 ms
+info : Se instaló Microsoft.EntityFrameworkCore.InMemory 3.1.0 de https://api.nuget.org/v3/index.json con el hash de contenido IMinH4BdgJaom5klQVjllAeT4w6Ke7WrE1CBvos5D+usNJIZW8fD1L+BG4VrGf9s8zvF9gB5JU8DHZL6ndOgaw==.
+info : El paquete "Microsoft.EntityFrameworkCore.InMemory" es compatible con todos los marcos de trabajo especificados del proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+info : Se actualizó PackageReference para la versión "3.1.0" del paquete "Microsoft.EntityFrameworkCore.InMemory" en el archivo "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+info : Ejecutando restauración...
+info : Escribiendo el archivo de recursos en el disco. Ruta de acceso: D:\Users\ralmarales\source\repos\Usuarios\obj\project.assets.json
+log  : Se ha restaurado D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj (en 4.96 sec).
+
+D:\Users\ralmarales\source\repos\Usuarios>dotnet add package Microsoft.EntityFrameworkCore.SqlServer -v 3.1.0
+  Determinando los proyectos que se van a restaurar...
+  Writing C:\Users\ralmarales\AppData\Local\Temp\tmp5DEC.tmp
+info : Agregando PackageReference para el paquete "Microsoft.EntityFrameworkCore.SqlServer" al proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+info : Restaurando paquetes para D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj...
+info : El paquete "Microsoft.EntityFrameworkCore.SqlServer" es compatible con todos los marcos de trabajo especificados del proyecto "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+info : Se actualizó PackageReference para la versión "3.1.0" del paquete "Microsoft.EntityFrameworkCore.SqlServer" en el archivo "D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj".
+info : Ejecutando restauración...
+info : Generación de archivo MSBuild D:\Users\ralmarales\source\repos\Usuarios\obj\Usuarios.csproj.nuget.g.props.
+info : Escribiendo el archivo de recursos en el disco. Ruta de acceso: D:\Users\ralmarales\source\repos\Usuarios\obj\project.assets.json
+log  : Se ha restaurado D:\Users\ralmarales\source\repos\Usuarios\Usuarios.csproj (en 10.53 sec).
+
+D:\Users\ralmarales\source\repos\Usuarios>

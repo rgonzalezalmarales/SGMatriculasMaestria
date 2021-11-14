@@ -1,0 +1,18 @@
+LAN: Red: 172.16.21.0, mask:255.255.255.248, enlace 172.16.21.1
+Interfaz router wan: 192.168.2.86
+Interfaz router etecsa: 192.168.2.85
+
+
+Segun etecsa la lan de mzo es:
+172.16.21.0, mask:255.255.255.0, enlace 172.16.21.1
+
+Mzo esta por ip/mpls el numero de servicio es: Ed-160624 paso a ser ED-16024
+ED-> Enlace dedicado
+Lan: 172.16.21.0/24
+Wan: 192.178.2.84/24 (192.178.2.84/255.255.255.0)
+Telefono: 543529
+
+Puede ser?
+fr/
+
+ip/mpls

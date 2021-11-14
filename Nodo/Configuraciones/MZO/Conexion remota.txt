@@ -1,0 +1,54 @@
+=======lotti===========
+Mariorquis Ahora lotti
+lotti\Granma2021*
+videoconf: Gases2021*
+SVN: mzo01*
+Naveg: Gases2021*
+172.16.21.6/255.255.255.248
+172.16.21.1
+172.16.22.76
+172.16.254.151
+Usuraio: lotti
+hostname: MZO01
+
+vm06 - 172.16.21.2
+=====================================
+
+
+Mzo02- 172.16.21.4
+Usuario> Mariorquis.Osorio@mzo.gases.co.cu
+Clave>mariorquis.osorio/ Gases2021*
+Correo: 
+	Server: Favorite2020*
+Navegacion: Gases2020*
+Rchat: Cuba2020*
+
+Ponme el psi visible
+y cambiame el idioma
+el sistema de contratacio y conferencia
+el svn
+mas todo lo que te interese a ti
+
+Pc 
+scu\mariorquis.osorio Gases2020*
+
+Dania:
+ Hostname: MZO03
+ User:     Dania/Daniela2020*
+	   scuadmon/ Haier2016*
+ IP:       172.16.21.3/255.255.255.248
+Sistema comercial: user: mzo_dania pass: dania2015*
+Siscont:Antony020*
+ VMSiscont (Remoto): scu\dania /Gases2021*
+
+filezilla: mzo_dania
+            mzo2019*
+
+Impresora 400 en red
+Ip:169.254.198.249
+
+VideoConferecnia: Mzo2021*
+Lotti ahora mariurkis:
+Hostname: MZO02
+lotti/Mari2020*
+172.16.21.4

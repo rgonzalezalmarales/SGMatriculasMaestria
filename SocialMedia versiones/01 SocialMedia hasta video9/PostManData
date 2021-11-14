@@ -1,0 +1,32 @@
+{
+    "postId": 9,
+    "userId": 12,
+    "date": "2021-06-19T09:55:43.09",
+    "description": " description",
+    "image": "https://arever.dk/he/ithshove/mealat/thforhenen.jpg",
+    "user": {
+					"UserId":" ",
+					"FirstName":" ",
+					"LastName":" ",
+					"Email":" ",
+					"DateOfBirth":" ",
+					"Telephone":" ",
+					"IsActive":" "
+				}
+}
+
+
+Data Body
+{
+    "date": "2021-06-19T09:55:43.09",
+    "description": " description",
+    "image": "https://arever.dk/he/ithshove/mealat/thforhenen.jpg",
+    "user": {
+					"FirstName":"Ramiro",
+					"LastName":"Api Error",
+					"Email":"ramiro.api@gmail.com",
+					"DateOfBirth":"1988-06-22T00:00:00",
+					"Telephone":"54527786"
+				}
+}
+

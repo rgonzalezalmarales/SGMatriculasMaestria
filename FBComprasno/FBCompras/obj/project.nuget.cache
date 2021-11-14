@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "lio2JT1BGYvP3roq0FKB5lFuunAx/J+ZM3kMuP5XkcuuqItC9bpwEzP74AuHE2LL/SZv3uzk8lWI2KBEp3ZSxA==",
+  "success": true,
+  "projectFilePath": "D:\\Users\\ralmarales\\source\\repos\\FBComprasno\\FBCompras\\FBCompras.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ralmarales\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,20 @@
+Santiago
+
+ED-SR170377 (ya no es esa)
+
+ED-170377 -- 
+W: 192.168.2.88/30
+L: 172.16.22.0/30
+
+Datos Etecsa: 22623477, 22652547
+Comercial:22624430--Yolanda
+
+IP: 192.168.2.90
+Mask: 
+
+
+
+22609597 - linea
+
+11/02/2020 Reporte - 3168811
+DSL papardea y internet no enciende

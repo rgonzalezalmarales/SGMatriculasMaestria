@@ -1,0 +1,125 @@
+﻿@model IEnumerable<SGMatriculasMaestria.Models.Matricula>
+
+@{
+    ViewData["Title"] = "Matrículas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-normal">Listado de Matriculas</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="tablematriculas" width="100%" cellspacing="0">
+                <thead class="thead-light">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FechaInicio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FechaCulminacion)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MotivoSolicitud)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AnnoExperienciaLaboral)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FechaMatricula)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Aspirante.Nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Aspirante.PrimerApellido)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Aspirante.SegundoApellido)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Aspirante.CI)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FechaInicio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FechaCulminacion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MotivoSolicitud)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AnnoExperienciaLaboral)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FechaMatricula)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Aspirante.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Aspirante.PrimerApellido)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Aspirante.SegundoApellido)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Aspirante.CI)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success btn-circle btn-sm">
+                                    <i class="fas fa-fw fa-wrench"></i>
+                                </a>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-circle btn-sm">
+                                    <i class="fas fa-info-circle"></i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-circle btn-sm">
+                                    <i class="fas fa-trash">
+                                    </i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div>
+    <p>
+        <a asp-action="Create" class="btn btn-info btn-icon-split">
+            <span class="icon text-white-50">
+                <i class="fas fa-plus-circle"></i>
+            </span>
+            <span class="text">Agregar Matricula</span>
+        </a>
+    </p>
+</div>
+</div>
+@section scripts
+{
+    <script>
+        $(function () {
+            $('#tablematriculas').DataTable({
+                "order": [[2, 'asc']],
+                'paging': true,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'scrollX': true,
+                'scrollY': true,
+                'autoWidth': true
+            });
+        })
+    </script>
+}
