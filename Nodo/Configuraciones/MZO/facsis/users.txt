@@ -1,9 +1,0 @@
-Facsis mzo:
-USER/PASS ------------DERECHO
-ADMIN/ADMIN------5
-CONTADOR/CONTADOR------3
-VENTAS/VENTAS------4
-FACTURAR/MAR ------2
-
-------
-------

@@ -1,1 +1,0 @@
-﻿CREATE LOGIN [UrseSm] WITH PASSWORD = 'sM5JSD*7@#'
