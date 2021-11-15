@@ -142,16 +142,17 @@ namespace SGMatriculasMaestria.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             
-            try
+
+            /*try
             {
                 using(var transaction = _context.Database.BeginTransaction())
                 {
-
-                    var provincia = await _context.Provincia.FindAsync(id);
+                    // _context.Provincia.FindAsync(id);
+                   //var provincia = await _context.Provincia.Include(x => x.Municipios).FirstOrDefaultAsync(x => x.Id == id);
                     try
                     {
-                        var municipios = await _context.Municipios.Select(x => x.Provincia.Id == id).ToListAsync();
-                        _context.RemoveRange(municipios);
+                        //var municipios = await _context.Municipios.Select(x => x.Provincia.Id == id).ToListAsync();
+                        //_context.RemoveRange(municipios);
                         _context.Provincia.Remove(provincia);
                         await _context.SaveChangesAsync();
                         await transaction.CommitAsync();
@@ -167,6 +168,16 @@ namespace SGMatriculasMaestria.Controllers
             catch (DbUpdateException e)
             {
                 Console.WriteLine("Mensaje de error de prueba",e);
+            }*/
+            try
+            {
+                var provincia = await _context.Provincia.FindAsync(id);
+                _context.Provincia.Remove(provincia);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException e)
+            {
+                Console.WriteLine("Mensaje de error de prueba", e);
             }
             return RedirectToAction(nameof(Index));
          }

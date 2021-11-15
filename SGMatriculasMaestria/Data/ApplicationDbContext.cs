@@ -10,23 +10,27 @@ namespace SGMatriculasMaestria.Data
 {
     public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
+        public ApplicationDbContext()
+        {
+
+        }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
            
         }
-        public DbSet<Aspirante> Aspirantes { get; set; }
-        public DbSet<CategDocente> CategDocentes { get; set; }
-        public DbSet<CentroTrabajo> CentroTrabajos { get; set; }
-        public DbSet<Ces> Ces { get; set; }
-        public DbSet<EspecGraduado> EspecGraduados { get; set; }
-        public DbSet<Facultad> Facultades { get; set; }
-        public DbSet<Maestria> Maestrias { get; set; }
-        public DbSet<Matricula> Matricula { get; set; }
-        public DbSet<Municipio> Municipios { get; set; }
-        public DbSet<Pais> Paises { get; set; }
-        public DbSet<Provincia> Provincia { get; set; }
-        public DbSet<SecretarioPostg> SecretarioPostgrados { get; set; }
+        public virtual DbSet<Aspirante> Aspirantes { get; set; }
+        public virtual DbSet<CategDocente> CategDocentes { get; set; }
+        public virtual DbSet<CentroTrabajo> CentroTrabajos { get; set; }
+        public virtual DbSet<Ces> Ces { get; set; }
+        public virtual DbSet<EspecGraduado> EspecGraduados { get; set; }
+        public virtual DbSet<Facultad> Facultades { get; set; }
+        public virtual DbSet<Maestria> Maestrias { get; set; }
+        public virtual DbSet<Matricula> Matricula { get; set; }
+        public virtual DbSet<Municipio> Municipios { get; set; }
+        public virtual DbSet<Pais> Paises { get; set; }
+        public virtual DbSet<Provincia> Provincia { get; set; }
+        public virtual DbSet<SecretarioPostg> SecretarioPostgrados { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
