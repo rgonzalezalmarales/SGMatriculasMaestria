@@ -57,9 +57,9 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Municipio municipio)
+        public async Task<IActionResult> Create([FromForm]Municipio municipio)
         {
-            municipio.Provincia = await _context.Provincia.FindAsync(municipio.Provincia.Id);
+            //municipio.Provincia = await _context.Provincia.FindAsync(municipio.Provincia.Id);
             if (ModelState.IsValid)
             {
                 _context.Add(municipio);

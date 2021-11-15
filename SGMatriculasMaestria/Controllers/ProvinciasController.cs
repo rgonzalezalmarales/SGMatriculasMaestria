@@ -141,11 +141,28 @@ namespace SGMatriculasMaestria.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var provincia = await _context.Provincia.FindAsync(id);
+            
             try
             {
-                _context.Provincia.Remove(provincia);
-            await _context.SaveChangesAsync();
+                using(var transaction = _context.Database.BeginTransaction())
+                {
+
+                    var provincia = await _context.Provincia.FindAsync(id);
+                    try
+                    {
+                        var municipios = await _context.Municipios.Select(x => x.Provincia.Id == id).ToListAsync();
+                        _context.RemoveRange(municipios);
+                        _context.Provincia.Remove(provincia);
+                        await _context.SaveChangesAsync();
+                        await transaction.CommitAsync();
+                    }
+                    catch (Exception e)
+                    {
+                        await transaction.RollbackAsync();
+                        Console.WriteLine("Mensaje de error de prueba", e);
+                    }                    
+                }
+                
             }
             catch (DbUpdateException e)
             {
