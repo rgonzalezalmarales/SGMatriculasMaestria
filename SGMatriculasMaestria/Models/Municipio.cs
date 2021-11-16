@@ -1,26 +1,24 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace SGMatriculasMaestria.Models
 {
     public partial class Municipio
     {
-        [Key]
+        //[ForeignKey(nameof(ProvinciaId))]
+        public Municipio()
+        {
+            CentroTrabajos = new HashSet<CentroTrabajo>();
+            Ces = new HashSet<Ces>();
+            Aspirantes = new HashSet<Aspirante>();
+        }
         public int Id { get; set; }
         public string Nombre { get; set; }
+
         public int ProvinciaId { get; set; }
         public Provincia Provincia { get; set; }
-        [ForeignKey(nameof(ProvinciaId))]
-        public ICollection<CentroTrabajo> CentroTrabajos { get; set; }
-        public ICollection<Ces> Ces { get; set; }
-        public ICollection<Aspirante> Aspirantes { get; set; }
 
-    
-
+        public virtual ICollection<CentroTrabajo> CentroTrabajos { get; set; }
+        public virtual ICollection<Ces> Ces { get; set; }
+        public virtual ICollection<Aspirante> Aspirantes { get; set; }
     }
 }

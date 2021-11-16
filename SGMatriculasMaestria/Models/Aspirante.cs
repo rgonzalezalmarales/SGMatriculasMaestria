@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SGMatriculasMaestria.Models
 {
@@ -24,11 +21,22 @@ namespace SGMatriculasMaestria.Models
         public int Tomo { get; set; }
         public int Folio { get; set; }
         public int Numero { get; set; }
+
+        public int SexoId { get; set; }
         public Sexo Sexo { get; set; }
+
+        public int EspecGraduadoId { get; set; }
         public EspecGraduado EspecGraduado { get; set; }
+
+        public int PaisId { get; set; }
         public Pais Pais { get; set; }
+
+        public int CesId { get; set; }
         public Ces Ces { get; set; }
+
+        public int? MunicipioId { get; set; }
         public Municipio Municipio { get; set; }
+
         public DateTime Creatat { get; set; }
         public DateTime Modifiat { get; set; }
     }

@@ -1,0 +1,111 @@
+Each package is licensed to you by its owner. NuGet is not responsible for, nor does it grant any licenses to, third-party packages. Some packages may include dependencies which are governed by additional licenses. Follow the package source (feed) URL to determine any dependencies.
+
+Package Manager Console Host Version 5.10.0.7240
+
+Type 'get-help NuGet' to see all available NuGet commands.
+
+PM> update-databse
+update-databse : The term 'update-databse' is not recognized as the name of a cmdlet, function, script file, or operable 
+program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:1
++ update-databse
++ ~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (update-databse:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+PM> update-database
+update-database : The term 'update-database' is not recognized as the name of a cmdlet, function, script file, or operable 
+program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:1
++ update-database
++ ~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (update-database:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+PM> Update-Database
+Update-Database : The term 'Update-Database' is not recognized as the name of a cmdlet, function, script file, or operable 
+program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:1
++ Update-Database
++ ~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (Update-Database:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+PM> dotnet ef database update
+dotnet : Could not execute because the specified command or file was not found.
+At line:1 char:1
++ dotnet ef database update
++ ~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Could not execu... was not found.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Possible reasons for this include:
+  * You misspelled a built-in dotnet command.
+  * You intended to execute a .NET program, but dotnet-ef does not exist.
+  * You intended to run a global tool, but a dotnet-prefixed executable with this name could not be found on the PATH.
+PM> Update-Database
+Update-Database : The term 'Update-Database' is not recognized as the name of a cmdlet, function, script file, or operable 
+program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:1
++ Update-Database
++ ~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (Update-Database:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+PM> Update-Database
+Update-Database : The term 'Update-Database' is not recognized as the name of a cmdlet, function, script file, or operable 
+program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:1
++ Update-Database
++ ~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (Update-Database:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+PM> Update-Database
+Build started...
+Build succeeded.
+Done.
+PM> Add-Migration fk_provincia_in_municipio
+Build started...
+Build succeeded.
+An operation was scaffolded that may result in the loss of data. Please review the migration for accuracy.
+To undo this action, use Remove-Migration.
+PM> Update-Database
+Build started...
+Build succeeded.
+Done.
+PM> Add-Migration prov_from_list_to_icollection_municipios
+Build started...
+Build succeeded.
+To undo this action, use Remove-Migration.
+PM> Update-Database
+Build started...
+Build succeeded.
+Done.
+PM> Add-Migration dataannotatios_key
+Build started...
+Build succeeded.
+To undo this action, use Remove-Migration.
+PM> Update-Database
+Build started...
+Build succeeded.
+Done.
+PM> Remove-Migration`dataannotatios_key
+Remove-Migrationdataannotatios_key : The term 'Remove-Migrationdataannotatios_key' is not recognized as the name of a cmdlet, 
+function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is 
+correct and try again.
+At line:1 char:1
++ Remove-Migration`dataannotatios_key
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (Remove-Migrationdataannotatios_key:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+PM> Remove-Migration`"dataannotatios_key"
+>>  Remove-Migration prov_from_list_to_icollection_municipios
+>>  Remove-Migration dataannotatios_key
+>>  Update-Database
+>>  Update-Database
+>>  Remove-Migration Initial
+>>  Remove-Migration Initial
+>>  Add-Migration Initial
+>>  

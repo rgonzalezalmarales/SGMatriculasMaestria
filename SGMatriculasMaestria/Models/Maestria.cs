@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SGMatriculasMaestria.Models
 {
     public class Maestria
     {
+        public Maestria()
+        {
+            Matriculas = new HashSet<Matricula>();
+        }
+
         public int Id { get; set; }
         [Required]
         [Display(Name ="Título")]
@@ -15,7 +17,10 @@ namespace SGMatriculasMaestria.Models
         [Required]
         [Display(Name = "Versión")]
         public string Version { get; set; }
+
+        public int FacultadId { get; set; }
         public Facultad Facultad { get; set; }
-        public List<Matricula> Matriculas { get; set; }
+
+        public virtual ICollection<Matricula> Matriculas { get; set; }
     }
 }
