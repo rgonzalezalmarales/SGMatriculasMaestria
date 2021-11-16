@@ -54,7 +54,7 @@
             <div class="col-6">
                 <div class="form-group">
                     <label asp-for="Ces" class="control-label"></label>
-                    <select asp-for="Ces.Id" asp-items="@(new SelectList(ViewBag.Ces,"Id","Nombre"))" id="CesAspiranteSelect" class="form-control">
+                    <select asp-for="CesId" asp-items="@(new SelectList(ViewBag.Ces,"Id","Nombre"))" id="CesAspiranteSelect" class="form-control">
                         <option value="">-- Seleccione una Ces --</option>
                     </select>
                     <span asp-validation-for="Ces.Nombre" class="text-danger"></span>
@@ -104,7 +104,7 @@
             <div class="col-6">
                 <div class="form-group">
                     <label asp-for="Sexo" class="control-label"></label>
-                    <select asp-for="Sexo" class="form-control">
+                    <select asp-for="SexoId" class="form-control">
                         <option value="">-- Seleccione Genero --</option>
                         <option value="0">@Sexo.Masculino</option>
                         <option value="1">@Sexo.Femenino</option>
@@ -115,7 +115,7 @@
             <div class="col-6">
                 <div class="form-group">
                     <label asp-for="EspecGraduado" class="control-label"></label>
-                    <select asp-for="EspecGraduado.Id" asp-items="@(new SelectList(ViewBag.Especialidades,"Id","Nombre"))" id="EspecialidadAspiranteSelect" class="form-control">
+                    <select asp-for="EspecGraduadoId" asp-items="@(new SelectList(ViewBag.Especialidades,"Id","Nombre"))" id="EspecialidadAspiranteSelect" class="form-control">
                         <option value="">-- Seleccione una Especialidad --</option>
                     </select>
                     <span asp-validation-for="EspecGraduado.Nombre" class="text-danger"></span>
@@ -126,7 +126,7 @@
             <div class="col-6">
                 <div class="form-group">
                     <label asp-for="Pais" class="control-label"></label>
-                    <select asp-for="Pais.Id" asp-items="@(new SelectList(ViewBag.Pais,"Id","Nombre"))" id="PaisAspiranteSelect" class="form-control">
+                    <select asp-for="PaisId" asp-items="@(new SelectList(ViewBag.Pais,"Id","Nombre"))" id="PaisAspiranteSelect" class="form-control">
                         <option value="">-- Seleccione un Pais --</option>
                     </select>
                     <span asp-validation-for="Pais.Nombre" class="text-danger"></span>
@@ -135,7 +135,7 @@
             <div class="col-6">
                 <div class="form-group">
                     <label asp-for="Municipio" class="control-label"></label>
-                    <select asp-for="Municipio.Id" asp-items="@(new SelectList(ViewBag.Municipios,"Id","Nombre"))" id="MunicipioAspiranteSelect" class="form-control">
+                    <select asp-for="MunicipioId" asp-items="@(new SelectList(ViewBag.Municipios,"Id","Nombre"))" id="MunicipioAspiranteSelect" class="form-control">
                         <option value="">-- Seleccione un Municipio --</option>
                     </select>
                     <span asp-validation-for="Municipio.Nombre" class="text-danger"></span>

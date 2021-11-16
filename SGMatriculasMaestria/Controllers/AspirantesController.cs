@@ -24,7 +24,7 @@ namespace SGMatriculasMaestria.Controllers
         // GET: Aspirantes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Aspirantes.ToListAsync());
+            return View(await _context.Aspirantes.OrderBy(x => x.Nombre).Include(x => x.EspecGraduado).ToListAsync());
         }
 
         // GET: Aspirantes/Details/5
@@ -35,8 +35,12 @@ namespace SGMatriculasMaestria.Controllers
                 return NotFound();
             }
 
-            var aspirante = await _context.Aspirantes
-                .FirstOrDefaultAsync(m => m.CI == id);
+            var aspirante = await _context.Aspirantes.
+                Include(p => p.Ces).
+                Include(x => x.EspecGraduado).
+                Include(x => x.Pais).
+                Include(m => m.Municipio).
+                FirstOrDefaultAsync(m => m.CI == id);
             if (aspirante == null)
             {
                 return NotFound();
@@ -60,7 +64,8 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CI,Nombre,PrimerApellido,DireccionParticular,Telefono,Email,FechaGraduacion,Tomo,Folio,Numero,Sexo")] Aspirante aspirante)
+        //[Bind("CI,Nombre,PrimerApellido,DireccionParticular,Telefono,Email,FechaGraduacion,Tomo,Folio,Numero,Sexo")]
+        public async Task<IActionResult> Create( Aspirante aspirante)
         {
             if (ModelState.IsValid)
             {

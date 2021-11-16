@@ -20,6 +20,9 @@
                                 @Html.DisplayNameFor(model => model.Nombre)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => model.EspecGraduado)
+                            </th>
+                            @*<th>
                                 @Html.DisplayNameFor(model => model.PrimerApellido)
                             </th>
                             <th>
@@ -42,7 +45,7 @@
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Pais)
-                            </th>
+                            </th>*@
                             <th></th>
                         </tr>
                     </thead>
@@ -52,8 +55,13 @@
                             <tr>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Nombre)
+                                    @Html.DisplayFor(modelItem => item.PrimerApellido)
+                                    @Html.DisplayFor(modelItem => item.SegundoApellido)
                                 </td>
                                 <td>
+                                    @Html.DisplayFor(modelItem => item.EspecGraduado.Nombre)
+                                </td>
+                                @*<td>
                                     @Html.DisplayFor(modelItem => item.PrimerApellido)
                                 </td>
                                 <td>
@@ -76,7 +84,7 @@
                                 </td>
                                 <th>
                                     @Html.DisplayFor(modelItem => item.Pais)
-                                </th>
+                                </th>*@
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@item.CI" class="btn btn-success btn-circle btn-sm"><i class="fas fa-fw fa-wrench"></i></a>
                                     <a asp-action="Details" asp-route-id="@item.CI" class="btn btn-info btn-circle btn-sm"><i class="fas fa-info-circle"></i></a>
