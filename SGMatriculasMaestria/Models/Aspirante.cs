@@ -36,6 +36,7 @@ namespace SGMatriculasMaestria.Models
 
         [Display(Name = "Fecha de graduación")]
         [Required(ErrorMessage = "La dirección es obligatoria")]
+        [DataType(DataType.DateTime, ErrorMessage = "Solo se permiten fechas válidas")]
         public DateTime FechaGraduacion { get; set; }
 
         [Required(ErrorMessage = "El tomo es obligatorio")]
@@ -54,12 +55,14 @@ namespace SGMatriculasMaestria.Models
         public Sexo Sexo { get; set; }
 
         public int EspecGraduadoId { get; set; }
+        [Display(Name = "Especialidad")]
         public EspecGraduado EspecGraduado { get; set; }
 
         public int PaisId { get; set; }
         public Pais Pais { get; set; }
 
         public int CesId { get; set; }
+        [Display(Name = "Úniversidad")]
         public Ces Ces { get; set; }
 
         public int? MunicipioId { get; set; }

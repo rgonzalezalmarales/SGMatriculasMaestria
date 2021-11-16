@@ -24,7 +24,12 @@ namespace SGMatriculasMaestria.Controllers
         // GET: Aspirantes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Aspirantes.OrderBy(x => x.Nombre).Include(x => x.EspecGraduado).ToListAsync());
+            return View(await _context.Aspirantes.
+                OrderBy(x => x.Nombre).
+                Include(x => x.EspecGraduado).
+                Include(c => c.Ces).
+                Include(m => m.Municipio).
+                ToListAsync());
         }
 
         // GET: Aspirantes/Details/5
