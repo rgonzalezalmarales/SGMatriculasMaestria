@@ -29,7 +29,7 @@ namespace SGMatriculasMaestria.Data
         public virtual DbSet<Matricula> Matricula { get; set; }
         public virtual DbSet<Municipio> Municipios { get; set; }
         public virtual DbSet<Pais> Paises { get; set; }
-        public virtual DbSet<Provincia> Provincia { get; set; }
+        public virtual DbSet<Provincia> Provincias { get; set; }
         public virtual DbSet<SecretarioPostg> SecretarioPostgrados { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)

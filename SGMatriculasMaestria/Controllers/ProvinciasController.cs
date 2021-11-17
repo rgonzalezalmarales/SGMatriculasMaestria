@@ -24,7 +24,7 @@ namespace SGMatriculasMaestria.Controllers
         // GET: Provincias
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Provincia.ToListAsync());
+            return View(await _context.Provincias.ToListAsync());
         }
 
         // GET: Provincias/Details/5
@@ -35,7 +35,7 @@ namespace SGMatriculasMaestria.Controllers
                 return NotFound();
             }
 
-            var provincia = await _context.Provincia
+            var provincia = await _context.Provincias
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (provincia == null)
             {
@@ -45,9 +45,18 @@ namespace SGMatriculasMaestria.Controllers
             return View(provincia);
         }
 
-        // GET: Provincias/Create
-        public IActionResult Create()
+        public async Task<JsonResult> GetProvinciasByPaisJson(int paisId)
         {
+            var provincias = await _context.Provincias.
+                Where(x => x.PaisId == paisId).
+                Select(x => new { x.Id, x.Nombre }).ToListAsync();
+            return Json(provincias);
+        }
+
+        // GET: Provincias/Create
+        public async Task<IActionResult> Create()
+        {
+            ViewBag.Paises = await _context.Paises.ToListAsync();
             return View();
         }
 
@@ -56,7 +65,7 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre")] Provincia provincia)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,PaisId")] Provincia provincia)
         {
             if (ModelState.IsValid)
             {
@@ -75,7 +84,7 @@ namespace SGMatriculasMaestria.Controllers
                 return NotFound();
             }
 
-            var provincia = await _context.Provincia.FindAsync(id);
+            var provincia = await _context.Provincias.FindAsync(id);
             if (provincia == null)
             {
                 return NotFound();
@@ -126,7 +135,7 @@ namespace SGMatriculasMaestria.Controllers
                 return NotFound();
             }
 
-            var provincia = await _context.Provincia
+            var provincia = await _context.Provincias
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (provincia == null)
             {
@@ -171,8 +180,8 @@ namespace SGMatriculasMaestria.Controllers
             }*/
             try
             {
-                var provincia = await _context.Provincia.FindAsync(id);
-                _context.Provincia.Remove(provincia);
+                var provincia = await _context.Provincias.FindAsync(id);
+                _context.Provincias.Remove(provincia);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException e)
@@ -184,7 +193,7 @@ namespace SGMatriculasMaestria.Controllers
 
         private bool ProvinciaExists(int id)
         {
-            return _context.Provincia.Any(e => e.Id == id);
+            return _context.Provincias.Any(e => e.Id == id);
         }
     }
 }

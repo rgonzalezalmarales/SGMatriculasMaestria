@@ -58,15 +58,18 @@ namespace SGMatriculasMaestria.Models
         [Display(Name = "Especialidad")]
         public EspecGraduado EspecGraduado { get; set; }
 
-        public int PaisId { get; set; }
+        public int? PaisId { get; set; }
         public Pais Pais { get; set; }
 
         public int CesId { get; set; }
-        [Display(Name = "Úniversidad")]
+        [Display(Name = "Universidad")]
         public Ces Ces { get; set; }
 
         public int? MunicipioId { get; set; }
         public Municipio Municipio { get; set; }
+
+        public int? ProvinciaId { get; set; }
+        public Provincia Provincia { get; set; }
 
         public DateTime Creatat { get; set; }
         public DateTime Modifiat { get; set; }

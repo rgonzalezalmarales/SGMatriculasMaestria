@@ -44,6 +44,7 @@ namespace SGMatriculasMaestria.Controllers
                 Include(p => p.Ces).
                 Include(x => x.EspecGraduado).
                 Include(x => x.Pais).
+                Include(p => p.Provincia).
                 Include(m => m.Municipio).
                 FirstOrDefaultAsync(m => m.CI == id);
             if (aspirante == null)
@@ -55,12 +56,13 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: Aspirantes/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewBag.Especialidades = _context.EspecGraduados.ToList();
-            ViewBag.Ces = _context.Ces.ToList();
-            ViewBag.Pais = _context.Paises.ToList();
-            ViewBag.Municipios = _context.Municipios.ToList();            
+            ViewBag.Especialidades = await _context.EspecGraduados.ToListAsync();
+            ViewBag.Ces = await _context.Ces.ToListAsync();
+            ViewBag.Paises = await _context.Paises.ToListAsync();
+            /*ViewBag.Provincias = _context.Provincias.ToList();
+            ViewBag.Municipios = _context.Municipios.ToList();*/
             return View();
         }
 
@@ -80,6 +82,11 @@ namespace SGMatriculasMaestria.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewBag.Especialidades = await _context.EspecGraduados.ToListAsync();
+            ViewBag.Ces = await _context.Ces.ToListAsync();
+            ViewBag.Paises = await _context.Paises.ToListAsync();
+
             return View(aspirante);
         }
 
@@ -91,11 +98,21 @@ namespace SGMatriculasMaestria.Controllers
                 return NotFound();
             }
 
-            var aspirante = await _context.Aspirantes.FindAsync(id);
-            ViewBag.Especialidades = _context.EspecGraduados.ToList();
-            ViewBag.Ces = _context.Ces.ToList();
-            ViewBag.Pais = _context.Paises.ToList();
-            ViewBag.Municipios = _context.Municipios.ToList();
+            /*var aspirante = await _context.Aspirantes.
+                Where(a => a.CI == id).
+                Include(x => x.Ces).
+                Include(x => x.EspecGraduado).
+                Include(x => x.Pais).
+                Include(x => x.Provincia).
+                Include(x => x.Municipio).
+                FirstAsync();*/
+            var aspirante = await _context.Aspirantes.FirstOrDefaultAsync(m => m.CI == id);
+
+            ViewBag.Especialidades = await _context.EspecGraduados.ToListAsync();
+            ViewBag.Ces = await _context.Ces.ToListAsync();
+            ViewBag.Paises = await _context.Paises.ToListAsync();
+            ViewBag.Provincias = await _context.Provincias.Where(x => x.PaisId == aspirante.PaisId).ToListAsync();
+            ViewBag.Municipios = await _context.Municipios.Where(x => x.ProvinciaId == aspirante.ProvinciaId).ToListAsync();
             if (aspirante == null)
             {
                 return NotFound();

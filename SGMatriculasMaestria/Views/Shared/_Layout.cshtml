@@ -27,7 +27,7 @@
         }
 
         .tb-accion {
-            width:100px;
+            width:100px !important;
         }
     </style>
 
@@ -134,7 +134,7 @@
                             <span>Crear Universidad</span>
                         </a>
                         <div class="collapse-divider">
-                            <hr class="sidebar-divider"/>
+                            <hr class="sidebar-divider" />
                         </div>
                         <a class="collapse-item" asp-area="" asp-controller="Facultades" asp-action="Index">
                             <span>Listar Facultades</span>
@@ -271,7 +271,7 @@
     </div>
     <!-- End of Page Wrapper -->
     <!-- Scroll to Top Button-->
-    
+
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
@@ -305,13 +305,12 @@
     </footer>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
+
     <!-- Core plugin JavaScript-->
-    <script src="~/lib/jquery-easing/jquery.easing.min.js"></script>
-
-
+    <!--<script src="~/lib/jquery-easing/jquery.easing.min.js"></script>-->
     <!-- Custom scripts for all pages-->
     <script src="~/js/sb-admin-2.min.js"></script>
 
@@ -329,6 +328,10 @@
     <script>
         AOS.init();
     </script>
+
+
+
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

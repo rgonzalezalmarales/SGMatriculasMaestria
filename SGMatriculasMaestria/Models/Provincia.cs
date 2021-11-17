@@ -10,6 +10,10 @@ namespace SGMatriculasMaestria.Models
         }
         public int Id { get; set; }
         public string Nombre { get; set; }
+
+        public int PaisId { get; set; }
+        public Pais Pais { get; set; }
+
         public virtual ICollection<Municipio> Municipios { get; set; }
     }
 }

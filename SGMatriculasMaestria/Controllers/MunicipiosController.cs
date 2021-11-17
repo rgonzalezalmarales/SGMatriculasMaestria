@@ -27,6 +27,14 @@ namespace SGMatriculasMaestria.Controllers
             return View(await _context.Municipios.ToListAsync());
         }
 
+        public async Task<JsonResult> GetMinucipiosByProvinciaJson(int provinciaId)
+        {
+            var municipios = await _context.Municipios.
+                Where(x => x.ProvinciaId == provinciaId).
+                Select(x => new { x.Id, x.Nombre }).ToListAsync();
+            return Json(municipios);
+        }
+
         // GET: Municipios/Details/5
         public async Task<IActionResult> Details(int id)
         {
@@ -46,9 +54,9 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: Municipios/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewBag.Provincias = _context.Provincia.ToList();
+            ViewBag.Provincias = await _context.Provincias.ToListAsync();
             return View();
         }
 

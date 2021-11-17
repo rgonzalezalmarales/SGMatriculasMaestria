@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SGMatriculasMaestria.Data;
 
 namespace SGMatriculasMaestria.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211117030722_UpateAspirante4")]
+    partial class UpateAspirante4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -256,7 +258,7 @@ namespace SGMatriculasMaestria.Migrations
                     b.Property<int>("Numero")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PaisId")
+                    b.Property<int>("PaisId")
                         .HasColumnType("int");
 
                     b.Property<string>("PrimerApellido")
@@ -522,12 +524,7 @@ namespace SGMatriculasMaestria.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PaisId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PaisId");
 
                     b.ToTable("Provincias");
                 });
@@ -618,7 +615,9 @@ namespace SGMatriculasMaestria.Migrations
 
                     b.HasOne("SGMatriculasMaestria.Models.Pais", "Pais")
                         .WithMany("Aspirantes")
-                        .HasForeignKey("PaisId");
+                        .HasForeignKey("PaisId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SGMatriculasMaestria.Models.Provincia", "Provincia")
                         .WithMany()
@@ -720,17 +719,6 @@ namespace SGMatriculasMaestria.Migrations
                     b.Navigation("Provincia");
                 });
 
-            modelBuilder.Entity("SGMatriculasMaestria.Models.Provincia", b =>
-                {
-                    b.HasOne("SGMatriculasMaestria.Models.Pais", "Pais")
-                        .WithMany("Provincias")
-                        .HasForeignKey("PaisId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Pais");
-                });
-
             modelBuilder.Entity("SGMatriculasMaestria.Models.CategDocente", b =>
                 {
                     b.Navigation("Matriculas");
@@ -773,8 +761,6 @@ namespace SGMatriculasMaestria.Migrations
             modelBuilder.Entity("SGMatriculasMaestria.Models.Pais", b =>
                 {
                     b.Navigation("Aspirantes");
-
-                    b.Navigation("Provincias");
                 });
 
             modelBuilder.Entity("SGMatriculasMaestria.Models.Provincia", b =>

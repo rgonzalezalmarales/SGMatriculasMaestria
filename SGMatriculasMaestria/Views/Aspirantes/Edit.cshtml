@@ -6,11 +6,11 @@
 }
 
 <h1 class="text-center">Editar Aspirante</h1>
-<hr />    
+<hr />
+
 <div class="container-fluid">
     <form asp-action="Edit">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="CI" />
         <div class="row">
             <div class="col-4">
                 <div class="form-group">
@@ -35,14 +35,32 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
+            <div class="col-3">
                 <div class="form-group">
-                    <label asp-for="DireccionParticular" class="control-label"></label>
-                    <input asp-for="DireccionParticular" class="form-control" />
-                    <span asp-validation-for="DireccionParticular" class="text-danger"></span>
+                    <label asp-for="CI" disabled class="control-label"></label>
+                    <input asp-for="CI" class="form-control" />
+                    <span asp-validation-for="Sexo" class="text-danger"></span>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-3">
+                <div class="form-group">
+                    <label asp-for="Sexo" class="control-label"></label>
+                    <select asp-for="SexoId" class="form-control">
+                        <option value="">--Seleccione--</option>
+                        <option value="0">@Sexo.Masculino</option>
+                        <option value="1">@Sexo.Femenino</option>
+                    </select>
+                    <span asp-validation-for="Sexo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-3">
                 <div class="form-group">
                     <label asp-for="Telefono" class="control-label"></label>
                     <input asp-for="Telefono" class="form-control" />
@@ -51,7 +69,46 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
+            <div class="col-12">
+                <div class="form-group">
+                    <label asp-for="DireccionParticular" class="control-label"></label>
+                    <input asp-for="DireccionParticular" class="form-control" />
+                    <span asp-validation-for="DireccionParticular" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="form-group">
+                    <label asp-for="Pais" class="control-label"></label>
+                    <select asp-for="PaisId" asp-items="@(new SelectList(ViewBag.Paises,"Id","Nombre"))" id="PaisAspiranteSelect" class="form-control">
+                        <option value="">-- Seleccione un Pais --</option>
+                    </select>
+                    <span asp-validation-for="Pais.Nombre" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label asp-for="Provincia" class="control-label"></label>
+                    <select asp-for="ProvinciaId" asp-items="@(new SelectList(ViewBag.Provincias,"Id","Nombre"))" id="ProvinciaAspiranteSelect" class="form-control">
+                        <option value="">-- Seleccione una provincia --</option>
+                    </select>
+                    <span asp-validation-for="Provincia.Nombre" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label asp-for="Municipio" class="control-label"></label>
+                    <select asp-for="MunicipioId" asp-items="@(new SelectList(ViewBag.Municipios,"Id","Nombre"))" id="MunicipioAspiranteSelect" class="form-control">
+                        <option value="">-- Seleccione un municipio --</option>
+                    </select>
+                    <span asp-validation-for="Municipio.Nombre" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
                 <div class="form-group">
                     <label asp-for="Ces" class="control-label"></label>
                     <select asp-for="CesId" asp-items="@(new SelectList(ViewBag.Ces,"Id","Nombre"))" id="CesAspiranteSelect" class="form-control">
@@ -60,59 +117,7 @@
                     <span asp-validation-for="Ces.Nombre" class="text-danger"></span>
                 </div>
             </div>
-            <div class="col-6">
-                <div class="form-group">
-                    <label asp-for="Email" class="control-label"></label>
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <div class="form-group">
-                    <label asp-for="FechaGraduacion" class="control-label"></label>
-                    <input asp-for="FechaGraduacion" class="form-control" />
-                    <span asp-validation-for="FechaGraduacion" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="form-group">
-                    <label asp-for="Tomo" class="control-label"></label>
-                    <input asp-for="Tomo" class="form-control" />
-                    <span asp-validation-for="Tomo" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <div class="form-group">
-                    <label asp-for="Folio" class="control-label"></label>
-                    <input asp-for="Folio" class="form-control" />
-                    <span asp-validation-for="Folio" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="form-group">
-                    <label asp-for="Numero" class="control-label"></label>
-                    <input asp-for="Numero" class="form-control" />
-                    <span asp-validation-for="Numero" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <div class="form-group">
-                    <label asp-for="Sexo" class="control-label"></label>
-                    <select asp-for="SexoId" class="form-control">
-                        <option value="">-- Seleccione Genero --</option>
-                        <option value="0">@Sexo.Masculino</option>
-                        <option value="1">@Sexo.Femenino</option>
-                    </select>
-                    <span asp-validation-for="Sexo" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col-6">
+            <div class="col-4">
                 <div class="form-group">
                     <label asp-for="EspecGraduado" class="control-label"></label>
                     <select asp-for="EspecGraduadoId" asp-items="@(new SelectList(ViewBag.Especialidades,"Id","Nombre"))" id="EspecialidadAspiranteSelect" class="form-control">
@@ -121,24 +126,34 @@
                     <span asp-validation-for="EspecGraduado.Nombre" class="text-danger"></span>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
+            <div class="col-4">
                 <div class="form-group">
-                    <label asp-for="Pais" class="control-label"></label>
-                    <select asp-for="PaisId" asp-items="@(new SelectList(ViewBag.Pais,"Id","Nombre"))" id="PaisAspiranteSelect" class="form-control">
-                        <option value="">-- Seleccione un Pais --</option>
-                    </select>
-                    <span asp-validation-for="Pais.Nombre" class="text-danger"></span>
+                    <label asp-for="FechaGraduacion" class="control-label"></label>
+                    <input asp-for="FechaGraduacion" class="form-control" />
+                    <span asp-validation-for="FechaGraduacion" class="text-danger"></span>
                 </div>
             </div>
-            <div class="col-6">
+        </div>
+        <div class="row">
+            <div class="col-4">
                 <div class="form-group">
-                    <label asp-for="Municipio" class="control-label"></label>
-                    <select asp-for="MunicipioId" asp-items="@(new SelectList(ViewBag.Municipios,"Id","Nombre"))" id="MunicipioAspiranteSelect" class="form-control">
-                        <option value="">-- Seleccione un Municipio --</option>
-                    </select>
-                    <span asp-validation-for="Municipio.Nombre" class="text-danger"></span>
+                    <label asp-for="Tomo" class="control-label"></label>
+                    <input asp-for="Tomo" class="form-control" />
+                    <span asp-validation-for="Tomo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label asp-for="Folio" class="control-label"></label>
+                    <input asp-for="Folio" class="form-control" />
+                    <span asp-validation-for="Folio" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label asp-for="Numero" class="control-label"></label>
+                    <input asp-for="Numero" class="form-control" />
+                    <span asp-validation-for="Numero" class="text-danger"></span>
                 </div>
             </div>
         </div>
@@ -152,12 +167,12 @@
             </a>
         </div>
         <div>
-            
+
         </div>
     </form>
 </div>
 
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_LoadMunicipiosScriptPartial");}
 }

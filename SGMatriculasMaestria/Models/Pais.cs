@@ -7,9 +7,11 @@ namespace SGMatriculasMaestria.Models
         public Pais()
         {
             Aspirantes = new HashSet<Aspirante>();
+            Provincias = new HashSet<Provincia>();
         }
         public int Id { get; set; }
         public string Nombre { get; set; }
         public virtual ICollection<Aspirante> Aspirantes { get; set; }
+        public virtual ICollection<Provincia> Provincias { get; set; }
     }
 }
