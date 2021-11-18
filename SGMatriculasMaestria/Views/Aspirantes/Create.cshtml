@@ -39,7 +39,7 @@
                 <div class="form-group">
                     <label asp-for="CI" class="control-label"></label>
                     <input asp-for="CI" class="form-control" />
-                    <span asp-validation-for="Sexo" class="text-danger"></span>
+                    <span asp-validation-for="CI" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-3">
@@ -50,7 +50,7 @@
                         <option value="0">@Sexo.Masculino</option>
                         <option value="1">@Sexo.Femenino</option>
                     </select>
-                    <span asp-validation-for="Sexo" class="text-danger"></span>
+                    <span asp-validation-for="SexoId" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-3">
@@ -84,7 +84,7 @@
                     <select asp-for="PaisId" asp-items="@(new SelectList(ViewBag.Paises,"Id","Nombre"))" id="PaisAspiranteSelect" class="form-control">
                         <option value="">-- Seleccione un Pais --</option>
                     </select>
-                    <span asp-validation-for="Pais.Nombre" class="text-danger"></span>
+                    <span asp-validation-for="Pais" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-4">
@@ -93,7 +93,7 @@
                     <select asp-for="ProvinciaId" id="ProvinciaAspiranteSelect" class="form-control">
                         <option value="">-- Seleccione una provincia --</option>
                     </select>
-                    <span asp-validation-for="Provincia.Nombre" class="text-danger"></span>
+                    <span asp-validation-for="Provincia" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-4">
@@ -102,7 +102,7 @@
                     <select asp-for="MunicipioId" id="MunicipioAspiranteSelect" class="form-control">
                         <option value="">-- Seleccione un municipio --</option>
                     </select>
-                    <span asp-validation-for="Municipio.Nombre" class="text-danger"></span>
+                    <span asp-validation-for="Municipio" class="text-danger"></span>
                 </div>
             </div>
         </div>
@@ -114,7 +114,7 @@
                     <select asp-for="CesId" asp-items="@(new SelectList(ViewBag.Ces,"Id","Nombre"))" id="CesAspiranteSelect" class="form-control">
                         <option value="">-- Seleccione una Ces --</option>
                     </select>
-                    <span asp-validation-for="Ces.Nombre" class="text-danger"></span>
+                    <span asp-validation-for="Ces" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-4">
@@ -123,7 +123,7 @@
                     <select asp-for="EspecGraduadoId" asp-items="@(new SelectList(ViewBag.Especialidades,"Id","Nombre"))" id="EspecialidadAspiranteSelect" class="form-control">
                         <option value="">-- Seleccione una Especialidad --</option>
                     </select>
-                    <span asp-validation-for="EspecGraduado.Nombre" class="text-danger"></span>
+                    <span asp-validation-for="EspecGraduado" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-4">

@@ -47,6 +47,7 @@ namespace SGMatriculasMaestria.Controllers
                 Include(p => p.Provincia).
                 Include(m => m.Municipio).
                 FirstOrDefaultAsync(m => m.CI == id);
+
             if (aspirante == null)
             {
                 return NotFound();

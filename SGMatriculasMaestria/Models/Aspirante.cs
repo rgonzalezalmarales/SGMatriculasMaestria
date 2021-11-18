@@ -1,13 +1,13 @@
-﻿using System;
+﻿using SGMatriculasMaestria.Validators;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace SGMatriculasMaestria.Models
 {
     public class Aspirante
     {
-
-        [Display(Name = "Carnet de Indentidad")]
         [Required(ErrorMessage = "El carnet de identidad es obligatorio")]
+        [Display(Name = "Carnet de Indentidad")]
         [DataType(DataType.Text)]
         [MinLength(11, ErrorMessage = "El carnet de identidad debe ser de 11 caracteres")]
         [MaxLength(11, ErrorMessage = "El carnet de identidad debe ser de 11 caracteres")]
@@ -34,9 +34,12 @@ namespace SGMatriculasMaestria.Models
         [Display(Name = "Correo")]
         public string Email { get; set; }
 
+
+        //[Range(typeof(DateTime),"01/01/1988","17/11/2021")]
         [Display(Name = "Fecha de graduación")]
-        [Required(ErrorMessage = "La dirección es obligatoria")]
+        [Required(ErrorMessage = "La fecha de graduacion es obligatoria")]
         [DataType(DataType.DateTime, ErrorMessage = "Solo se permiten fechas válidas")]
+        [BeforeTomorrow]
         public DateTime FechaGraduacion { get; set; }
 
         [Required(ErrorMessage = "El tomo es obligatorio")]

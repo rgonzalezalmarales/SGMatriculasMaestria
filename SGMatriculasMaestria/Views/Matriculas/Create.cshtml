@@ -38,10 +38,10 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
-                        <span id="msgerror" class="text-danger d-none">Fecha de inicio debe ser mayor a la Fecha actual</span>
                         <div class="form-group">
                             <label asp-for="FechaInicio" class="control-label"></label>
-                            <input id="matriculafechaini" asp-for="FechaInicio" class="form-control" value="" onchange="checkdateini()" />
+                            <input id="matriculafechaini" max="Date.Now()" asp-for="FechaInicio" class="form-control" value="" onchange="checkdateini()" />
+                            <span id="msgerror" class="text-danger d-none">Fecha de inicio debe ser mayor a la Fecha actual</span>
                             <span asp-validation-for="FechaInicio" class="text-danger"></span>
                         </div>
                     </div>

@@ -13,131 +13,130 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
+
+
+
                 <div class="row">
                     <div class="col-12">
-                       
-                            <table id="example1" class="table table-bordered table-striped">
-                                <tbody>
-                                    <tr>
-                                        <th>Nombre</th>
-                                    </tr>
-                                    <tr>
-                                        <td> @Html.DisplayFor(modelItem => Model.Nombre)</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Primer Apellido</th>
-                                    </tr>
-                                    <tr>
-                                        <td> @Html.DisplayFor(modelItem => Model.PrimerApellido)</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Segundo Apellido</th>
-                                    </tr>
-                                    <tr>
-                                        <td> @Html.DisplayFor(modelItem => Model.SegundoApellido)</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Direccion Particular</th>
-                                    </tr>
-                                    <tr>
-                                        <td> @Html.DisplayFor(modelItem => Model.DireccionParticular)</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Telefono</th>
-                                    </tr>
-                                    <tr>
-                                        <td> @Html.DisplayFor(modelItem => Model.Telefono)</td>
-                                    </tr>
-                                    <tr>
-                                        <th>E-mail</th>
-                                    </tr>
-                                    <tr>
-                                        <td> @Html.DisplayFor(modelItem => Model.Email)</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Sexo</th>
-                                    </tr>
-                                    <tr>
-                                        <td> @Html.DisplayFor(modelItem => Model.Sexo)</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Especialidad</th>
-                                    </tr>
-                                    <tr>
-                                        <td> @Html.DisplayFor(modelItem => Model.EspecGraduado.Nombre)</td>
-                                    </tr>
-                                    <tr>
-                                        <th>CES</th>
-                                    </tr>
-                                    <tr>
-                                        <td> @Html.DisplayFor(modelItem => Model.Ces.Nombre)</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Fecha de Graduado</th>
-                                    </tr>
-                                    <tr>
-                                        <td> @Html.DisplayFor(modelItem => Model.FechaGraduacion)</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Tomo</th>
-                                    </tr>
-                                    <tr>
-                                        <td> @Html.DisplayFor(modelItem => Model.Tomo)</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Folio</th>
-                                    </tr>
-                                    <tr>
-                                        <td> @Html.DisplayFor(modelItem => Model.Folio)</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Numero</th>
-                                    </tr>
-                                    <tr>
-                                        <td> @Html.DisplayFor(modelItem => Model.Numero)</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Pais</th>
-                                    </tr>
-                                    <tr>
-                                        <td> @Html.DisplayFor(modelItem => Model.Pais.Nombre)</td>
-                                    </tr>
 
-                                    <tr>
-                                        <th>Prov</th>
-                                        @*<th>@Html.DisplayNameFor(modelItem => Model.Municipio.Provincia)</th*@>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => Model.Provincia.Nombre)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Municipio</th>
-                                    </tr>
-                                    <tr>
-                                        <td> @Html.DisplayFor(modelItem => Model.Municipio.Nombre)</td>
-                                    </tr>
-                                </tbody>
-
-                            </table>
-                       
-                        <!-- /.row -->
+                        <table id="example1" class="table table-bordered table-striped">
+                            <tbody>
+                                <tr>
+                                    <th> @Html.DisplayNameFor(modelItem => Model.Nombre)</th>
+                                </tr>
+                                <tr>
+                                    <td> @Html.DisplayFor(modelItem => Model.Nombre)</td>
+                                </tr>
+                                <tr>
+                                    <th> @Html.DisplayNameFor(modelItem => Model.PrimerApellido)</th>
+                                </tr>
+                                <tr>
+                                    <td> @Html.DisplayFor(modelItem => Model.PrimerApellido)</td>
+                                </tr>
+                                <tr>
+                                    <th> @Html.DisplayNameFor(modelItem => Model.SegundoApellido)</th>
+                                </tr>
+                                <tr>
+                                    <td> @Html.DisplayFor(modelItem => Model.SegundoApellido)</td>
+                                </tr>
+                                <tr>
+                                    <th> @Html.DisplayNameFor(modelItem => Model.DireccionParticular)</th>
+                                </tr>
+                                <tr>
+                                    <td> @Html.DisplayFor(modelItem => Model.DireccionParticular)</td>
+                                </tr>
+                                <tr>
+                                    <th> @Html.DisplayNameFor(modelItem => Model.Telefono)</th>
+                                </tr>
+                                <tr>
+                                    <td> @Html.DisplayFor(modelItem => Model.Telefono)</td>
+                                </tr>
+                                <tr>
+                                    <th> @Html.DisplayNameFor(modelItem => Model.Email)</th>
+                                </tr>
+                                <tr>
+                                    <td> @Html.DisplayFor(modelItem => Model.Email)</td>
+                                </tr>
+                                <tr>
+                                    <th> @Html.DisplayNameFor(modelItem => Model.Sexo)</th>
+                                </tr>
+                                <tr>
+                                    <td> @Html.DisplayFor(modelItem => Model.Sexo)</td>
+                                </tr>
+                                <tr>
+                                    <th> @Html.DisplayNameFor(modelItem => Model.EspecGraduado)</th>
+                                </tr>
+                                <tr>
+                                    <td> @Html.DisplayFor(modelItem => Model.EspecGraduado.Nombre)</td>
+                                </tr>
+                                <tr>
+                                    <th> @Html.DisplayNameFor(modelItem => Model.Ces)</th>
+                                </tr>
+                                <tr>
+                                    <td> @Html.DisplayFor(modelItem => Model.Ces.Nombre)</td>
+                                </tr>
+                                <tr>
+                                    <th> @Html.DisplayNameFor(modelItem => Model.FechaGraduacion)</th>
+                                </tr>
+                                <tr>
+                                    <td> @Html.DisplayFor(modelItem => Model.FechaGraduacion)</td>
+                                </tr>
+                                <tr>
+                                    <th> @Html.DisplayNameFor(modelItem => Model.Tomo)</th>
+                                </tr>
+                                <tr>
+                                    <td> @Html.DisplayFor(modelItem => Model.Tomo)</td>
+                                </tr>
+                                <tr>
+                                    <th> @Html.DisplayNameFor(modelItem => Model.Folio)</th>
+                                </tr>
+                                <tr>
+                                    <td> @Html.DisplayFor(modelItem => Model.Folio)</td>
+                                </tr>
+                                <tr>
+                                    <th> @Html.DisplayNameFor(modelItem => Model.Numero)</th>
+                                </tr>
+                                <tr>
+                                    <td> @Html.DisplayFor(modelItem => Model.Numero)</td>
+                                </tr>
+                                <tr>
+                                    <th> @Html.DisplayNameFor(modelItem => Model.Pais)</th>
+                                </tr>
+                                <tr>
+                                    <td> @Html.DisplayFor(modelItem => Model.Pais.Nombre)</td>
+                                </tr>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(modelItem => Model.Municipio.Provincia)</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => Model.Provincia.Nombre)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th> @Html.DisplayNameFor(modelItem => Model.Municipio)</th>
+                                </tr>
+                                <tr>
+                                    <td> @Html.DisplayFor(modelItem => Model.Municipio.Nombre)</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <!-- /.container-fluid -->
                 </div>
+                <div class="col-xl-3 col-md-6 mb-4"></div>
+                <div>
+                    <a asp-action="Edit" asp-route-id="@Model.CI" class="btn btn-info margin-left">Editar</a>&nbsp;&nbsp;&nbsp;
+                    <a asp-action="Index" class="btn btn-secondary btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-arrow-left"></i>
+                        </span>
+                        <span class="text">Regresar al listado</span>
+                    </a>
+                </div> <!-- /.card-body -->
             </div>
+            <div class="col-xl-3 col-md-6 mb-4"></div>
         </div>
     </center>
-    <div class="col-xl-3 col-md-6 mb-4"></div>
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model.CI" class="btn btn-info margin-left">Editar</a>&nbsp;&nbsp;&nbsp;
-        <a asp-action="Index" class="btn btn-secondary btn-icon-split">
-            <span class="icon text-white-50">
-                <i class="fas fa-arrow-left"></i>
-            </span>
-            <span class="text">Regresar al listado</span>
-        </a>
-    </div> <!-- /.card-body -->
 </div>
-<div class="col-xl-3 col-md-6 mb-4"></div>
+
+
