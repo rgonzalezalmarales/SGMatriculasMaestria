@@ -85,7 +85,7 @@ namespace SGMatriculasMaestria.Controllers
             var aspiranteDb = await _context.Aspirantes.Where(a => a.CI == aspirante.CI).FirstOrDefaultAsync();
             if(aspiranteDb == null)
             {
-                if (aspiranteDb != null && ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
                     aspirante.Creatat = DateTime.Now;
                     aspirante.Modifiat = DateTime.Now;
@@ -128,15 +128,18 @@ namespace SGMatriculasMaestria.Controllers
                 FirstAsync();*/
             var aspirante = await _context.Aspirantes.FirstOrDefaultAsync(m => m.CI == id);
 
+            
+            if (aspirante == null)
+            {
+                return NotFound();
+            }
+
             ViewBag.Especialidades = await _context.EspecGraduados.ToListAsync();
             ViewBag.Ces = await _context.Ces.ToListAsync();
             ViewBag.Paises = await _context.Paises.ToListAsync();
             ViewBag.Provincias = await _context.Provincias.Where(x => x.PaisId == aspirante.PaisId).ToListAsync();
             ViewBag.Municipios = await _context.Municipios.Where(x => x.ProvinciaId == aspirante.ProvinciaId).ToListAsync();
-            if (aspirante == null)
-            {
-                return NotFound();
-            }
+
             return View(aspirante);
         }
 

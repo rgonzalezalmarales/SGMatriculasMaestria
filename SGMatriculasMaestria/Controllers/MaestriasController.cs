@@ -44,8 +44,9 @@ namespace SGMatriculasMaestria.Controllers
                 return NotFound();
             }
 
-            var maestria = await _context.Maestrias
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var maestria = await _context.Maestrias.
+                Include(m => m.Facultad).
+                FirstOrDefaultAsync(m => m.Id == id);
             if (maestria == null)
             {
                 return NotFound();
@@ -55,9 +56,9 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: Maestrias/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewBag.Facultades = _context.Facultades.ToList();
+            ViewBag.Facultades = await _context.Facultades.ToListAsync();
             return View();
         }
 
@@ -77,7 +78,7 @@ namespace SGMatriculasMaestria.Controllers
             }
             catch (Exception ex)
             {
-
+                ViewBag.Facultades = await _context.Facultades.ToListAsync();
                 return View(ex.Message);
             }               
             
@@ -92,11 +93,15 @@ namespace SGMatriculasMaestria.Controllers
                 return NotFound();
             }
 
-            var maestria = await _context.Maestrias.FindAsync(id);
+            var maestria = await _context.Maestrias.
+                FindAsync(id);
             if (maestria == null)
             {
                 return NotFound();
             }
+
+            ViewBag.Facultades = await _context.Facultades.ToListAsync();
+
             return View(maestria);
         }
 
@@ -105,7 +110,8 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo,Version")] Maestria maestria)
+        //[Bind("Id,Titulo,Version")]
+        public async Task<IActionResult> Edit(int id, Maestria maestria)
         {
             if (id != maestria.Id)
             {

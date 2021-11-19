@@ -27,7 +27,7 @@
                     <div class="form-group">
                         <label asp-for="Facultad.Nombre" class="control-label"></label>
                         <select asp-for="Facultad.Id" asp-items="@(new SelectList(ViewBag.Facultades,"Id","Nombre"))" id="FacultadesSelect" class="form-control">
-                            <option value="">-- Seleccione una Facultad --</option>
+                            <option value="">-- Seleccione una facultad --</option>
                         </select>
                         <span asp-validation-for="Facultad.Nombre" class="text-danger"></span>
                     </div>
