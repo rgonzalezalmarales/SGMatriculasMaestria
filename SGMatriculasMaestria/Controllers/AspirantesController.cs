@@ -87,8 +87,8 @@ namespace SGMatriculasMaestria.Controllers
             {
                 if (aspiranteDb != null && ModelState.IsValid)
                 {
-                    aspirante.Creatat = DateTime.UtcNow;
-                    aspirante.Modifiat = DateTime.UtcNow;
+                    aspirante.Creatat = DateTime.Now;
+                    aspirante.Modifiat = DateTime.Now;
                     _context.Add(aspirante);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
@@ -156,7 +156,7 @@ namespace SGMatriculasMaestria.Controllers
             {
                 try
                 {
-                    aspirante.Modifiat = DateTime.UtcNow;
+                    aspirante.Modifiat = DateTime.Now;
                     _context.Update(aspirante);
                     await _context.SaveChangesAsync();
                 }
