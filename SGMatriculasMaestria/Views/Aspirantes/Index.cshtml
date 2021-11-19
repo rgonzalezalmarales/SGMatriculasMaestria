@@ -27,34 +27,34 @@
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Municipio)
-                            </th>               
+                            </th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
                         {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Nombre)
-                                @Html.DisplayFor(modelItem => item.PrimerApellido)
-                                @Html.DisplayFor(modelItem => item.SegundoApellido)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.EspecGraduado.Nombre)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Ces.Nombre)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Municipio.Nombre)
-                            </td>
-                            <td class="tb-accion">
-                                <a asp-action="Edit" asp-route-id="@item.CI" class="btn btn-success btn-circle btn-sm"><i class="fas fa-fw fa-wrench"></i></a>
-                                <a asp-action="Details" asp-route-id="@item.CI" class="btn btn-info btn-circle btn-sm"><i class="fas fa-info-circle"></i></a>
-                                <a asp-action="Delete" asp-route-id="@item.CI" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                    @Html.DisplayFor(modelItem => item.PrimerApellido)
+                                    @Html.DisplayFor(modelItem => item.SegundoApellido)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EspecGraduado.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Ces.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Municipio.Nombre)
+                                </td>
+                                <td class="tb-accion">
+                                    <a asp-action="Edit" asp-route-id="@item.CI" class="btn btn-success btn-circle btn-sm"><i class="fas fa-fw fa-wrench"></i></a>
+                                    <a asp-action="Details" asp-route-id="@item.CI" class="btn btn-info btn-circle btn-sm"><i class="fas fa-info-circle"></i></a>
+                                    <a asp-action="Delete" asp-route-id="@item.CI" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>

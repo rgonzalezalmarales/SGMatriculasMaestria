@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SGMatriculasMaestria.Data;
+using SGMatriculasMaestria.DTOs;
 using SGMatriculasMaestria.Models;
 
 namespace SGMatriculasMaestria.Controllers
@@ -15,21 +17,26 @@ namespace SGMatriculasMaestria.Controllers
     public class AspirantesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public AspirantesController(ApplicationDbContext context)
+        public AspirantesController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: Aspirantes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Aspirantes.
+            var aspirantes = await _context.Aspirantes.
                 OrderBy(x => x.Nombre).
                 Include(x => x.EspecGraduado).
                 Include(c => c.Ces).
                 Include(m => m.Municipio).
-                ToListAsync());
+                ToListAsync();
+
+            //var aspiranteDtos = _mapper.Map<List<AspiranteDto>>(aspirantes);
+            return View(aspirantes);
         }
 
         // GET: Aspirantes/Details/5
@@ -62,8 +69,8 @@ namespace SGMatriculasMaestria.Controllers
             ViewBag.Especialidades = await _context.EspecGraduados.ToListAsync();
             ViewBag.Ces = await _context.Ces.ToListAsync();
             ViewBag.Paises = await _context.Paises.ToListAsync();
-            /*ViewBag.Provincias = _context.Provincias.ToList();
-            ViewBag.Municipios = _context.Municipios.ToList();*/
+            ViewBag.Provincias = new List<Provincia>();
+            ViewBag.Municipios = new List<Municipio>();
             return View();
         }
 
@@ -75,18 +82,30 @@ namespace SGMatriculasMaestria.Controllers
         //[Bind("CI,Nombre,PrimerApellido,DireccionParticular,Telefono,Email,FechaGraduacion,Tomo,Folio,Numero,Sexo")]
         public async Task<IActionResult> Create( Aspirante aspirante)
         {
-            if (ModelState.IsValid)
+            var aspiranteDb = await _context.Aspirantes.Where(a => a.CI == aspirante.CI).FirstOrDefaultAsync();
+            if(aspiranteDb == null)
             {
-                aspirante.Creatat = DateTime.UtcNow;
-                aspirante.Modifiat = DateTime.UtcNow;
-                _context.Add(aspirante);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (aspiranteDb != null && ModelState.IsValid)
+                {
+                    aspirante.Creatat = DateTime.UtcNow;
+                    aspirante.Modifiat = DateTime.UtcNow;
+                    _context.Add(aspirante);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            else
+            {
+                ViewBag.ErrorMessage =  "Ya existe un aspirante con este carnet de identidad";
             }
 
             ViewBag.Especialidades = await _context.EspecGraduados.ToListAsync();
             ViewBag.Ces = await _context.Ces.ToListAsync();
             ViewBag.Paises = await _context.Paises.ToListAsync();
+            ViewBag.Provincias = await _context.Provincias.Where(x => x.PaisId == aspirante.PaisId).ToListAsync();
+            ViewBag.Municipios = await _context.Municipios.Where(x => x.ProvinciaId == aspirante.ProvinciaId).ToListAsync();
+
+
 
             return View(aspirante);
         }
@@ -137,6 +156,7 @@ namespace SGMatriculasMaestria.Controllers
             {
                 try
                 {
+                    aspirante.Modifiat = DateTime.UtcNow;
                     _context.Update(aspirante);
                     await _context.SaveChangesAsync();
                 }

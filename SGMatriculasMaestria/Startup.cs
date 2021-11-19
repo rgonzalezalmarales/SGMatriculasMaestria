@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -8,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SGMatriculasMaestria.Data;
+using SGMatriculasMaestria.Models;
+using SGMatriculasMaestria.Validators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +31,18 @@ namespace SGMatriculasMaestria
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            /*services.AddMvc().AddFluentValidation(options => {
+                options.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+            });*/
+
+            /*services.AddMvc().AddFluentValidation(options =>
+            {
+                options.DisableDataAnnotationsValidation = true;
+            });*/
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddTransient<IValidator<Aspirante>, AspiranteValidator>();
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -34,8 +50,23 @@ namespace SGMatriculasMaestria
 
             services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
-            services.AddControllersWithViews();
-            services.AddRazorPages();
+            services.AddControllersWithViews()/*.AddFluentValidation(fv => {
+                fv.DisableDataAnnotationsValidation = true;
+                fv.RegisterValidatorsFromAssemblyContaining<AspiranteValidator>();
+            })*/;
+            services.AddRazorPages().AddFluentValidation(options =>
+            {
+                options.RegisterValidatorsFromAssemblyContaining<Startup>();
+                options.AutomaticValidationEnabled = true;
+                options.ImplicitlyValidateChildProperties = true;
+                options.DisableDataAnnotationsValidation = true;
+            });
+            /*services.AddMvc().AddFluentValidation(options => {
+                options.RegisterValidatorsFromAssemblyContaining<Startup>();
+                options.AutomaticValidationEnabled = true;
+                options.ImplicitlyValidateChildProperties = true;
+                options.DisableDataAnnotationsValidation = true;
+            });*/
 
             services.Configure<IdentityOptions>(options =>
             {
