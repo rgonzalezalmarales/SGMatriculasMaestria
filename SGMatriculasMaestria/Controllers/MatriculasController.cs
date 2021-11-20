@@ -62,11 +62,7 @@ namespace SGMatriculasMaestria.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Matricula matricula)
         {
-            matricula.Maestria = _context.Maestrias.Where(x => x.Id == matricula.Maestria.Id).Include(x => x.Facultad).FirstOrDefault();
-            matricula.CategDocente = _context.CategDocentes.Where(x => x.Id == matricula.CategDocente.Id).FirstOrDefault();
-            matricula.CentroTrabajo = _context.CentroTrabajos.Where(x => x.Id == matricula.CentroTrabajo.Id).FirstOrDefault();
-            matricula.SecretarioPostg = _context.SecretarioPostgrados.Where(x => x.Id == matricula.SecretarioPostg.Id).FirstOrDefault();
-            
+                       
                 var aspirante =await _context.Aspirantes.FindAsync(matricula.Aspirante.CI);
                 if (aspirante is not null)
                 {
@@ -76,8 +72,14 @@ namespace SGMatriculasMaestria.Controllers
                     return RedirectToAction(nameof(Index));
                 }
                 ModelState.AddModelError("no user", "no existe el usuario");
-                
-            
+
+
+            matricula.Maestria = _context.Maestrias.Where(x => x.Id == matricula.Maestria.Id).Include(x => x.Facultad).FirstOrDefault();
+            matricula.CategDocente = _context.CategDocentes.Where(x => x.Id == matricula.CategDocente.Id).FirstOrDefault();
+            matricula.CentroTrabajo = _context.CentroTrabajos.Where(x => x.Id == matricula.CentroTrabajo.Id).FirstOrDefault();
+            matricula.SecretarioPostg = _context.SecretarioPostgrados.Where(x => x.Id == matricula.SecretarioPostg.Id).FirstOrDefault();
+
+
             return View(matricula);
         }
 

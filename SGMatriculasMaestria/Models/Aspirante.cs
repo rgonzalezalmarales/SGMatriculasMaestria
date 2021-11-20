@@ -6,7 +6,7 @@ namespace SGMatriculasMaestria.Models
 {
     public class Aspirante
     {
-        
+        [Key]
         [Display(Name = "Carnet de Indentidad")]        
         public string CI { get; set; }
 

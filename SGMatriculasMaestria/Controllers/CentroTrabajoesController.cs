@@ -24,7 +24,7 @@ namespace SGMatriculasMaestria.Controllers
         // GET: CentroTrabajoes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.CentroTrabajos.ToListAsync());
+            return View(await _context.CentroTrabajos.Include(m => m.Municipio).ToListAsync());
         }
 
         // GET: CentroTrabajoes/Details/5
@@ -35,8 +35,11 @@ namespace SGMatriculasMaestria.Controllers
                 return NotFound();
             }
 
-            var centroTrabajo = await _context.CentroTrabajos
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var centroTrabajo = await _context.CentroTrabajos.
+                Include(x => x.Provincia).
+                Include(x => x.Municipio).
+                FirstOrDefaultAsync(m => m.Id == id);
+
             if (centroTrabajo == null)
             {
                 return NotFound();
@@ -46,9 +49,10 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: CentroTrabajoes/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewBag.Municipios = _context.Municipios.ToList();
+            ViewBag.Provincias = await _context.Provincias.ToListAsync();
+            ViewBag.Municipios = new List<Municipio>();
             return View();
         }
 
@@ -57,7 +61,8 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Departamento,Direccion")] CentroTrabajo centroTrabajo)
+        //[Bind("Id,Nombre,Departamento,Direccion")]
+        public async Task<IActionResult> Create(CentroTrabajo centroTrabajo)
         {
             if (ModelState.IsValid)
             {
@@ -65,6 +70,12 @@ namespace SGMatriculasMaestria.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewBag.Provincias = await _context.Provincias.ToListAsync();
+            ViewBag.Municipios = await _context.Municipios.
+                Where(x => x.ProvinciaId == centroTrabajo.ProvinciaId).
+                FirstOrDefaultAsync();
+
             return View(centroTrabajo);
         }
 
@@ -81,6 +92,11 @@ namespace SGMatriculasMaestria.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Provincias = await _context.Provincias.ToListAsync();
+            ViewBag.Municipios = await _context.Municipios.
+                Where(x => x.ProvinciaId == centroTrabajo.ProvinciaId).
+                ToListAsync();
+
             return View(centroTrabajo);
         }
 
@@ -89,7 +105,8 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Departamento,Direccion")] CentroTrabajo centroTrabajo)
+        // [Bind("Id,Nombre,Departamento,Direccion")] 
+        public async Task<IActionResult> Edit(int id,CentroTrabajo centroTrabajo)
         {
             if (id != centroTrabajo.Id)
             {
@@ -127,8 +144,12 @@ namespace SGMatriculasMaestria.Controllers
                 return NotFound();
             }
 
-            var centroTrabajo = await _context.CentroTrabajos
-                .FirstOrDefaultAsync(m => m.Id == id);
+            /*Include(x => x.Provincia).
+                Include(x => x.Municipio).*/
+
+            var centroTrabajo = await _context.CentroTrabajos.                
+                FirstOrDefaultAsync(m => m.Id == id);
+
             if (centroTrabajo == null)
             {
                 return NotFound();

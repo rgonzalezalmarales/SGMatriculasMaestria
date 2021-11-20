@@ -8,8 +8,9 @@ namespace SGMatriculasMaestria.Models
         public int Id { get; set; }
 
         //[Required(ErrorMessage = "El campo 'aspirante' es obligatorio")]
-        public int? AspiranteId { get; set; }        
-        [Display(Name = "Aspirante")]
+        public int? AspiranteCI { get; set; }  
+        
+        //[Display(Name = "Aspirante")]
         public Aspirante Aspirante { get; set; }
 
         //[Required(ErrorMessage = "El campo 'maestria' es obligatorio")]
