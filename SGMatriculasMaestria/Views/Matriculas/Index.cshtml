@@ -16,10 +16,13 @@
                 <thead class="thead-light">
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.FechaInicio)
+                            Período
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.FechaCulminacion)
+                            @Html.DisplayNameFor(model => model.Aspirante.Nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Aspirante.CI)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.MotivoSolicitud)
@@ -27,68 +30,46 @@
                         <th>
                             @Html.DisplayNameFor(model => model.AnnoExperienciaLaboral)
                         </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.FechaMatricula)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Aspirante.Nombre)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Aspirante.PrimerApellido)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Aspirante.SegundoApellido)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Aspirante.CI)
-                        </th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.FechaInicio)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.FechaCulminacion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.MotivoSolicitud)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.AnnoExperienciaLaboral)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.FechaMatricula)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Aspirante.Nombre)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Aspirante.PrimerApellido)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Aspirante.SegundoApellido)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Aspirante.CI)
-                            </td>
-                            <td>
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success btn-circle btn-sm">
-                                    <i class="fas fa-fw fa-wrench"></i>
-                                </a>
-                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-circle btn-sm">
-                                    <i class="fas fa-info-circle"></i>
-                                </a>
-                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-circle btn-sm">
-                                    <i class="fas fa-trash">
-                                    </i>
-                                </a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaInicio)
+                            @Html.DisplayFor(modelItem => item.FechaCulminacion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Aspirante.Nombre)
+
+                            @Html.DisplayFor(modelItem => item.Aspirante.PrimerApellido)
+
+                            @Html.DisplayFor(modelItem => item.Aspirante.SegundoApellido)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Aspirante.CI)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MotivoSolicitud)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AnnoExperienciaLaboral)
+                        </td>
+                        <td class="tb-accion">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success btn-circle btn-sm">
+                                <i class="fas fa-fw fa-wrench"></i>
+                            </a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-circle btn-sm">
+                                <i class="fas fa-info-circle"></i>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-circle btn-sm">
+                                <i class="fas fa-trash">
+                                </i>
+                            </a>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>

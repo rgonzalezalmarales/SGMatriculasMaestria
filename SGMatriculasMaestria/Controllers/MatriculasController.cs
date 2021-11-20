@@ -35,7 +35,12 @@ namespace SGMatriculasMaestria.Controllers
                 return NotFound();
             }
 
-            var matricula = await _context.Matricula
+            var matricula = await _context.Matricula.
+                Include(x => x.Aspirante).
+                Include(x => x.CategDocente).
+                Include(x => x.CentroTrabajo).
+                Include(x => x.Maestria).
+                Include(x => x.SecretarioPostg)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (matricula == null)
             {
@@ -133,6 +138,7 @@ namespace SGMatriculasMaestria.Controllers
             {
                 try
                 {
+                    matricula.Maestria = null;
                     _context.Update(matricula);
                     await _context.SaveChangesAsync();
                 }
