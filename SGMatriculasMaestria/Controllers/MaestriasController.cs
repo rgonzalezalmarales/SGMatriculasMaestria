@@ -29,11 +29,10 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         public  JsonResult GetMaestriasByFacultad(int? facultad)
-        {
-             
-             var maestrias =  _context.Maestrias.Where(x=>x.Facultad.Id== facultad).ToList();
-            var selectmaestrias = new SelectList(maestrias, "Id", "Titulo");
-            return Json(selectmaestrias);
+        {           
+            var maestrias =  _context.Maestrias.Where(x=>x.Facultad.Id== facultad).ToList();
+            //var selectmaestrias = new SelectList(maestrias, "Id", "Titulo");
+            return Json(maestrias);
         }
 
         // GET: Maestrias/Details/5

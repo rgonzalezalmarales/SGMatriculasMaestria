@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SGMatriculasMaestria.Data;
 
 namespace SGMatriculasMaestria.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211119225022_Matriculas")]
+    partial class Matriculas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -324,20 +326,15 @@ namespace SGMatriculasMaestria.Migrations
                     b.Property<string>("Direccion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MunicipioId")
+                    b.Property<int>("MunicipioId")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProvinciaId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("MunicipioId");
-
-                    b.HasIndex("ProvinciaId");
 
                     b.ToTable("CentroTrabajos");
                 });
@@ -645,15 +642,11 @@ namespace SGMatriculasMaestria.Migrations
                 {
                     b.HasOne("SGMatriculasMaestria.Models.Municipio", "Municipio")
                         .WithMany("CentroTrabajos")
-                        .HasForeignKey("MunicipioId");
-
-                    b.HasOne("SGMatriculasMaestria.Models.Provincia", "Provincia")
-                        .WithMany("CentroTrabajos")
-                        .HasForeignKey("ProvinciaId");
+                        .HasForeignKey("MunicipioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Municipio");
-
-                    b.Navigation("Provincia");
                 });
 
             modelBuilder.Entity("SGMatriculasMaestria.Models.Ces", b =>
@@ -787,8 +780,6 @@ namespace SGMatriculasMaestria.Migrations
 
             modelBuilder.Entity("SGMatriculasMaestria.Models.Provincia", b =>
                 {
-                    b.Navigation("CentroTrabajos");
-
                     b.Navigation("Municipios");
                 });
 

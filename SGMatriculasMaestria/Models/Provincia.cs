@@ -7,6 +7,7 @@ namespace SGMatriculasMaestria.Models
         public Provincia()
         {
             Municipios = new HashSet<Municipio>();
+            CentroTrabajos = new HashSet<CentroTrabajo>();
         }
         public int Id { get; set; }
         public string Nombre { get; set; }
@@ -15,5 +16,6 @@ namespace SGMatriculasMaestria.Models
         public Pais Pais { get; set; }
 
         public virtual ICollection<Municipio> Municipios { get; set; }
+        public virtual ICollection<CentroTrabajo> CentroTrabajos { get; set; }
     }
 }

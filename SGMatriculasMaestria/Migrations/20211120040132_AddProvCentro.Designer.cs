@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SGMatriculasMaestria.Data;
 
 namespace SGMatriculasMaestria.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211120040132_AddProvCentro")]
+    partial class AddProvCentro
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -330,14 +332,14 @@ namespace SGMatriculasMaestria.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProvinciaId")
+                    b.Property<int?>("ProvinciaId1")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("MunicipioId");
 
-                    b.HasIndex("ProvinciaId");
+                    b.HasIndex("ProvinciaId1");
 
                     b.ToTable("CentroTrabajos");
                 });
@@ -649,7 +651,7 @@ namespace SGMatriculasMaestria.Migrations
 
                     b.HasOne("SGMatriculasMaestria.Models.Provincia", "Provincia")
                         .WithMany("CentroTrabajos")
-                        .HasForeignKey("ProvinciaId");
+                        .HasForeignKey("ProvinciaId1");
 
                     b.Navigation("Municipio");
 

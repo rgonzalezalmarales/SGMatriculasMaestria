@@ -17,20 +17,20 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6 col-sm-12 col-xl-6">
+                    <div class="col-md-6 col-sm-12">
                         <div class="form-group">
-                            <label asp-for="Maestria.Facultad.Nombre" class="control-label"></label>
-                            <select asp-for="Maestria.Facultad.Id" asp-items="@(new SelectList(ViewBag.Facultades,"Id","Nombre"))" id="FacultadesSelect" class="form-control">
-                                <option value="">-- Seleccione una Facultad --</option>
+                            <label class="control-label">Facultad</label>
+                            <select asp-for="Maestria.FacultadId" asp-items="@(new SelectList(ViewBag.Facultades,"Id","Nombre"))" id="facultades-select" class="form-control">
+                                <option value="">-- Seleccione una facultad --</option>
                             </select>
-                            <span asp-validation-for="Maestria.Facultad.Nombre" class="text-danger"></span>
+                            <span asp-validation-for="Maestria.FacultadId" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-12 col-xl-6">
+                    <div class="col-md-6 col-sm-12">
                         <div class="form-group">
                             <label asp-for="Maestria.Titulo" class="control-label"></label>
-                            <select asp-for="Maestria.Id" id="MaestriasSelect" class="form-control">
-                                <option value="">-- Seleccione una Maestria --</option>
+                            <select asp-for="Maestria.Id" id="maestria-select" class="form-control">
+                                <option value="">-- Seleccione una maestría --</option>
                             </select>
                             <span asp-validation-for="Maestria.Titulo" class="text-danger"></span>
                         </div>
@@ -46,11 +46,12 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12">
-                        <span id="msgerrorfin" class="text-danger d-none">Fecha de fin debe ser mayor a la Fecha de inicio</span>
+                        
                         <div class="form-group">
                             <label asp-for="FechaCulminacion" class="control-label"></label>
                             <input id="matriculafechafin" asp-for="FechaCulminacion" class="form-control" value="" onchange="checkdatefin()" />
                             <span asp-validation-for="FechaCulminacion" class="text-danger"></span>
+                            <span id="msgerrorfin" class="text-danger d-none">Fecha de fin debe ser mayor a la Fecha de inicio</span>
                         </div>
                     </div>
                 </div>
@@ -58,7 +59,7 @@
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group">
                             <label asp-for="Aspirante.CI" class="control-label"></label>
-                            <input asp-for="Aspirante.CI" class="form-control" />
+                            <input asp-for="Aspirante.CI" class="form-control" id="aspirante-autocomple"/>
                             <span asp-validation-for="Aspirante.CI" class="text-danger"></span>
                         </div>
                     </div>
@@ -90,10 +91,10 @@
                     <div class="col-md-4 col-sm-12 col-xl-4">
                         <div class="form-group">
                             <label asp-for="CategDocente" class="control-label">Categoría Docente</label>
-                            <select asp-for="CategDocente.Id" asp-items="@(new SelectList(ViewBag.CategoriasDocentes,"Id","Nombre"))" id="CatDocSelect" class="form-control">
+                            <select asp-for="CategDocenteId" asp-items="@(new SelectList(ViewBag.CategoriasDocentes,"Id","Nombre"))" id="CatDocSelect" class="form-control">
                                 <option value="">-- Seleccione una Categoría Docente --</option>
                             </select>
-                            <span asp-validation-for="CategDocente.Nombre" class="text-danger"></span>
+                            <span asp-validation-for="CategDocenteId" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-12 col-xl-4">
@@ -134,4 +135,43 @@
 
     @section Scripts {
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        
+        <script src="~/js/combine-selects.js"></script>
+        <script>
+            $(document).ready(function () {
+                /*$("#facultades-select").change(function () {
+                    console.log("Faculta", $("#facultades-select").val())
+                })*/
+                combineSelect("#facultades-select",
+                    "#maestria-select",
+                    "/Maestrias/GetMaestriasByFacultad",
+                    "facultad",
+                    "Seleccione una maestría",
+                    "id",
+                    "titulo");
+
+                $("#aspirante-autocomple").autocomplete({
+                    source: function (request, respponse) {
+                        $.ajax({
+                            url: "/Aspirantes/FilterAjaxAspirante",
+                            type: 'POST',
+                            dataType: 'json',
+                            data: { search: request.term },
+                            success: function (data) {
+                                respponse($.map(data, function (item) {
+                                    console.log(item)
+                                    return {
+                                        label: `${item.nombre} ${item.primerApellido} ${item.segundoApellido}`, value: item.ci }
+                                }))
+                            }
+                        })
+                    },
+                    messages: {
+                        noResults: "", results: ""
+                    }
+                })
+
+
+            });
+        </script>
     }

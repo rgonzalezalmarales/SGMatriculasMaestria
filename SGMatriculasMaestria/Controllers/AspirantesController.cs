@@ -74,6 +74,25 @@ namespace SGMatriculasMaestria.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async Task<JsonResult> FilterAjaxAspirante(string search)
+        {
+            //|| x.CI.ToString().ToUpper().Contains(query.ToUpper())
+            /*var aspirantes = await _context.Aspirantes.
+                Where(x => string.Concat(x.CI,x.Nombre, x.PrimerApellido, x.SegundoApellido).ToUpper().Contains(query.ToUpper()) ).
+                ToListAsync();*/
+
+            var aspirantes = await _context.Aspirantes.
+               Where(x => x.CI.Contains(search) || 
+                    x.Nombre.Contains(search) || 
+                    x.PrimerApellido.Contains(search) || 
+                    x.SegundoApellido.Contains(search)).
+               ToListAsync();
+
+
+            return Json(aspirantes);
+        }
+
         // POST: Aspirantes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.

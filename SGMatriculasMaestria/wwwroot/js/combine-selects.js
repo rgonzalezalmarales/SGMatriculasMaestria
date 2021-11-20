@@ -22,22 +22,7 @@
 }
 
 
-$(document).ready(function () {
 
-    console.log('pais val', $("#PaisAspiranteSelect").val())
-    combineSelect("#PaisAspiranteSelect",
-        "#ProvinciaAspiranteSelect",
-        "/Provincias/GetProvinciasByPaisJson",
-        "paisId",
-        "Seleccione una provincia");
-
-    combineSelect("#ProvinciaAspiranteSelect",
-        "#MunicipioAspiranteSelect",
-        "/Municipios/GetMinucipiosByProvinciaJson",
-        "provinciaId",
-        "Seleccione un municipio");   
-    
-});
 
 
 
