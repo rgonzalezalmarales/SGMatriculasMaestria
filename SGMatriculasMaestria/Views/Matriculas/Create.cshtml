@@ -20,7 +20,7 @@
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group">
                             <label class="control-label">Facultad</label>
-                            <select asp-for="Maestria.FacultadId" asp-items="@(new SelectList(ViewBag.Facultades,"Id","Nombre"))" id="facultades-select" class="form-control">
+                            <select asp-items="@(new SelectList(ViewBag.Facultades,"Id","Nombre"))" id="facultades-select" class="form-control">
                                 <option value="">-- Seleccione una facultad --</option>
                             </select>
                             <span asp-validation-for="Maestria.FacultadId" class="text-danger"></span>
@@ -28,11 +28,11 @@
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group">
-                            <label asp-for="Maestria.Titulo" class="control-label"></label>
-                            <select asp-for="Maestria.Id" id="maestria-select" class="form-control">
+                            <label asp-for="Maestria" class="control-label"></label>
+                            <select asp-for="MaestriaId" asp-items="@(new SelectList(ViewBag.Maestrias,"Id","Titulo"))" id="maestria-select" class="form-control">
                                 <option value="">-- Seleccione una maestría --</option>
                             </select>
-                            <span asp-validation-for="Maestria.Titulo" class="text-danger"></span>
+                            <span asp-validation-for="MaestriaId" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12">
-                        
+
                         <div class="form-group">
                             <label asp-for="FechaCulminacion" class="control-label"></label>
                             <input id="matriculafechafin" asp-for="FechaCulminacion" class="form-control" value="" onchange="checkdatefin()" />
@@ -58,9 +58,9 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group">
-                            <label asp-for="Aspirante.CI" class="control-label"></label>
-                            <input asp-for="Aspirante.CI" class="form-control" id="aspirante-autocomple"/>
-                            <span asp-validation-for="Aspirante.CI" class="text-danger"></span>
+                            <label asp-for="Aspirante" class="control-label"></label>
+                            <input asp-for="AspiranteCI" class="form-control" id="aspirante-autocomple" />
+                            <span asp-validation-for="AspiranteCI" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12">
@@ -100,19 +100,19 @@
                     <div class="col-md-4 col-sm-12 col-xl-4">
                         <div class="form-group">
                             <label asp-for="SecretarioPostg" class="control-label"></label>
-                            <select asp-for="SecretarioPostg.Id" asp-items="@(new SelectList(ViewBag.SecretarioPost,"Id","Nombre"))" id="SecretarioSelect" class="form-control">
+                            <select asp-for="SecretarioPostgId" asp-items="@(new SelectList(ViewBag.SecretarioPost,"Id","Nombre"))" id="SecretarioSelect" class="form-control">
                                 <option value="">-- Seleccione un Secretario de Postgrado --</option>
                             </select>
-                            <span asp-validation-for="SecretarioPostg.Nombre" class="text-danger"></span>
+                            <span asp-validation-for="SecretarioPostgId" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-12 col-xl-4">
                         <div class="form-group">
                             <label asp-for="CentroTrabajo" class="control-label"></label>
-                            <select asp-for="CentroTrabajo.Id" asp-items="@(new SelectList(ViewBag.CentrosTrabajo,"Id","Nombre"))" id="SecretarioSelect" class="form-control">
+                            <select asp-for="CentroTrabajoId" asp-items="@(new SelectList(ViewBag.CentrosTrabajo,"Id","Nombre"))" id="SecretarioSelect" class="form-control">
                                 <option value="">-- Seleccione un Centro de trabajo --</option>
                             </select>
-                            <span asp-validation-for="CentroTrabajo.Nombre" class="text-danger"></span>
+                            <span asp-validation-for="CentroTrabajoId" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -126,7 +126,7 @@
                     </a>
                 </div>
                 <div>
-                   
+
                 </div>
             </div>
         </form>        

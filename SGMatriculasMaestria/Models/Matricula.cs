@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SGMatriculasMaestria.Models
 {
@@ -8,14 +9,16 @@ namespace SGMatriculasMaestria.Models
         public int Id { get; set; }
 
         //[Required(ErrorMessage = "El campo 'aspirante' es obligatorio")]
-        public int? AspiranteCI { get; set; }  
         
+        public string AspiranteCI { get; set; }  
+        [ForeignKey(nameof(AspiranteCI))]
         //[Display(Name = "Aspirante")]
         public Aspirante Aspirante { get; set; }
 
         //[Required(ErrorMessage = "El campo 'maestria' es obligatorio")]
         public int MaestriaId { get; set; }
         [Display(Name = "Maestría")]
+        [ForeignKey(nameof(MaestriaId))]
         public Maestria Maestria { get; set; }
 
         [Required(ErrorMessage = "El campo 'fecha de inicio' es obligatorio")]
