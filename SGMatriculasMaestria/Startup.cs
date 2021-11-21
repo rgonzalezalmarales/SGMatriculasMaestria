@@ -10,7 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SGMatriculasMaestria.Data;
+using SGMatriculasMaestria.Interfaces;
 using SGMatriculasMaestria.Models;
+using SGMatriculasMaestria.Servicios;
 using SGMatriculasMaestria.Validators;
 using System;
 using System.Collections.Generic;
@@ -39,6 +41,8 @@ namespace SGMatriculasMaestria
             {
                 options.DisableDataAnnotationsValidation = true;
             });*/
+            services.AddTransient<IReporteService, ReporteService>();
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddTransient<IValidator<Aspirante>, AspiranteValidator>();

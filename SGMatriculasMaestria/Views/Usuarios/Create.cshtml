@@ -1,0 +1,110 @@
+﻿@model SGMatriculasMaestria.DTOs.UserDto;
+
+@{
+    ViewData["Title"] = "Agregar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">Nuevo Usuario</h1>
+<hr />
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="text-danger text-center">
+        <h3>@ViewBag.ErrorMessage</h3>
+    </div>
+    <hr />
+}
+
+
+<div class="container-fluid">
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row">
+            <div class="col-4">
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label asp-for="LastNameTwo" class="control-label"></label>
+                    <input asp-for="LastNameTwo" class="form-control" />
+                    <span asp-validation-for="LastNameTwo" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <div class="form-group">
+                    <label asp-for="CI" class="control-label"></label>
+                    <input asp-for="CI" class="form-control" maxlength="11" />
+                    <span asp-validation-for="CI" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="form-group">
+                    <label asp-for="SexoId" class="control-label"></label>
+                    <select asp-for="SexoId" class="form-control">
+                        <option value="">--Seleccione--</option>
+                        <option value="0">Masculino</option>
+                        <option value="1">Femenino</option>
+                    </select>
+                    <span asp-validation-for="SexoId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="form-group">
+                    <select asp-for="Role" asp-items="@(new SelectList(ViewBag.Roles,"Id","Name"))" class="form-control">
+                        <option value="">-- Seleccione el rol --</option>
+                    </select>
+                    <span asp-validation-for="Role" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Guardar" class="btn btn-info" />&nbsp;&nbsp;&nbsp;
+            <a asp-action="Index" class="btn btn-secondary btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-arrow-left"></i>
+                </span>
+                <span class="text">Regresar al listado</span>
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

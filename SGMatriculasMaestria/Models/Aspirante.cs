@@ -1,4 +1,4 @@
-﻿using SGMatriculasMaestria.Validators;
+﻿using SGMatriculasMaestria.Enums;
 using System;
 using System.ComponentModel.DataAnnotations;
 

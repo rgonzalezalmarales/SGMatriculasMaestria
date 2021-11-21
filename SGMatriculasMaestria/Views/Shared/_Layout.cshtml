@@ -12,18 +12,22 @@
 
     <!-- Custom fonts for this template-->
     <link href="~/lib/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-          rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">-->
+
+    
 
     <!-- Custom styles for this template-->
     <link href="~/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="~/css/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <!--<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>-->
+    <link rel="stylesheet" href="~/lib/AOS/aos.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 
     <link rel="stylesheet" href="~/lib/jquery-ui-1.13.0.custom/jquery-ui.css" />
     <!--<link rel="stylesheet" href="~/lib/jquery-ui-1.13.0.custom/jquery-ui.theme.css" />-->
-
+    <!--
     <style>
         .custom-combobox {
             position: relative;
@@ -51,7 +55,7 @@
         .tb-accion {
             width: 100px !important;
         }
-    </style>
+    </style>-->
 
 </head>
 <body class="hold-transition sidebar-mini sidebar-collapse layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -72,186 +76,23 @@
             <!-- Divider -->
             <li><hr class="sidebar-divider" /></li>
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#aspirantes"
-                   aria-expanded="true" aria-controls="aspirantes">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Aspirantes</span>
-                </a>
-                <div id="aspirantes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" asp-area="" asp-controller="Aspirantes" asp-action="Index">
-                            <span>Lista de Aspirantes</span>
-                        </a>
-                        <a class="collapse-item" asp-area="" asp-controller="Aspirantes" asp-action="Create">
-                            <span>Crear Aspirante</span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#maestrias"
-                   aria-expanded="true" aria-controls="maestrias">
-                    <i class="fas fa-fw fa-file-word"></i>
-                    <span>Mestrías</span>
-                </a>
-                <div id="maestrias" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" asp-area="" asp-controller="Maestrias" asp-action="Index">
-                            <span>Lista de Maestrías</span>
-                        </a>
-                        <a class="collapse-item" asp-area="" asp-controller="Maestrias" asp-action="Create">
-                            <span>Crear Maestría</span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#matriculas"
-                   aria-expanded="true" aria-controls="matriculas">
-                    <i class="fas fa-fw fa-user-edit"></i>
-                    <span>Matrículas</span>
-                </a>
-                <div id="matriculas" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" asp-area="" asp-controller="Matriculas" asp-action="Index">
-                            <span>Lista de Matrículas</span>
-                        </a>
-                        <a class="collapse-item" asp-area="" asp-controller="Matriculas" asp-action="Create">
-                            <span>Crear Matrícula</span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#especgraduadoes"
-                   aria-expanded="true" aria-controls="especgraduadoes">
-                    <i class="fas fa-fw fa-clipboard-list"></i>
-                    <span>Especialidades</span>
-                </a>
-                <div id="especgraduadoes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" asp-area="" asp-controller="EspecGraduadoes" asp-action="Index">
-                            <span>Lista de Especialidades</span>
-                        </a>
-                        <a class="collapse-item" asp-area="" asp-controller="EspecGraduadoes" asp-action="Create">
-                            <span>Crear Especialidad</span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                   aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-university"></i>
-                    <span>Universidades</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" asp-area="" asp-controller="Ces" asp-action="Index">
-                            <span>Listar Universidades</span>
-                        </a>
-                        <a class="collapse-item" asp-area="" asp-controller="Ces" asp-action="Create">
-                            <span>Crear Universidad</span>
-                        </a>
-                        <div class="collapse-divider">
-                            <hr class="sidebar-divider" />
-                        </div>
-                        <a class="collapse-item" asp-area="" asp-controller="Facultades" asp-action="Index">
-                            <span>Listar Facultades</span>
-                        </a>
-                        <a class="collapse-item" asp-area="" asp-controller="Facultades" asp-action="Create">
-                            <span>Crear Facultad</span>
-                        </a>
 
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#centrotrabajoes"
-                   aria-expanded="true" aria-controls="centrotrabajoes">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Centros de Trabajo</span>
-                </a>
-                <div id="centrotrabajoes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" asp-area="" asp-controller="CentroTrabajoes" asp-action="Index">
-                            <span>Lista de Centros de Trabajo</span>
-                        </a>
-                        <a class="collapse-item" asp-area="" asp-controller="CentroTrabajoes" asp-action="Create">
-                            <span>Crear Centro de Trabajo</span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#secretariopostgs"
-                   aria-expanded="true" aria-controls="secretariopostgs">
-                    <i class="fas fa-fw fa-calendar"></i>
-                    <span>Secretarios Post-Grado</span>
-                </a>
-                <div id="secretariopostgs" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" asp-area="" asp-controller="SecretarioPostgs" asp-action="Index">
-                            <span>Lista de Secretarios</span>
-                        </a>
-                        <a class="collapse-item" asp-area="" asp-controller="SecretarioPostgs" asp-action="Create">
-                            <span>Crear Secretario</span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#categdocentes"
-                   aria-expanded="true" aria-controls="categdocentes">
-                    <i class="fas fa-fw fa-flag"></i>
-                    <span>Categorias Docentes</span>
-                </a>
-                <div id="categdocentes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" asp-area="" asp-controller="CategDocentes" asp-action="Index">
-                            <span>Lista de Categorias</span>
-                        </a>
-                        <a class="collapse-item" asp-area="" asp-controller="CategDocentes" asp-action="Create">
-                            <span>Crear Categoria</span>
-                        </a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#paises"
-                   aria-expanded="true" aria-controls="paises">
-                    <i class="fas fa-globe-americas"></i>
-                    <span>Ubicaciones</span>
-                </a>
-                <!-- Nav Item - Charts -->
-                <div id="paises" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" asp-area="" asp-controller="Pais" asp-action="Index">
-                            <span>Listar Paises</span>
-                        </a>
-                        <a class="collapse-item" asp-area="" asp-controller="Pais" asp-action="Create">
-                            <span>Crear Pais</span>
-                        </a>
-                        <div class="collapse-divider"></div>
-                        <a class="collapse-item" asp-area="" asp-controller="Provincias" asp-action="Index">
-                            <span>Listar Provincias</span>
-                        </a>
-                        <a class="collapse-item" asp-area="" asp-controller="Provincias" asp-action="Create">
-                            <span>Crear Provincia</span>
-                        </a>
+            @if (User.IsInRole(SGMatriculasMaestria.Enums.Roles.Administrador.ToString()))
+            {
+                <partial name="_MenuAdministradorPartial" />
+            }
 
-                        <div class="collapse-divider"></div>
-                        <a class="collapse-item" asp-area="" asp-controller="Municipios" asp-action="Index">
-                            <span>Listar Municipios</span>
-                        </a>
-                        <a class="collapse-item" asp-area="" asp-controller="Municipios" asp-action="Create">
-                            <span>Crear Municipio</span>
-                        </a>
-                    </div>
-                </div>
-            </li>
+            @if (User.IsInRole(SGMatriculasMaestria.Enums.Roles.Especialista.ToString()))
+            {
+                <partial name="_MenuEspecialistaPartial" />
+            }
+
+            @if (User.IsInRole(SGMatriculasMaestria.Enums.Roles.Tecnico.ToString()))
+            {
+                <partial name="_MenuTecnicoPartial" />
+            }
+
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
             <!-- Sidebar Toggler (Sidebar) -->
@@ -337,15 +178,14 @@
     <script src="~/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="~/js/chart.js/Chart.min.js"></script>
-
+    <!--<script src="~/js/chart.js/Chart.min.js"></script>-->
     <!-- Page level custom scripts -->
-    <script src="~/js/demo/chart-area-demo.js"></script>
+    <!--<script src="~/js/demo/chart-area-demo.js"></script>-->
     <script src="~/css/datatables/jquery.dataTables.min.js"></script>
     <script src="~/css/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/Matricula.js" asp-append-version="true"></script>
-    <script src="~/lib/aos.js"></script>
+    <script src="~/lib/AOS/aos.js"></script>
     <!--<script src="https://unpkg.com/aos@next/dist/aos.js"></script>-->
     <script>
         AOS.init();

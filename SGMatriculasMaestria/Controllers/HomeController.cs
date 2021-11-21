@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using SGMatriculasMaestria.Enums;
 
 namespace SGMatriculasMaestria.Controllers
 {

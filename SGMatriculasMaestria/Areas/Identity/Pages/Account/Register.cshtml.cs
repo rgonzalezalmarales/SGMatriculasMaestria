@@ -73,9 +73,18 @@ namespace SGMatriculasMaestria.Areas.Identity.Pages.Account
             {
                 var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
+
+                
+                await _signInManager.CreateUserPrincipalAsync(user);
+
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    //Code modificado para establcer el role por defecto;
+                    await _userManager.AddToRoleAsync(user, Enums.Roles.Tecnico.ToString());
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

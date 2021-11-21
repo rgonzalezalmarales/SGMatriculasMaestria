@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SGMatriculasMaestria
+namespace SGMatriculasMaestria.Enums
 {
     public enum Sexo
     {
