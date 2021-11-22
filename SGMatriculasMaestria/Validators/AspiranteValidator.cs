@@ -10,7 +10,7 @@ namespace SGMatriculasMaestria.Validators
     public class AspiranteValidator : AbstractValidator<Aspirante>
     {
         private string MessageNull { get => "El campo '{PropertyName}' es obligatorio";}
-        private string RegLastName { get => "^(([A-Z][a-záéíóúñü]{1,})(( [A-Z][a-záéíóúñ]{0,})*|( [a-z]{2} ([A-Z][a-záéíóúñ]{1,}))))$"; }
+        private string RegLastName { get => "^(([A-Z][a-záéíóúñü]{1,})(( [A-Z][a-záéíóúñü]{0,})*|( [a-z]{2} ([A-Z][a-záéíóúñü]{1,}))))$"; }
         public AspiranteValidator()
         {
             
@@ -21,7 +21,7 @@ namespace SGMatriculasMaestria.Validators
                 WithMessage("Valor correcto: 11 dígitos");
 
             RuleFor(Aspirante => Aspirante.Nombre).
-                Matches("^(([A-Z][a-záéíóúñü]{2,})( [A-Z][a-záéíóúñ]{2,}){0,2})$").
+                Matches("^(([A-Z][a-záéíóúñü]{2,})( [A-Z][a-záéíóúñü]{2,}){0,2})$").
                 WithMessage("Solo letras Ej: Ana");
             
             RuleFor(Aspirante => Aspirante.PrimerApellido).

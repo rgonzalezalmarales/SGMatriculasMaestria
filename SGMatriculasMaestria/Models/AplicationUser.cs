@@ -15,5 +15,8 @@ namespace SGMatriculasMaestria.Models
         public string LastNameTwo { get; set; }
         public string CI { get; set; }
         public byte[] ProfilePicture { get; set; }
+
+        public DateTime Creatat { get; set; }
+        public DateTime Modifiat { get; set; }
     }
 }

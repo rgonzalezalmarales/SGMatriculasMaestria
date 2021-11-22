@@ -12,7 +12,7 @@ namespace SGMatriculasMaestria.Models
         
         public string AspiranteCI { get; set; }  
         [ForeignKey(nameof(AspiranteCI))]
-        //[Display(Name = "Aspirante")]
+
         public Aspirante Aspirante { get; set; }
 
         //[Required(ErrorMessage = "El campo 'maestria' es obligatorio")]

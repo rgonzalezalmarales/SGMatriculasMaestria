@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SGMatriculasMaestria.Models
 {
@@ -20,5 +21,8 @@ namespace SGMatriculasMaestria.Models
         public virtual ICollection<CentroTrabajo> CentroTrabajos { get; set; }
         public virtual ICollection<Ces> Ces { get; set; }
         public virtual ICollection<Aspirante> Aspirantes { get; set; }
+
+        public DateTime Creatat { get; set; }
+        public DateTime Modifiat { get; set; }
     }
 }

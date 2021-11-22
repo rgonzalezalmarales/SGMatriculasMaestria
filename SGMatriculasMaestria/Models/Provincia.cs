@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SGMatriculasMaestria.Models
 {
@@ -8,6 +9,7 @@ namespace SGMatriculasMaestria.Models
         {
             Municipios = new HashSet<Municipio>();
             CentroTrabajos = new HashSet<CentroTrabajo>();
+            Ces = new HashSet<Ces>();
         }
         public int Id { get; set; }
         public string Nombre { get; set; }
@@ -17,5 +19,8 @@ namespace SGMatriculasMaestria.Models
 
         public virtual ICollection<Municipio> Municipios { get; set; }
         public virtual ICollection<CentroTrabajo> CentroTrabajos { get; set; }
+        public virtual ICollection<Ces> Ces { get; set; }
+        public DateTime Creatat { get; set; }
+        public DateTime Modifiat { get; set; }
     }
 }

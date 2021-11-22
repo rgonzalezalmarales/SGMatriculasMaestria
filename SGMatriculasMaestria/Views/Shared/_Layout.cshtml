@@ -77,17 +77,17 @@
             <li><hr class="sidebar-divider" /></li>
             <!-- Nav Item - Pages Collapse Menu -->
 
-            @if (User.IsInRole(SGMatriculasMaestria.Enums.Roles.Administrador.ToString()))
+            @if(User.IsInRole(SGMatriculasMaestria.Enums.Roles.Administrador.ToString()))
             {
                 <partial name="_MenuAdministradorPartial" />
             }
 
-            @if (User.IsInRole(SGMatriculasMaestria.Enums.Roles.Especialista.ToString()))
+            @if(User.IsInRole(SGMatriculasMaestria.Enums.Roles.Especialista.ToString()))
             {
                 <partial name="_MenuEspecialistaPartial" />
             }
 
-            @if (User.IsInRole(SGMatriculasMaestria.Enums.Roles.Tecnico.ToString()))
+            @if(User.IsInRole(SGMatriculasMaestria.Enums.Roles.Tecnico.ToString()))
             {
                 <partial name="_MenuTecnicoPartial" />
             }

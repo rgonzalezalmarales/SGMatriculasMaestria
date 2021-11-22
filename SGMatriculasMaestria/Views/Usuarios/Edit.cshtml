@@ -74,8 +74,18 @@
 
 
         <div class="row">
+            <div class="col-2">
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck">
+                        <label class="form-check-label" for="gridCheck">
+                            Cambiar Contraseña
+                        </label>
+                    </div>
+                </div>
+            </div>
 
-            <div class="col-6">
+            <div class="col-5">
                 <div class="form-group">
                     <label asp-for="Password" class="control-label"></label>
                     <input disabled asp-for="Password" class="form-control  user-password" id="user-password" />
@@ -83,7 +93,7 @@
                 </div>
             </div>
 
-            <div class="col-6">
+            <div class="col-5">
                 <div class="form-group">
                     <label asp-for="ConfirmPassword" class="control-label"></label>
                     <input disabled asp-for="ConfirmPassword" class="form-control user-password" />
@@ -108,11 +118,14 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
         $(document).ready(function () {
-            console.log("A: ", $("#user-password"))
-            var a = $("#user-password").popover("disable", true)
-            console.log("A: ", $("input.user-password").popover("disable"))
-        })
-        
+            $('#gridCheck').change(function (event) {
+                if ($('#gridCheck').prop('checked')) {
+                    $("input.user-password").prop("disabled", false);
+                } else {
+                    $("input.user-password").prop("disabled", true);
+                }
+            });            
+        });        
     </script>
     
 }

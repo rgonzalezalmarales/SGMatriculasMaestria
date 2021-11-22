@@ -1,4 +1,10 @@
-﻿@model SGMatriculasMaestria.DTOs.UserDto
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model SGMatriculasMaestria.DTOs.UserDto
 
 @{
     ViewData["Title"] = "Eliminar";
@@ -51,29 +57,29 @@
                 @Html.DisplayFor(model => model.Role)
             </dd>
         </dl>
-
-        <!--<form asp-action="Edit">
-            <input type="hidden" asp-for="Id" />
-            <input asp-action="Edit" asp-route-id="@item.Id" type="submit" value="Edit" class="btn btn-info margin-left" />&nbsp;&nbsp;&nbsp;
-            
-            </form>-->
-
-            <div class="row">
-                <a asp-action="Edit" asp-for="Id" class="btn btn-info margin-left btn-icon-split">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-arrow-left"></i>
-                    </span>
-                    <span class="text">Editar</span>
-                </a>
-                <a asp-action="Index" class="btn btn-secondary btn-icon-split">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-arrow-left"></i>
-                    </span>
-                    <span class="text">Regresar al listado</span>
-                </a>
-            </div>
-            
-           
-        
     </div>
+    <div class="row">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-info margin-left">
+            <span class="icon text-white-50">
+                <i class="fas fa-arrow-left"></i>
+            </span>
+            <span class="text">Editar</span>
+        </a>&nbsp;&nbsp;&nbsp;
+        <a asp-action="Index" class="btn btn-secondary btn-icon-split">
+            <span class="icon text-white-50">
+                <i class="fas fa-arrow-left"></i>
+            </span>
+            <span class="text">Regresar al listado</span>
+        </a>
+    </div>
+    <!--<div>
+        <a asp-action="Edit" asp-route-id="Model.Id" class="btn btn-info margin-left">Editar</a>&nbsp;&nbsp;&nbsp;
+        <a asp-action="Index" class="btn btn-secondary btn-icon-split">
+            <span class="icon text-white-50">
+                <i class="fas fa-arrow-left"></i>
+            </span>
+            <span class="text">Regresar al listado</span>
+        </a>
+    </div>-->
 </div>
+

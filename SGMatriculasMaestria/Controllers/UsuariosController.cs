@@ -167,23 +167,29 @@ namespace SGMatriculasMaestria.Controllers
         public async Task<ActionResult> Edit(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
-
-            var userDto = new UserDto
+            if(user is not null)
             {
-                Email = user.Email,
-                UserName = user.UserName,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Id = user.Id,
-                LastNameTwo = user.LastNameTwo,
-                CI = user.CI,
-                ProfilePicture = user.ProfilePicture,
-                Role = (await _userManager.GetRolesAsync(user)).FirstOrDefault()
-                //Role = await GetIdRoleByUserAsync(user)
-            };
-            ViewBag.Roles = await _roleManager.Roles.ToListAsync();
+                var userDto = new UserDto
+                {
+                    Email = user.Email,
+                    UserName = user.UserName,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Id = user.Id,
+                    LastNameTwo = user.LastNameTwo,
+                    CI = user.CI,
+                    ProfilePicture = user.ProfilePicture,
+                    Role = (await _userManager.GetRolesAsync(user)).FirstOrDefault()
+                    //Role = await GetIdRoleByUserAsync(user)
+                };
+                ViewBag.Roles = await _roleManager.Roles.ToListAsync();
 
-            return View(userDto);
+                return View(userDto);
+
+            }
+
+            return View();
+            
         }
 
         // POST: UsersController/Edit/5
