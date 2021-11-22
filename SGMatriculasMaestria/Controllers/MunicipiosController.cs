@@ -43,8 +43,10 @@ namespace SGMatriculasMaestria.Controllers
                 return NotFound();
             }
 
-            var municipio = await _context.Municipios
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var municipio = await _context.Municipios.
+                Include(x => x.Provincia).
+                FirstOrDefaultAsync(m => m.Id == id);
+
             if (municipio == null)
             {
                 return NotFound();

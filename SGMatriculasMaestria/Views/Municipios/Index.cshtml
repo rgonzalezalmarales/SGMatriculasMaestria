@@ -18,16 +18,21 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.Nombre)
                             </th>
-                            <th></th>
+                            @if (User.IsInRole(SGMatriculasMaestria.Enums.Roles.Tecnico.ToString()) == false)
+                            {
+                                <th></th>
+                            }
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Nombre)
-                                </td>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </td>
+                            @if (User.IsInRole(SGMatriculasMaestria.Enums.Roles.Tecnico.ToString()) == false)
+                            {
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success btn-circle btn-sm">
                                         <i class="fas fa-fw fa-wrench"></i>
@@ -40,7 +45,8 @@
                                         </i>
                                     </a>
                                 </td>
-                            </tr>
+                            }
+                        </tr>
                         }
                     </tbody>
                 </table>

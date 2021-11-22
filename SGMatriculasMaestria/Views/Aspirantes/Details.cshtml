@@ -137,7 +137,11 @@
                 </div>
                 <div class="col-xl-3 col-md-6 mb-4"></div>
                 <div>
-                    <a asp-action="Edit" asp-route-id="@Model.CI" class="btn btn-info margin-left">Editar</a>&nbsp;&nbsp;&nbsp;
+                    @if (User.IsInRole(SGMatriculasMaestria.Enums.Roles.Tecnico.ToString()) == false)
+                    {
+                        <a asp-action="Delete" asp-route-id="@Model.CI" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a><span>&nbsp; &nbsp; &nbsp;</span>
+                        <a asp-action="Edit" asp-route-id="@Model.CI" class="btn btn-info margin-left">Editar</a><span>&nbsp; &nbsp; &nbsp;</span>
+                    }
                     <a asp-action="Index" class="btn btn-secondary btn-icon-split">
                         <span class="icon text-white-50">
                             <i class="fas fa-arrow-left"></i>

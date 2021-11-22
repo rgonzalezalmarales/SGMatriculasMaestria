@@ -202,36 +202,39 @@ namespace SGMatriculasMaestria.Controllers
                 try
                 {
                     var user = _userManager.Users.Where(x => x.Id == id).FirstOrDefault();
-                     //await GetIdRoleByUserAsync(user);
-                    if (user is not null)
+                    
+                    if (user is null)
+                        throw new Exception(string.Format("No se econtró ningún usuario con el código {0}", id));
+
+                    var a = (await _userManager.GetRolesAsync(user)).ToList();
+                    var oldRole = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
+                    /*if (!string.IsNullOrEmpty(userDto.UserName))
+                        user.UserName = userDto.UserName;*/
+                    if (!string.IsNullOrEmpty(userDto.Email))
+                        user.Email = userDto.Email;
+                    if (!string.IsNullOrEmpty(userDto.FirstName))
+                        user.FirstName = userDto.FirstName;
+                    if (!string.IsNullOrEmpty(userDto.LastName))
+                        user.LastName = userDto.LastName;
+                    if (!string.IsNullOrEmpty(userDto.LastNameTwo))
+                        user.LastNameTwo = userDto.LastNameTwo;
+                    if (!string.IsNullOrEmpty(userDto.CI))
+                        user.CI = userDto.CI;
+                    if (!string.IsNullOrEmpty(userDto.FirstName))
+                        user.FirstName = userDto.FirstName;
+                    if (!string.IsNullOrEmpty(userDto.Role) && oldRole != userDto.Role)
                     {
-                        var oldRole = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
-                        /*if (!string.IsNullOrEmpty(userDto.UserName))
-                            user.UserName = userDto.UserName;*/
-                        if (!string.IsNullOrEmpty(userDto.Email))
-                            user.Email = userDto.Email;
-                        if (!string.IsNullOrEmpty(userDto.FirstName))
-                            user.FirstName = userDto.FirstName;
-                        if (!string.IsNullOrEmpty(userDto.LastName))
-                            user.LastName = userDto.LastName;
-                        if (!string.IsNullOrEmpty(userDto.LastNameTwo))
-                            user.LastNameTwo = userDto.LastNameTwo;
-                        if (!string.IsNullOrEmpty(userDto.CI))
-                            user.CI = userDto.CI;
-                        if (!string.IsNullOrEmpty(userDto.FirstName))
-                            user.FirstName = userDto.FirstName;
-                        if (!string.IsNullOrEmpty(userDto.Role) && oldRole != userDto.Role)
-                        {
-                            //var r = await _roleManager.FindByIdAsync(userDto.Role);
-                            //if (r is not null)
-                            await _userManager.RemoveFromRolesAsync(user, new List<string> {
+                        var roles = new List<string> {
                                Enums.Roles.Administrador.ToString(),
                                Enums.Roles.Especialista.ToString(),
                                Enums.Roles.Tecnico.ToString(),
-                            });
-                            await _userManager.AddToRoleAsync(user, userDto.Role);
+                        };
+                        foreach (var r in roles)
+                        {
+                            await _userManager.RemoveFromRoleAsync(user, r);
                         }
-                    }                
+                        await _userManager.AddToRoleAsync(user, userDto.Role);
+                    }
 
                     await _userManager.UpdateAsync(user);
                     return RedirectToAction(nameof(Index));
