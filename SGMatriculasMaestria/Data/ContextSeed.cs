@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using SGMatriculasMaestria.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,17 +9,17 @@ namespace SGMatriculasMaestria.Data
 {
     public static class ContextSeed
     {
-        public static async Task SeedRolesAsync(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public static async Task SeedRolesAsync(UserManager<AplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             await roleManager.CreateAsync(new IdentityRole(Enums.Roles.Administrador.ToString()));
             await roleManager.CreateAsync(new IdentityRole(Enums.Roles.Especialista.ToString()));
             await roleManager.CreateAsync(new IdentityRole(Enums.Roles.Tecnico.ToString()));
         }
 
-        public static async Task SeedAdministradorAsync(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public static async Task SeedAdministradorAsync(UserManager<AplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             var email = "administrador@gmail.com";
-            var defaulUser = new IdentityUser
+            var defaulUser = new AplicationUser
             {
                 Email = email,
                 UserName = email,

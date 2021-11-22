@@ -8,7 +8,7 @@ using System.Text;
 
 namespace SGMatriculasMaestria.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
+    public class ApplicationDbContext : IdentityDbContext<AplicationUser>
     {
         public ApplicationDbContext()
         {

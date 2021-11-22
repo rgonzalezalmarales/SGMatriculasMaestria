@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SGMatriculasMaestria.DTOs;
+using SGMatriculasMaestria.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,11 @@ namespace SGMatriculasMaestria.Controllers
 {
     public class UsuariosController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<AplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
 
-        public UsuariosController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper)
+        public UsuariosController(UserManager<AplicationUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper)
         {
             _roleManager = roleManager;
             _userManager = userManager;
@@ -29,27 +30,46 @@ namespace SGMatriculasMaestria.Controllers
             var users = await _userManager.Users.ToListAsync();
             var userDtos = new List<UserDto>();
 
-            foreach(IdentityUser user in users)
+            foreach(AplicationUser user in users)
             {
-                var first = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
+                
                 userDtos.Add(new UserDto
                 {
                     Email = user.Email,
                     UserName = user.UserName,
-                    FirstName = "First",
-                    LastName ="last",
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
                     Id = user.Id,
-                    Role = first is not null? first: ""
-                });
+                    LastNameTwo = user.LastNameTwo,
+                    CI = user.CI,
+                    ProfilePicture = user.ProfilePicture,
+                    Role = (await _userManager.GetRolesAsync(user)).FirstOrDefault()
+                });                
             }
 
             return View(userDtos);
         }
 
         // GET: UsersController/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(string id)
         {
-            return View();
+            var user = await _userManager.FindByIdAsync(id);
+
+            var userDto = new UserDto
+            {
+                Email = user.Email,
+                UserName = user.UserName,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Id = user.Id,
+                LastNameTwo = user.LastNameTwo,
+                CI = user.CI,
+                ProfilePicture = user.ProfilePicture,
+                Role = (await _userManager.GetRolesAsync(user)).FirstOrDefault()
+            };
+            //ViewBag.Roles = await _roleManager.Roles.ToListAsync();
+
+            return View(userDto);
         }
 
         // GET: UsersController/Create
@@ -69,11 +89,18 @@ namespace SGMatriculasMaestria.Controllers
             {
                 var useName = userDto.Email.Split("@")[0];
 
-                var user = new IdentityUser { 
+                var user = new AplicationUser { 
                     UserName = userDto.Email, 
                     Email = userDto.Email,
                     EmailConfirmed = true,
-                    PhoneNumberConfirmed = true
+                    PhoneNumberConfirmed = true,
+                    FirstName = userDto.FirstName,
+                    LastName = userDto.LastName,
+                    LastNameTwo = userDto.LastNameTwo,
+                    CI = userDto.CI,
+                    ProfilePicture = userDto.ProfilePicture,
+                    //UserName = userDto.Email,
+                    //Email = userDto.Email
                 };
 
                 if (_userManager.Users.All(u => u.Id != user.Id))
@@ -95,7 +122,7 @@ namespace SGMatriculasMaestria.Controllers
                 
 
                 /*var email = "administrador@gmail.com";
-                var defaulUser = new IdentityUser
+                var defaulUser = new AplicationUser
                 {
                     Email = email,
                     UserName = email,
@@ -117,40 +144,122 @@ namespace SGMatriculasMaestria.Controllers
             }
             catch
             {
-                return View();
+                ViewBag.Roles = _roleManager.Roles.ToList();
+                return View(userDto);
             }
         }
 
-        // GET: UsersController/Edit/5
-        public ActionResult Edit(int id)
+        private async Task<string> GetIdRoleByUserAsync(AplicationUser user)
         {
-            return View();
+            string roleId = "";
+            var roleName = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
+            if (roleName is not null)
+            {
+                var role = await _roleManager.FindByNameAsync(roleName);
+                if (role is not null)
+                    roleId = role.Id;
+            }
+
+            return roleId;
+        }
+
+        // GET: UsersController/Edit/5
+        public async Task<ActionResult> Edit(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+
+            var userDto = new UserDto
+            {
+                Email = user.Email,
+                UserName = user.UserName,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Id = user.Id,
+                LastNameTwo = user.LastNameTwo,
+                CI = user.CI,
+                ProfilePicture = user.ProfilePicture,
+                Role = (await _userManager.GetRolesAsync(user)).FirstOrDefault()
+                //Role = await GetIdRoleByUserAsync(user)
+            };
+            ViewBag.Roles = await _roleManager.Roles.ToListAsync();
+
+            return View(userDto);
         }
 
         // POST: UsersController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(string id, UserDto userDto)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    var user = _userManager.Users.Where(x => x.Id == id).FirstOrDefault();
+                     //await GetIdRoleByUserAsync(user);
+                    if (user is not null)
+                    {
+                        var oldRole = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
+                        /*if (!string.IsNullOrEmpty(userDto.UserName))
+                            user.UserName = userDto.UserName;*/
+                        if (!string.IsNullOrEmpty(userDto.Email))
+                            user.Email = userDto.Email;
+                        if (!string.IsNullOrEmpty(userDto.FirstName))
+                            user.FirstName = userDto.FirstName;
+                        if (!string.IsNullOrEmpty(userDto.LastName))
+                            user.LastName = userDto.LastName;
+                        if (!string.IsNullOrEmpty(userDto.LastNameTwo))
+                            user.LastNameTwo = userDto.LastNameTwo;
+                        if (!string.IsNullOrEmpty(userDto.CI))
+                            user.CI = userDto.CI;
+                        if (!string.IsNullOrEmpty(userDto.FirstName))
+                            user.FirstName = userDto.FirstName;
+                        if (!string.IsNullOrEmpty(userDto.Role) && oldRole != userDto.Role)
+                        {
+                            //var r = await _roleManager.FindByIdAsync(userDto.Role);
+                            //if (r is not null)
+                            await _userManager.RemoveFromRolesAsync(user, new List<string> {
+                               Enums.Roles.Administrador.ToString(),
+                               Enums.Roles.Especialista.ToString(),
+                               Enums.Roles.Tecnico.ToString(),
+                            });
+                            await _userManager.AddToRoleAsync(user, userDto.Role);
+                        }
+                    }                
+
+                    await _userManager.UpdateAsync(user);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception exp)
+                {
+                    ViewBag.ErrorMessage = exp.Message;
+                }
             }
-            catch
-            {
-                return View();
-            }
+
+
+
+            ViewBag.Roles = _roleManager.Roles.ToList();
+            return View(userDto);
         }
 
         // GET: UsersController/Delete/5
         public async Task<ActionResult> Delete(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
-            return View(new UserDto { 
+            var userDto = new UserDto
+            {
                 Email = user.Email,
                 UserName = user.UserName,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Id = user.Id,
+                LastNameTwo = user.LastNameTwo,
+                CI = user.CI,
+                ProfilePicture = user.ProfilePicture,
                 Role = (await _userManager.GetRolesAsync(user)).FirstOrDefault()
-            });
+            };
+
+            return View(userDto);
         }
 
         // POST: UsersController/Delete/5
