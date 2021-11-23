@@ -12,7 +12,7 @@ using SGMatriculasMaestria.Models;
 
 namespace SGMatriculasMaestria.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Especialista")]
     public class SecretarioPostgsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,12 +22,14 @@ namespace SGMatriculasMaestria.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Tecnico,Especialista,Administrador")]
         // GET: SecretarioPostgs
         public async Task<IActionResult> Index()
         {
             return View(await _context.SecretarioPostgrados.ToListAsync());
         }
 
+        [Authorize(Roles = "Tecnico,Especialista,Administrador")]
         // GET: SecretarioPostgs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
