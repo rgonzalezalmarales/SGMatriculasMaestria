@@ -13,7 +13,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="tableaspirantes" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="table-users" width="100%" cellspacing="0">
                     <thead class="thead-light">
                         <tr>
                             <th>
@@ -67,8 +67,8 @@
 {
     <script>
         $(function () {
-            $('#tableaspirantes').DataTable({
-                "order": [[2, 'asc']],
+            $('#table-users').DataTable({
+                "order": [[0, 'asc']],
                 'paging': true,
                 'searching': true,
                 'ordering': true,

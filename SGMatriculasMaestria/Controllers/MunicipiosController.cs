@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SGMatriculasMaestria.Data;
+using SGMatriculasMaestria.Exceptions;
 using SGMatriculasMaestria.Models;
 
 namespace SGMatriculasMaestria.Controllers
@@ -70,12 +71,28 @@ namespace SGMatriculasMaestria.Controllers
         public async Task<IActionResult> Create([FromForm]Municipio municipio)
         {
             //municipio.Provincia = await _context.Provincia.FindAsync(municipio.Provincia.Id);
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(municipio);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    var m = await _context.Municipios.Where(x => x.Nombre == municipio.Nombre).FirstOrDefaultAsync();
+                    if(m is not null)
+                        throw new NegocioException("Ya existe un municipio con este nombre");
+                    
+                    _context.Add(municipio);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+            }catch(NegocioException nexp)
+            {
+                ViewBag.ErrorMessage = nexp.Message;
+                ViewBag.Provincias = await _context.Provincias.ToListAsync();
             }
+            catch (Exception exp)
+            {
+                BadRequest(exp);
+            }
+            
             return View(municipio);
         }
 
@@ -143,6 +160,17 @@ namespace SGMatriculasMaestria.Controllers
             if (municipio == null)
             {
                 return NotFound();
+            }
+
+            var count = _context.Entry(municipio).
+                Collection(b => b.Aspirantes).
+                Query().
+                Count();
+
+            if (count > 0)
+            {
+                ViewBag.ErrorMessage = string.Format("No se puede eliminar el municipio {0} porque esta asociado a {1} aspirante/s", municipio.Nombre, count);
+                ViewBag.hidden = true;
             }
 
             return View(municipio);

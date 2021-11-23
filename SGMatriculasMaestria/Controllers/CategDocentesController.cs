@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SGMatriculasMaestria.Data;
+using SGMatriculasMaestria.Exceptions;
 using SGMatriculasMaestria.Models;
 
 namespace SGMatriculasMaestria.Controllers
@@ -58,12 +59,29 @@ namespace SGMatriculasMaestria.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre")] CategDocente categDocente)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(categDocente);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    var cat = _context.CategDocentes.Where(x => x.Nombre == categDocente.Nombre).FirstOrDefault();
+                    if (cat is not null)
+                        throw new NegocioException("Ya existe una categoría con estas características");
+
+                    categDocente.Creatat = DateTime.Now;
+                    categDocente.Modifiat = DateTime.Now;
+                    _context.Add(categDocente);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+            }catch(NegocioException nexp)
+            {
+                ViewBag.ErrorMessage = nexp.Message;
             }
+            catch (Exception exp)
+            {
+                return BadRequest(exp);
+            }
+            
             return View(categDocente);
         }
 
@@ -99,6 +117,7 @@ namespace SGMatriculasMaestria.Controllers
             {
                 try
                 {
+                    categDocente.Modifiat = DateTime.Now;
                     _context.Update(categDocente);
                     await _context.SaveChangesAsync();
                 }

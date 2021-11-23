@@ -29,19 +29,7 @@
                                 </tr>
                                 <tr>
                                     <td> @Html.DisplayFor(modelItem => Model.Descripcion)</td>
-                                </tr>
-                                <tr>
-                                    <th>Municipio</th>
-                                </tr>
-                                <tr>
-                                    <td> @Html.DisplayFor(modelItem => Model.Municipio.Nombre)</td>
-                                </tr>
-                                <tr>
-                                    <th>Provincia</th>
-                                </tr>
-                                <tr>
-                                    <td> @Html.DisplayFor(modelItem => Model.Provincia.Nombre)</td>
-                                </tr>
+                                </tr>                               
                                 <tr>
                                     <th>Fecha de creación</th>
                                 </tr>
@@ -61,6 +49,20 @@
                         <!-- /.row -->
                     </div>
                     <!-- /.container-fluid -->
+                </div>
+                <div class="col-xl-3 col-md-6 mb-4"></div>
+                <div>
+                    @if (User.IsInRole(SGMatriculasMaestria.Enums.Roles.Tecnico.ToString()) == false)
+                    {
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger mr-2"><i class="fas fa-trash mr-2"></i>Eliminar</a>
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success mr-2"><i class="fas fa-fw fa-wrench mr-2"></i>Editar</a>
+                    }
+                    <a asp-action="Index" class="btn btn-secondary btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-arrow-left"></i>
+                        </span>
+                        <span class="text">Regresar al listado</span>
+                    </a>
                 </div>
             </div>
         </div>

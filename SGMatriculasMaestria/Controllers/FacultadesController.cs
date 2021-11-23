@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SGMatriculasMaestria.Data;
+using SGMatriculasMaestria.Exceptions;
 using SGMatriculasMaestria.Models;
 
 namespace SGMatriculasMaestria.Controllers
@@ -58,11 +59,36 @@ namespace SGMatriculasMaestria.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre")] Facultad facultad)
         {
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var m = await _context.Facultades.Where(x => x.Nombre == facultad.Nombre).FirstOrDefaultAsync();
+                    if (m is not null)
+                        throw new NegocioException("Ya existe una facultad con este nombre");
+
+                    facultad.Creatat = DateTime.Now;
+                    facultad.Modifiat = DateTime.Now;
+                    _context.Add(facultad);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch (NegocioException nexp)
+            {
+                ViewBag.ErrorMessage = nexp.Message;
+            }
+            catch (Exception exp)
+            {
+                BadRequest(exp);
+            }
+
+
+
             if (ModelState.IsValid)
             {
-                _context.Add(facultad);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                
             }
             return View(facultad);
         }
@@ -99,6 +125,7 @@ namespace SGMatriculasMaestria.Controllers
             {
                 try
                 {
+                    facultad.Modifiat = DateTime.Now;
                     _context.Update(facultad);
                     await _context.SaveChangesAsync();
                 }

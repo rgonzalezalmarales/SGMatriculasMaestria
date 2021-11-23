@@ -14,6 +14,9 @@ namespace SGMatriculasMaestria.Mappings
         {
             CreateMap<Aspirante, AspiranteDto>();
             CreateMap<AspiranteDto, Aspirante>();
+
+            CreateMap<MatriculaDto, Matricula>();
+            CreateMap<Matricula, MatriculaDto>();
         }
     }
 }

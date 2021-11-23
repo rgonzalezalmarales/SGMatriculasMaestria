@@ -7,6 +7,13 @@
 
 <h1 class="text-center">Nuevo Centro de Trabajo</h1>
 <hr />
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="text-danger text-center">
+        <h5>@ViewBag.ErrorMessage</h5>
+    </div>
+    <hr />
+}
 
 <div class="container-fluid">
     <div class="row">
@@ -56,16 +63,16 @@
     </div>
 </div>
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-        <script src="~/js/combine-selects.js"></script>
-        <script>
-            $(document).ready(function () {
-                combineSelect("#centro-provincia-select",
-                    "#centro-municipio-select",
-                    "/Municipios/GetMinucipiosByProvinciaJson",
-                    "provinciaId",
-                    "Seleccione un municipio");
-            });
-        </script>
-    }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/combine-selects.js"></script>
+    <script>
+        $(document).ready(function () {
+            combineSelect("#centro-provincia-select",
+                "#centro-municipio-select",
+                "/Municipios/GetMinucipiosByProvinciaJson",
+                "provinciaId",
+                "Seleccione un municipio");
+        });
+    </script>
+}

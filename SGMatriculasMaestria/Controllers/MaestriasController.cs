@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SGMatriculasMaestria.Data;
+using SGMatriculasMaestria.Exceptions;
 using SGMatriculasMaestria.Models;
 
 namespace SGMatriculasMaestria.Controllers
@@ -69,19 +70,34 @@ namespace SGMatriculasMaestria.Controllers
         public async Task<IActionResult> Create(Maestria maestria)
         {
             try
-            {               
-                maestria.Facultad = _context.Facultades.Find(maestria.Facultad.Id);
-                _context.Add(maestria);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+            {
+                //maestria.Facultad = _context.Facultades.Find(maestria.Facultad.Id);
+                
+                if (ModelState.IsValid)
+                {
+                    var m = await _context.Maestrias.
+                    Where(x => x.Titulo == maestria.Titulo && x.Version == maestria.Version).
+                    FirstOrDefaultAsync();
+                    if (m is not null)
+                        throw new NegocioException("Ya existe una maestría con estos datos");
+
+                    maestria.Creatat = DateTime.Now;
+                    maestria.Modifiat = DateTime.Now;
+                    _context.Add(maestria);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
             catch (Exception ex)
             {
                 ViewBag.Facultades = await _context.Facultades.ToListAsync();
-                return View(ex.Message);
-            }               
-            
-            
+                ViewBag.Facultades = await _context.Facultades.ToListAsync();
+                ViewBag.ErrorMessage = ex.Message;
+                
+            }
+
+            return View();
+
         }
 
         // GET: Maestrias/Edit/5
@@ -121,6 +137,7 @@ namespace SGMatriculasMaestria.Controllers
             {
                 try
                 {
+                    maestria.Modifiat = DateTime.Now;
                     _context.Update(maestria);
                     await _context.SaveChangesAsync();
                 }

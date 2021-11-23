@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SGMatriculasMaestria.Data;
+using SGMatriculasMaestria.Exceptions;
 using SGMatriculasMaestria.Models;
 
 namespace SGMatriculasMaestria.Controllers
@@ -35,8 +36,8 @@ namespace SGMatriculasMaestria.Controllers
                 return NotFound();
             }
 
-            var ces = await _context.Ces
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var ces = await _context.Ces.
+                FirstOrDefaultAsync(m => m.Id == id);
             if (ces == null)
             {
                 return NotFound();
@@ -58,11 +59,29 @@ namespace SGMatriculasMaestria.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre,Descripcion")] Ces ces)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(ces);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    var m = await _context.Ces.Where(x => x.Nombre == ces.Nombre).FirstOrDefaultAsync();
+                    if (m is not null)
+                        throw new NegocioException("Ya existe una universidad con este nombre");
+
+                    ces.Creatat = DateTime.Now;
+                    ces.Modifiat = DateTime.Now;
+                    _context.Add(ces);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+
+            }
+            catch (NegocioException nexp)
+            {
+                ViewBag.ErrorMessage = nexp.Message;
+            }
+            catch (Exception exp)
+            {
+                BadRequest(exp);
             }
             return View(ces);
         }
@@ -99,6 +118,7 @@ namespace SGMatriculasMaestria.Controllers
             {
                 try
                 {
+                    ces.Modifiat = DateTime.Now;
                     _context.Update(ces);
                     await _context.SaveChangesAsync();
                 }
@@ -131,6 +151,17 @@ namespace SGMatriculasMaestria.Controllers
             if (ces == null)
             {
                 return NotFound();
+            }
+
+            var count = _context.Entry(ces).
+                Collection(b => b.Aspirantes).
+                Query().
+                Count();
+
+            if (count > 0)
+            {
+                ViewBag.ErrorMessage = string.Format("No se puede eliminar el pais {0} porque esta asociado a {1} aspirante/s", ces.Nombre, count);
+                ViewBag.hidden = true;
             }
 
             return View(ces);

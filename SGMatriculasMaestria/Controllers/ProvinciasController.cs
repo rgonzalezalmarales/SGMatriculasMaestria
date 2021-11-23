@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SGMatriculasMaestria.Data;
+using SGMatriculasMaestria.Exceptions;
 using SGMatriculasMaestria.Models;
 
 namespace SGMatriculasMaestria.Controllers
@@ -66,12 +67,29 @@ namespace SGMatriculasMaestria.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre,PaisId")] Provincia provincia)
-        {
-            if (ModelState.IsValid)
+        {            
+            try
             {
-                _context.Add(provincia);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    var m = await _context.Provincias.Where(x => x.Nombre == provincia.Nombre).FirstOrDefaultAsync();
+                    if (m is not null)
+                        throw new NegocioException("Ya existe una provincia con este nombre");
+
+                    _context.Add(provincia);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+
+            }
+            catch (NegocioException nexp)
+            {
+                ViewBag.ErrorMessage = nexp.Message;
+                ViewBag.Paises = await _context.Paises.ToListAsync();
+            }
+            catch (Exception exp)
+            {
+                BadRequest(exp);
             }
             return View(provincia);
         }
@@ -140,6 +158,17 @@ namespace SGMatriculasMaestria.Controllers
             if (provincia == null)
             {
                 return NotFound();
+            }
+
+            var count = _context.Entry(provincia).
+               Collection(b => b.Aspirantes).
+               Query().
+               Count();
+
+            if (count > 0)
+            {
+                ViewBag.ErrorMessage = string.Format("No se puede eliminar el provincia {0} porque esta asociado a {1} aspirante/s", provincia.Nombre, count);
+                ViewBag.hidden = true;
             }
 
             return View(provincia);

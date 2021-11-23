@@ -17,10 +17,9 @@ namespace SGMatriculasMaestria.Validators
 
             string ProvinciaId = "nombre";
             RuleFor(Municipio => Municipio.ProvinciaId).
-                NotEmpty().WithName(ProvinciaId).
-                WithMessage(MessageNull).
-                NotNull().WithName(ProvinciaId).
-                WithMessage(MessageNull);
+                NotEmpty().WithName(ProvinciaId).WithMessage(MessageNull).
+                NotNull().WithName(ProvinciaId).WithMessage(MessageNull).
+                GreaterThan(0).WithName(ProvinciaId).WithMessage(MessageNull);
 
         }
 

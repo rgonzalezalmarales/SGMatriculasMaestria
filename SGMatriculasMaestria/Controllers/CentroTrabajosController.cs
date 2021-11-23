@@ -12,11 +12,11 @@ using SGMatriculasMaestria.Models;
 namespace SGMatriculasMaestria.Controllers
 {
     [Authorize]
-    public class CentroTrabajoesController : Controller
+    public class CentroTrabajosController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public CentroTrabajoesController(ApplicationDbContext context)
+        public CentroTrabajosController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -66,6 +66,8 @@ namespace SGMatriculasMaestria.Controllers
         {
             if (ModelState.IsValid)
             {
+                centroTrabajo.Creatat = DateTime.Now;
+                centroTrabajo.Modifiat = DateTime.Now;
                 _context.Add(centroTrabajo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -74,7 +76,7 @@ namespace SGMatriculasMaestria.Controllers
             ViewBag.Provincias = await _context.Provincias.ToListAsync();
             ViewBag.Municipios = await _context.Municipios.
                 Where(x => x.ProvinciaId == centroTrabajo.ProvinciaId).
-                FirstOrDefaultAsync();
+                ToListAsync();
 
             return View(centroTrabajo);
         }
@@ -117,6 +119,7 @@ namespace SGMatriculasMaestria.Controllers
             {
                 try
                 {
+                    centroTrabajo.Modifiat = DateTime.Now;
                     _context.Update(centroTrabajo);
                     await _context.SaveChangesAsync();
                 }
@@ -133,6 +136,12 @@ namespace SGMatriculasMaestria.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewBag.Provincias = await _context.Provincias.ToListAsync();
+            ViewBag.Municipios = await _context.Municipios.
+                Where(x => x.ProvinciaId == centroTrabajo.ProvinciaId).
+                ToListAsync();
+
             return View(centroTrabajo);
         }
 

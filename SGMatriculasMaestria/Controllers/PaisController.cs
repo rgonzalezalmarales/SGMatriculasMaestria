@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SGMatriculasMaestria.Data;
+using SGMatriculasMaestria.Exceptions;
 using SGMatriculasMaestria.Models;
 
 namespace SGMatriculasMaestria.Controllers
@@ -58,12 +59,29 @@ namespace SGMatriculasMaestria.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre")] Pais pais)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(pais);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    var m = await _context.Paises.Where(x => x.Nombre == pais.Nombre).FirstOrDefaultAsync();
+                    if (m is not null)
+                        throw new NegocioException("Ya existe una pais con este nombre");
+
+                    _context.Add(pais);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
+            catch (NegocioException nexp)
+            {
+                ViewBag.ErrorMessage = nexp.Message;
+                ViewBag.Provincias = await _context.Provincias.ToListAsync();
+            }
+            catch (Exception exp)
+            {
+                BadRequest(exp);
+            }
+
             return View(pais);
         }
 
@@ -132,6 +150,20 @@ namespace SGMatriculasMaestria.Controllers
             {
                 return NotFound();
             }
+            //var p = _context.Paises.Include(p => new { a = p.Aspirantes.Count });
+            //ViewBag.ErrorMessage = p;
+            var aspirantesCount = _context.Entry(pais).
+                Collection(b => b.Aspirantes).
+                Query().
+                Count();
+            
+            if(aspirantesCount > 0)
+            {
+                ViewBag.ErrorMessage = string.Format("No se puede eliminar el pais {0} porque esta asociado a {1} aspirante/s", pais.Nombre, aspirantesCount);
+                ViewBag.hidden = true;
+            }
+
+
 
             return View(pais);
         }

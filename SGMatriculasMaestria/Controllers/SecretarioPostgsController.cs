@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SGMatriculasMaestria.Data;
+using SGMatriculasMaestria.Exceptions;
 using SGMatriculasMaestria.Models;
 
 namespace SGMatriculasMaestria.Controllers
@@ -58,11 +59,34 @@ namespace SGMatriculasMaestria.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre")] SecretarioPostg secretarioPostg)
         {
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var m = await _context.SecretarioPostgrados.Where(x => x.Nombre == secretarioPostg.Nombre).FirstOrDefaultAsync();
+                    if (m is not null)
+                        throw new NegocioException("Ya existe un se cretario con este nombre");
+                    
+                    secretarioPostg.Creatat = DateTime.Now;
+                    secretarioPostg.Modifiat = DateTime.Now;
+                    _context.Add(secretarioPostg);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch (NegocioException nexp)
+            {
+                ViewBag.ErrorMessage = nexp.Message;
+            }
+            catch (Exception exp)
+            {
+                BadRequest(exp);
+            }
+
             if (ModelState.IsValid)
             {
-                _context.Add(secretarioPostg);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                
             }
             return View(secretarioPostg);
         }

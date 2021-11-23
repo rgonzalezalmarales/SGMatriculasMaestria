@@ -60,6 +60,8 @@ namespace SGMatriculasMaestria.Controllers
         {
             if (ModelState.IsValid)
             {
+                especGraduado.Creatat = DateTime.Now;
+                especGraduado.Modifiat = DateTime.Now;
                 _context.Add(especGraduado);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -99,6 +101,7 @@ namespace SGMatriculasMaestria.Controllers
             {
                 try
                 {
+                    especGraduado.Modifiat = DateTime.Now;
                     _context.Update(especGraduado);
                     await _context.SaveChangesAsync();
                 }

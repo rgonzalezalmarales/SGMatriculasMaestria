@@ -10,11 +10,9 @@ namespace SGMatriculasMaestria.Validators
         {
             string facultad = "facultad";
             RuleFor(Maestrias => Maestrias.FacultadId).
-                    NotEmpty().WithName(facultad).
-                    WithMessage(MessageNull).
-                    NotNull().
-                    WithName(facultad).
-                    WithMessage(MessageNull);
+                NotEmpty().WithName(facultad).WithMessage(MessageNull).
+                NotNull().WithName(facultad).WithMessage(MessageNull).
+                GreaterThan(0).WithName(facultad).WithMessage(MessageNull);
         }
     }
 }

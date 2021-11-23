@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SGMatriculasMaestria.Data;
+using SGMatriculasMaestria.DTOs;
 using SGMatriculasMaestria.Models;
 
 namespace SGMatriculasMaestria.Controllers
@@ -15,10 +17,12 @@ namespace SGMatriculasMaestria.Controllers
     public class MatriculasController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public MatriculasController(ApplicationDbContext context)
+        public MatriculasController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: Matriculas
@@ -69,28 +73,40 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Matricula matricula)
+        public async Task<IActionResult> Create(MatriculaDto matriculaDto)
         {
+            /*//
 
             var aspirante = await _context.Aspirantes.FindAsync(matricula.AspiranteCI);
-            if (aspirante is not null)
+            if (aspirante is not null)*/
+            Matricula matricula = _mapper.Map<Matricula>(matriculaDto);
+            
+            if (ModelState.IsValid)
             {
-                matricula.Aspirante = aspirante;
+                matricula.Creatat = DateTime.Now;
+                matricula.Modifiat = DateTime.Now;
+                matricula.FechaMatricula = DateTime.Now;
+                //matricula.Aspirante = aspirante;
+
                 _context.Add(matricula);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
-            ModelState.AddModelError("no user", "no existe el usuario");
+            
+
+            ViewBag.Facultades = await _context.Facultades.ToListAsync();
+            ViewBag.CategoriasDocentes = await _context.CategDocentes.ToListAsync();
+            ViewBag.SecretarioPost = await _context.SecretarioPostgrados.ToListAsync();
+            ViewBag.CentrosTrabajo = await _context.CentroTrabajos.ToListAsync();
+            ViewBag.Maestrias = await _context.Maestrias.Where(x=> x.Id == matriculaDto.MaestriaId).ToListAsync();
+            //matricula
+            ViewBag.ErrorMessage = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage));
 
 
-            matricula.Maestria = _context.Maestrias.Where(x => x.Id == matricula.Maestria.Id).Include(x => x.Facultad).FirstOrDefault();
-            matricula.CategDocente = _context.CategDocentes.Where(x => x.Id == matricula.CategDocente.Id).FirstOrDefault();
-            matricula.CentroTrabajo = _context.CentroTrabajos.Where(x => x.Id == matricula.CentroTrabajo.Id).FirstOrDefault();
-            matricula.SecretarioPostg = _context.SecretarioPostgrados.Where(x => x.Id == matricula.SecretarioPostg.Id).FirstOrDefault();
-
-
-            return View(matricula);
+            return View(matriculaDto);
         }
 
         // GET: Matriculas/Edit/5
@@ -102,10 +118,13 @@ namespace SGMatriculasMaestria.Controllers
                 return NotFound();
             }
 
+            
             var matricula = await _context.Matricula.
                 Include(m => m.Maestria).
                 Where(x => x.Id == id).
                 FirstOrDefaultAsync();
+
+            var matriculaDto = _mapper.Map<MatriculaDto>(matricula);
 
             if (matricula == null)
             {
@@ -117,8 +136,8 @@ namespace SGMatriculasMaestria.Controllers
             ViewBag.SecretarioPost = await _context.SecretarioPostgrados.ToListAsync();
             ViewBag.CentrosTrabajo = await _context.CentroTrabajos.ToListAsync();
             ViewBag.Maestrias = await _context.Maestrias.Where(m => m.FacultadId == matricula.Maestria.FacultadId).ToListAsync();
-
-            return View(matricula);
+            matriculaDto.FacultadId = matricula.Maestria.FacultadId;
+            return View(matriculaDto);
         }
 
         // POST: Matriculas/Edit/5
@@ -127,8 +146,10 @@ namespace SGMatriculasMaestria.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         //[Bind("Id,FechaInicio,FechaCulminacion,MotivoSolicitud,AnnoExperienciaLaboral,FechaMatricula")]
-        public async Task<IActionResult> Edit(int id, Matricula matricula)
+        public async Task<IActionResult> Edit(int id, MatriculaDto matriculaDto)
         {
+
+            var matricula = _mapper.Map<Matricula>(matriculaDto);
             if (id != matricula.Id)
             {
                 return NotFound();
@@ -138,6 +159,7 @@ namespace SGMatriculasMaestria.Controllers
             {
                 try
                 {
+
                     matricula.Maestria = null;
                     _context.Update(matricula);
                     await _context.SaveChangesAsync();
@@ -155,7 +177,15 @@ namespace SGMatriculasMaestria.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(matricula);
+
+            ViewBag.Facultades = await _context.Facultades.ToListAsync();
+            ViewBag.CategoriasDocentes = await _context.CategDocentes.ToListAsync();
+            ViewBag.SecretarioPost = await _context.SecretarioPostgrados.ToListAsync();
+            ViewBag.CentrosTrabajo = await _context.CentroTrabajos.ToListAsync();
+            ViewBag.Maestrias = await _context.Maestrias.Where(m => m.FacultadId == matriculaDto.FacultadId).ToListAsync();
+
+
+            return View(matriculaDto);
         }
 
         // GET: Matriculas/Delete/5

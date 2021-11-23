@@ -6,8 +6,15 @@
 }
 
 <h1 class="text-center">Nuevo Pais</h1>
-
 <hr />
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="text-danger text-center">
+        <h5>@ViewBag.ErrorMessage</h5>
+    </div>
+    <hr />
+}
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
@@ -32,6 +39,6 @@
     </div>
 </div>
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

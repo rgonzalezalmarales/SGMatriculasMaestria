@@ -29,18 +29,15 @@ namespace SGMatriculasMaestria.Validators
 
             string ProvinciaId = "provincia";
             RuleFor(Ces => Ces.ProvinciaId).
-                    NotEmpty().WithName(ProvinciaId).
-                    WithMessage(MessageNull).
-                    NotNull().
-                    WithName(ProvinciaId).
-                    WithMessage(MessageNull);
+                NotEmpty().WithName(ProvinciaId).WithMessage(MessageNull).
+                NotNull().WithName(ProvinciaId).WithMessage(MessageNull).
+                GreaterThan(0).WithName(ProvinciaId).WithMessage(MessageNull);
 
             string MunicipioId = "municipio";
             RuleFor(Ces => Ces.MunicipioId).
-                    NotEmpty().WithName(MunicipioId).
-                    WithMessage(MessageNull).
-                    NotNull().WithName(MunicipioId).
-                    WithMessage(MessageNull);
+                NotEmpty().WithName(MunicipioId).WithMessage(MessageNull).
+                NotNull().WithName(MunicipioId).WithMessage(MessageNull).
+                GreaterThan(0).WithName(MunicipioId).WithMessage(MessageNull);
 
         }
 

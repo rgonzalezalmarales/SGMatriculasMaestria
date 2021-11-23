@@ -7,6 +7,14 @@
 
 <h1 class="text-center">Nuevo Secretario de Post-Grado</h1>
 <hr />
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="text-danger text-center">
+        <h5>@ViewBag.ErrorMessage</h5>
+    </div>
+    <hr />
+}
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -30,7 +38,7 @@
 </div>
 
 <div>
- 
+
 </div>
 
 @section Scripts {

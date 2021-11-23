@@ -12,7 +12,7 @@ namespace SGMatriculasMaestria.Validators
         private string MessageNull { get => "El campo '{PropertyName}' es obligatorio"; }
         public ProvinciaValidador()
         {
-            string Pais = "nombre del pais";
+            string Pais = "provincia";
             RuleFor(Provincia => Provincia.Nombre).
                 NotEmpty().WithName(Pais).
                 WithMessage(MessageNull).
