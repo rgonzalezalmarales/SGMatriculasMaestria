@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SGMatriculasMaestria.Data;
+using SGMatriculasMaestria.Exceptions;
 using SGMatriculasMaestria.Models;
 
 namespace SGMatriculasMaestria.Controllers
@@ -62,14 +63,28 @@ namespace SGMatriculasMaestria.Controllers
         [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Create([Bind("Id,Nombre")] EspecGraduado especGraduado)
         {
-            if (ModelState.IsValid)
+            try
             {
-                especGraduado.Creatat = DateTime.Now;
-                especGraduado.Modifiat = DateTime.Now;
-                _context.Add(especGraduado);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var m = await  _context.EspecGraduados.Where(x => x.Nombre == especGraduado.Nombre).FirstOrDefaultAsync();
+                if (m is not null)
+                    throw new NegocioException("Ya existe una especialidad con este nombre");
+
+                if (ModelState.IsValid)
+                {
+                    especGraduado.Creatat = DateTime.Now;
+                    especGraduado.Modifiat = DateTime.Now;
+                    _context.Add(especGraduado);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+
             }
+            catch (Exception exp)
+            {
+
+                ViewBag.ErrorMessage = exp.Message;
+            }
+           
             return View(especGraduado);
         }
 

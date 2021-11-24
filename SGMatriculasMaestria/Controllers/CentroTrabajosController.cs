@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SGMatriculasMaestria.Data;
+using SGMatriculasMaestria.Exceptions;
 using SGMatriculasMaestria.Models;
 
 namespace SGMatriculasMaestria.Controllers
@@ -68,14 +69,26 @@ namespace SGMatriculasMaestria.Controllers
         [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Create(CentroTrabajo centroTrabajo)
         {
-            if (ModelState.IsValid)
+            try
             {
-                centroTrabajo.Creatat = DateTime.Now;
-                centroTrabajo.Modifiat = DateTime.Now;
-                _context.Add(centroTrabajo);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var m = await _context.CentroTrabajos.Where(x => x.Nombre == centroTrabajo.Nombre).FirstOrDefaultAsync();
+                if (m is not null)
+                    throw new NegocioException("Ya existe un centro de trabajo con este nombre");
+
+                if (ModelState.IsValid)
+                {
+                    centroTrabajo.Creatat = DateTime.Now;
+                    centroTrabajo.Modifiat = DateTime.Now;
+                    _context.Add(centroTrabajo);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
+            catch (Exception nexp)
+            {
+                ViewBag.ErrorMessage = nexp.Message;
+            }
+            
 
             ViewBag.Provincias = await _context.Provincias.ToListAsync();
             ViewBag.Municipios = await _context.Municipios.

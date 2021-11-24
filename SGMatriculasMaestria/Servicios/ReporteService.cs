@@ -32,5 +32,30 @@ namespace SGMatriculasMaestria.Servicios
         {
             return await _context.Aspirantes.Where(x => x.MunicipioId == municipioId).CountAsync();
         }
+
+        public async Task<long> TotalAspirantesAsync()
+        {
+            return await _context.Aspirantes.LongCountAsync();
+        }
+
+        public async Task<long> TotalMaestriasAsync()
+        {
+            return await _context.Aspirantes.LongCountAsync();
+        }
+
+        public async Task<long> TotalMatriculasAsync()
+        {
+            return await _context.Aspirantes.LongCountAsync();
+        }
+
+        public async Task<long> TotalAspirantesPendientesAsync()
+        {
+            return await _context.Aspirantes.Where(x=> x.Matriculas.Count() == 0).LongCountAsync();
+        }
+
+        public async Task<long> TotalMaestriasSinMatriculaAsync()
+        {
+            return await _context.Maestrias.Where(x => x.Matriculas.Count() == 0).LongCountAsync();
+        }
     }
 }

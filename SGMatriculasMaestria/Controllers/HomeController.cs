@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using SGMatriculasMaestria.Enums;
+using SGMatriculasMaestria.Interfaces;
+using SGMatriculasMaestria.DTOs;
 
 namespace SGMatriculasMaestria.Controllers
 {
@@ -19,16 +21,18 @@ namespace SGMatriculasMaestria.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
+        private readonly IReporteService _resporteService;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, IReporteService resporteService)
         {
             _logger = logger;
             _context = context;
+            _resporteService = resporteService;
         }
         
         public async Task<IActionResult> Index()
         {
-            AspirantesReport reporte = new AspirantesReport();
+            /*AspirantesReport reporte = new AspirantesReport();
 
             var matriculas =await _context.Matricula.ToListAsync();
             var aspirantes =await _context.Aspirantes.ToListAsync();
@@ -63,9 +67,17 @@ namespace SGMatriculasMaestria.Controllers
             reporte.AspirantesMasculinos = aspirantes.Count(x => x.Sexo == Sexo.Masculino);
             reporte.PorcientoDeAspirantesPorMatriculas = Convert.ToInt32((reporte.AspirantesConMatriculas / aspirantes.Count) * 100);
             reporte.AspirantesFemeninos = aspirantes.Count() - reporte.AspirantesMasculinos;
-            ViewBag.AspiranteReporte = reporte;
+            ViewBag.AspiranteReporte = reporte;*/
 
-            return View();
+            var reporte = new AspiranteReporteDto()
+            {
+                TotalAspirantes = await _resporteService.TotalAspirantesAsync(),
+                TotalAspirantesPendientes = await _resporteService.TotalAspirantesPendientesAsync(),
+                TotalMatriculas = await _resporteService.TotalMatriculasAsync(),
+                TotalMaestriasSinMatricula = await _resporteService.TotalMaestriasSinMatriculaAsync()
+            };
+
+            return View(reporte);
         }
 
         public IActionResult Privacy()

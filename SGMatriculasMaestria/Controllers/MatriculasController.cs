@@ -45,7 +45,7 @@ namespace SGMatriculasMaestria.Controllers
                 Include(x => x.Aspirante).
                 Include(x => x.CategDocente).
                 Include(x => x.CentroTrabajo).
-                Include(x => x.Maestria).
+                Include(x => x.Maestria).ThenInclude( a=> a.Facultad).
                 Include(x => x.SecretarioPostg)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (matricula == null)
@@ -57,7 +57,7 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: Matriculas/Create
-        [Authorize(Roles = "Especialista")]
+        [Authorize(Roles = "Especialista,Tecnico")]
         public IActionResult Create()
         {
             ViewBag.Facultades = _context.Facultades.ToList();
@@ -76,7 +76,7 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Especialista")]
+        [Authorize(Roles = "Especialista,Tecnico")]
         public async Task<IActionResult> Create(MatriculaDto matriculaDto)
         {
             /*//

@@ -1,11 +1,17 @@
 ﻿using SGMatriculasMaestria.Enums;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SGMatriculasMaestria.Models
 {
     public class Aspirante
     {
+        public Aspirante()
+        {
+            Matriculas = new HashSet<Matricula>();
+        }
+
         [Key]
         [Display(Name = "Carnet de Indentidad")]        
         public string CI { get; set; }
@@ -71,5 +77,7 @@ namespace SGMatriculasMaestria.Models
 
         public DateTime Creatat { get; set; }
         public DateTime Modifiat { get; set; }
+
+        public virtual ICollection<Matricula> Matriculas { get; set; }
     }
 }

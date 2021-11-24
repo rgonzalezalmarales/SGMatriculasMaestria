@@ -1,4 +1,5 @@
-﻿@{
+﻿@model SGMatriculasMaestria.DTOs.AspiranteReporteDto
+@{
     ViewData[""] = "";
 }
 
@@ -17,9 +18,9 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Aspirantes (Mensuales)
+                                    Total de Aspirantes
                                 </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.AspiranteReporte.AspirantesMensuales</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalAspirantes</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -36,9 +37,9 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Aspirantes (Anuales)
+                                    Aspirantes pendientes a matricular
                                 </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.AspiranteReporte.AspirantesAnuales</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalAspirantesPendientes</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-users fa-2x text-gray-300"></i>
@@ -55,19 +56,19 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                    Matriculas por Aspirantes
+                                    Total Maestrias sin matriculas
                                 </div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@ViewBag.AspiranteReporte.PorcientoDeAspirantesPorMatriculas%</div>
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@Model.TotalMaestriasSinMatricula</div>
                                     </div>
-                                    <div class="col">
+                                    <!--<div class="col">
                                         <div class="progress progress-sm mr-2">
                                             <div class="progress-bar bg-info" role="progressbar"
-                                                 style=" width:@ViewBag.AspiranteReporte.PorcientoDeAspirantesPorMatriculas%" aria-valuenow=@ViewBag.AspiranteReporte.PorcientoDeAspirantesPorMatriculas aria-valuemin="0"
+                                                 style=" aria-valuemin="0"
                                                  aria-valuemax="100"></div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </div>
                             <div class="col-auto">
@@ -87,7 +88,7 @@
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                     Aspirantes pendientes de matrícula
                                 </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.AspiranteReporte.AspirantesSinMatriculas</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TotalAspirantesPendientes</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -139,41 +140,7 @@
 
 
     @section scripts {
-        <script>
-   /* Chart.defaults.global.defaultFontColor = '#858796';
-
-    // Pie Chart Example
-    var ctx = document.getElementById("myPieChart");
-    var myPieChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ["Femeninos", "Masculinos"],
-            datasets: [{
-                data: [@ViewBag.AspiranteReporte.AspirantesFemeninos,@ViewBag.AspiranteReporte.AspirantesMasculinos],
-                backgroundColor: ['#ff477e', '#0496ff'],
-                hoverBackgroundColor: ['#ff477e', '#0496ff'],
-                hoverBorderColor: "rgba(234, 236, 244, 1)",
-            }],
-        },
-        options: {
-            maintainAspectRatio: false,
-            tooltips: {
-                backgroundColor: "rgb(255,255,255)",
-                bodyFontColor: "#858796",
-                borderColor: '#dddfeb',
-                borderWidth: 1,
-                xPadding: 15,
-                yPadding: 15,
-                displayColors: false,
-                caretPadding: 10,
-            },
-            legend: {
-                display: false
-            },
-            cutoutPercentage: 80,
-        },
-    });*/
-        </script>
+       
 
 
     }
