@@ -220,6 +220,18 @@ namespace SGMatriculasMaestria.Controllers
             {
                 return NotFound();
             }
+            
+            var count = _context.Entry(aspirante).
+              Collection(b => b.Matriculas).
+              Query().
+              Count();
+
+
+            if (count > 0)
+            {
+                ViewBag.ErrorMessage = string.Format("No se puede eliminar el aspirante {0} porque está asociado a {1} matrícula(s)", aspirante.Nombre, count);
+                ViewBag.hidden = true;
+            }
 
             return View(aspirante);
         }
