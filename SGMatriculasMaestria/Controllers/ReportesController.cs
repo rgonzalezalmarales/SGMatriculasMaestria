@@ -21,16 +21,24 @@ namespace SGMatriculasMaestria.Controllers
         // GET: ReportesController
         public async Task<ActionResult> Index()
         {
+            /*
             ViewBag.Mujeres = await _reporteService.CountAspirantesPorSexoAsync(Enums.Sexo.Femenino);
             ViewBag.Hombres = await _reporteService.CountAspirantesPorSexoAsync(Enums.Sexo.Masculino);
-
+            */
             return View();
         }
 
         [HttpPost]
-        /*public async Task<JsonResult> GraficaPorSexo() { 
+        public async Task<JsonResult> GraficaPorSexo()
+        {
+            var tempo = new
+            {
+                Hombres = await _reporteService.CountAspirantesPorSexoAsync(Enums.Sexo.Masculino),
+                Mujeres = await _reporteService.CountAspirantesPorSexoAsync(Enums.Sexo.Femenino)
+            };
 
-        }*/
+            return Json(tempo);
+        }
 
         // GET: ReportesController/Details/5
         public ActionResult Details(int id)
