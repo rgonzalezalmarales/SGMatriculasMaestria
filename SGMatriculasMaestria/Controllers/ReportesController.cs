@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SGMatriculasMaestria.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,25 @@ namespace SGMatriculasMaestria.Controllers
     [Authorize]
     public class ReportesController : Controller
     {
-        // GET: ReportesController
-        public ActionResult Index()
+        private readonly IReporteService _reporteService;
+
+        public ReportesController(IReporteService reporteService)
         {
+            _reporteService = reporteService;                
+        }
+        // GET: ReportesController
+        public async Task<ActionResult> Index()
+        {
+            ViewBag.Mujeres = await _reporteService.CountAspirantesPorSexoAsync(Enums.Sexo.Femenino);
+            ViewBag.Hombres = await _reporteService.CountAspirantesPorSexoAsync(Enums.Sexo.Masculino);
+
             return View();
         }
+
+        [HttpPost]
+        /*public async Task<JsonResult> GraficaPorSexo() { 
+
+        }*/
 
         // GET: ReportesController/Details/5
         public ActionResult Details(int id)

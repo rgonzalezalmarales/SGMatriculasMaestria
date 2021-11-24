@@ -33,6 +33,7 @@ namespace SGMatriculasMaestria.Models
 
         [Display(Name = "Fecha de graduación")]
         [Required(ErrorMessage = "El campo 'fecha de graduación' es obligatorio")]
+        [DataType(DataType.Date)]
         public DateTime FechaGraduacion { get; set; }
 
         [Required(ErrorMessage = "El campo 'tomo' es obligatorio")]

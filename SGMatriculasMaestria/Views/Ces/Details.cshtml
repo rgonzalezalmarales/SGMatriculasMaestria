@@ -29,7 +29,19 @@
                                 </tr>
                                 <tr>
                                     <td> @Html.DisplayFor(modelItem => Model.Descripcion)</td>
-                                </tr>                               
+                                </tr>
+                                <tr>
+                                    <th>Provincia</th>
+                                </tr>
+                                <tr>
+                                    <td> @Html.DisplayFor(modelItem => Model.Provincia.Nombre)</td>
+                                </tr>
+                                <tr>
+                                    <th>Municipio</th>
+                                </tr>
+                                <tr>
+                                    <td> @Html.DisplayFor(modelItem => Model.Municipio.Nombre)</td>
+                                </tr>
                                 <tr>
                                     <th>Fecha de creación</th>
                                 </tr>
@@ -67,18 +79,5 @@
             </div>
         </div>
     </center>
-    <div class="col-xl-3 col-md-6 mb-4"></div>
-    <div>
-        @if (User.IsInRole(SGMatriculasMaestria.Enums.Roles.Tecnico.ToString()) == false)
-        {
-            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a><span>&nbsp; &nbsp; &nbsp;</span>
-            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-info margin-left">Editar</a><span>&nbsp; &nbsp; &nbsp;</span>
-        }
-        <a asp-action="Index" class="btn btn-secondary btn-icon-split">
-            <span class="icon text-white-50">
-                <i class="fas fa-arrow-left"></i>
-            </span>
-            <span class="text">Regresar al listado</span>
-        </a>
-    </div> <!-- /.card-body -->
+    <!-- /.card-body -->
 </div>

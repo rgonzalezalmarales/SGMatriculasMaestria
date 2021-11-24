@@ -39,6 +39,8 @@ namespace SGMatriculasMaestria.Controllers
             }
 
             var ces = await _context.Ces.
+                Include(p => p.Provincia).
+                Include(m => m.Municipio).
                 FirstOrDefaultAsync(m => m.Id == id);
             if (ces == null)
             {
@@ -50,8 +52,10 @@ namespace SGMatriculasMaestria.Controllers
 
         // GET: Ces/Create
         [Authorize(Roles = "Especialista")]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            ViewBag.Provincias = await _context.Provincias.ToListAsync();
+            ViewBag.Municipios = new List<Municipio>();
             return View();
         }
 
@@ -60,7 +64,8 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Descripcion")] Ces ces)
+        //[Bind("Id,Nombre,Descripcion")]
+        public async Task<IActionResult> Create(Ces ces)
         {
             try
             {
@@ -80,12 +85,18 @@ namespace SGMatriculasMaestria.Controllers
             }
             catch (Exception nexp)
             {
-                ViewBag.ErrorMessage = nexp.Message;
+                //ViewBag.ErrorMessage = nexp.Message;
             }/*
             catch (Exception exp)
             {
                 BadRequest(exp);
             }*/
+
+            ViewBag.Provincias = await _context.Provincias.ToListAsync();
+            ViewBag.Municipios = await _context.Municipios.
+                Where(x => x.ProvinciaId == ces.ProvinciaId).
+                ToListAsync();
+
             return View(ces);
         }
 
@@ -103,6 +114,12 @@ namespace SGMatriculasMaestria.Controllers
             {
                 return NotFound();
             }
+
+            ViewBag.Provincias = await _context.Provincias.ToListAsync();
+            ViewBag.Municipios = await _context.Municipios.
+                Where(x => x.ProvinciaId == ces.ProvinciaId).
+                ToListAsync();
+
             return View(ces);
         }
 
@@ -112,7 +129,8 @@ namespace SGMatriculasMaestria.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Especialista")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Descripcion")] Ces ces)
+        // [Bind("Id,Nombre,Descripcion")] 
+        public async Task<IActionResult> Edit(int id,Ces ces)
         {
             if (id != ces.Id)
             {
@@ -140,6 +158,12 @@ namespace SGMatriculasMaestria.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewBag.Provincias = await _context.Provincias.ToListAsync();
+            ViewBag.Municipios = await _context.Municipios.
+                Where(x => x.ProvinciaId == ces.ProvinciaId).
+                ToListAsync();
+
             return View(ces);
         }
 
