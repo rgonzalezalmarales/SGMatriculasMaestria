@@ -13,7 +13,7 @@ using SGMatriculasMaestria.Models;
 
 namespace SGMatriculasMaestria.Controllers
 {
-    [Authorize(Roles = "Especialista")]
+    [Authorize]
     public class MatriculasController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -25,14 +25,14 @@ namespace SGMatriculasMaestria.Controllers
             _mapper = mapper;
         }
 
-        [Authorize(Roles = "Tecnico,Especialista,Administrador")]
+        
         // GET: Matriculas
         public async Task<IActionResult> Index()
         {
             return View(await _context.Matricula.Include(x=>x.Aspirante).ToListAsync());
         }
 
-        [Authorize(Roles = "Tecnico,Especialista,Administrador")]
+       
         // GET: Matriculas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -57,6 +57,7 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: Matriculas/Create
+        [Authorize(Roles = "Especialista")]
         public IActionResult Create()
         {
             ViewBag.Facultades = _context.Facultades.ToList();
@@ -75,6 +76,7 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Create(MatriculaDto matriculaDto)
         {
             /*//
@@ -112,6 +114,7 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: Matriculas/Edit/5
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Edit(int? id)
         {
             
@@ -147,6 +150,7 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Especialista")]
         //[Bind("Id,FechaInicio,FechaCulminacion,MotivoSolicitud,AnnoExperienciaLaboral,FechaMatricula")]
         public async Task<IActionResult> Edit(int id, MatriculaDto matriculaDto)
         {
@@ -191,6 +195,7 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: Matriculas/Delete/5
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -211,6 +216,7 @@ namespace SGMatriculasMaestria.Controllers
         // POST: Matriculas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var matricula = await _context.Matricula.FindAsync(id);

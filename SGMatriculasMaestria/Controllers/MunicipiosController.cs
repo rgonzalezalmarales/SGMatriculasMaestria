@@ -12,7 +12,7 @@ using SGMatriculasMaestria.Models;
 
 namespace SGMatriculasMaestria.Controllers
 {
-    [Authorize(Roles = "Especialista")]
+    [Authorize]
     public class MunicipiosController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,11 +22,11 @@ namespace SGMatriculasMaestria.Controllers
             _context = context;
         }
 
-        [Authorize(Roles = "Tecnico,Especialista,Administrador")]
+        
         // GET: Municipios
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Municipios.ToListAsync());
+            return View(await _context.Municipios.Include(x => x.Provincia).ToListAsync());
         }
 
         public async Task<JsonResult> GetMinucipiosByProvinciaJson(int provinciaId)
@@ -37,7 +37,7 @@ namespace SGMatriculasMaestria.Controllers
             return Json(municipios);
         }
 
-        [Authorize(Roles = "Tecnico,Especialista,Administrador")]
+       
         // GET: Municipios/Details/5
         public async Task<IActionResult> Details(int id)
         {
@@ -59,6 +59,7 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: Municipios/Create
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Create()
         {
             ViewBag.Provincias = await _context.Provincias.ToListAsync();
@@ -70,6 +71,7 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Create([FromForm]Municipio municipio)
         {
             //municipio.Provincia = await _context.Provincia.FindAsync(municipio.Provincia.Id);
@@ -80,37 +82,44 @@ namespace SGMatriculasMaestria.Controllers
                     var m = await _context.Municipios.Where(x => x.Nombre == municipio.Nombre).FirstOrDefaultAsync();
                     if(m is not null)
                         throw new NegocioException("Ya existe un municipio con este nombre");
-                    
+
+                    municipio.Creatat = DateTime.Now;
+                    municipio.Modifiat = DateTime.Now;
                     _context.Add(municipio);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
-            }catch(NegocioException nexp)
+            }catch(Exception nexp)
             {
                 ViewBag.ErrorMessage = nexp.Message;
                 ViewBag.Provincias = await _context.Provincias.ToListAsync();
-            }
+            }/*
             catch (Exception exp)
             {
-                BadRequest(exp);
-            }
+                //BadRequest(exp);
+            }*/
             
             return View(municipio);
         }
 
         // GET: Municipios/Edit/5
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
+            /*if (id == null)
             {
                 return NotFound();
-            }
+            }*/
 
             var municipio = await _context.Municipios.FindAsync(id);
             if (municipio == null)
             {
-                return NotFound();
+                //return NotFound();
+                ViewBag.ErrorMessage = "No existe un municipio con este identificador";
             }
+
+            ViewBag.Provincias = await _context.Provincias.ToListAsync();
+
             return View(municipio);
         }
 
@@ -119,7 +128,9 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre")] Municipio municipio)
+        [Authorize(Roles = "Especialista")]
+        // [Bind("Id,Nombre")]
+        public async Task<IActionResult> Edit(int id, Municipio municipio)
         {
             if (id != municipio.Id)
             {
@@ -130,6 +141,7 @@ namespace SGMatriculasMaestria.Controllers
             {
                 try
                 {
+                    municipio.Modifiat = DateTime.Now;
                     _context.Update(municipio);
                     await _context.SaveChangesAsync();
                 }
@@ -150,6 +162,7 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: Municipios/Delete/5
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Delete(int id)
         {
             if (id == 0)
@@ -168,10 +181,30 @@ namespace SGMatriculasMaestria.Controllers
                 Collection(b => b.Aspirantes).
                 Query().
                 Count();
+            
+            var countCt = _context.Entry(municipio).
+                Collection(b => b.CentroTrabajos).
+                Query().
+                Count();
+
+            var countCes = _context.Entry(municipio).
+                Collection(b => b.Ces).
+                Query().
+                Count();
+
 
             if (count > 0)
             {
-                ViewBag.ErrorMessage = string.Format("No se puede eliminar el municipio {0} porque esta asociado a {1} aspirante/s", municipio.Nombre, count);
+                ViewBag.ErrorMessage = string.Format("No se puede eliminar el municipio {0} porque está asociado a {1} aspirante(s).", municipio.Nombre, count);
+                ViewBag.hidden = true;
+            } else if( countCt > 0)
+            {
+                ViewBag.ErrorMessage = string.Format("No se puede eliminar el municipio {0} porque está asociado a {1} centro(s) de trabajo.", municipio.Nombre, countCt);
+                ViewBag.hidden = true;
+            }
+            else if (countCes > 0)
+            {
+                ViewBag.ErrorMessage = string.Format("No se puede eliminar el municipio {0} porque está asociado a {1} universidad(es).", municipio.Nombre, countCes);
                 ViewBag.hidden = true;
             }
 
@@ -181,6 +214,7 @@ namespace SGMatriculasMaestria.Controllers
         // POST: Municipios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var municipio = await _context.Municipios.FindAsync(id);

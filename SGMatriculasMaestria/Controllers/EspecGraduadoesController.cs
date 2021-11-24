@@ -11,7 +11,7 @@ using SGMatriculasMaestria.Models;
 
 namespace SGMatriculasMaestria.Controllers
 {
-    [Authorize(Roles = "Especialista")]
+    [Authorize]
     public class EspecGraduadoesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,14 +21,14 @@ namespace SGMatriculasMaestria.Controllers
             _context = context;
         }
 
-        [Authorize(Roles = "Tecnico,Especialista,Administrador")]
+        
         // GET: EspecGraduadoes
         public async Task<IActionResult> Index()
         {
             return View(await _context.EspecGraduados.ToListAsync());
         }
 
-        [Authorize(Roles = "Tecnico,Especialista,Administrador")]
+        
         // GET: EspecGraduadoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -48,6 +48,7 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: EspecGraduadoes/Create
+        [Authorize(Roles = "Especialista")]
         public IActionResult Create()
         {
             return View();
@@ -58,6 +59,7 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Create([Bind("Id,Nombre")] EspecGraduado especGraduado)
         {
             if (ModelState.IsValid)
@@ -72,6 +74,7 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: EspecGraduadoes/Edit/5
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -92,6 +95,7 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre")] EspecGraduado especGraduado)
         {
             if (id != especGraduado.Id)
@@ -124,6 +128,7 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: EspecGraduadoes/Delete/5
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -144,6 +149,7 @@ namespace SGMatriculasMaestria.Controllers
         // POST: EspecGraduadoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var especGraduado = await _context.EspecGraduados.FindAsync(id);

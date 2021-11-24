@@ -13,7 +13,8 @@ using SGMatriculasMaestria.Models;
 
 namespace SGMatriculasMaestria.Controllers
 {
-    [Authorize(Roles = "Especialista")]
+    //[Authorize(Roles = "Especialista")]
+    [Authorize]
     public class AspirantesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -25,8 +26,9 @@ namespace SGMatriculasMaestria.Controllers
             _mapper = mapper;
         }
 
-        [Authorize(Roles = "Tecnico,Especialista,Administrador")]
+
         // GET: Aspirantes
+        //[Authorize(Roles = "Tecnico,Especialista,Administrador")]
         public async Task<IActionResult> Index()
         {
             var aspirantes = await _context.Aspirantes.
@@ -40,7 +42,7 @@ namespace SGMatriculasMaestria.Controllers
             return View(aspirantes);
         }
 
-        [Authorize(Roles = "Tecnico,Especialista,Administrador")]
+        //[Authorize(Roles = "Tecnico,Especialista,Administrador")]
         // GET: Aspirantes/Details/5
         public async Task<IActionResult> Details(string id)
         {
@@ -66,6 +68,7 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: Aspirantes/Create
+        [Authorize(Roles ="Especialista")]
         public async Task<IActionResult> Create()
         {
             ViewBag.Especialidades = await _context.EspecGraduados.ToListAsync();
@@ -99,6 +102,7 @@ namespace SGMatriculasMaestria.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Especialista")]
         [ValidateAntiForgeryToken]
         //[Bind("CI,Nombre,PrimerApellido,DireccionParticular,Telefono,Email,FechaGraduacion,Tomo,Folio,Numero,Sexo")]
         public async Task<IActionResult> Create( Aspirante aspirante)
@@ -130,7 +134,7 @@ namespace SGMatriculasMaestria.Controllers
 
             return View(aspirante);
         }
-
+        [Authorize(Roles = "Especialista")]
         // GET: Aspirantes/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
@@ -168,6 +172,7 @@ namespace SGMatriculasMaestria.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Especialista")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id,Aspirante aspirante)
         {
@@ -201,6 +206,7 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: Aspirantes/Delete/5
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -221,6 +227,7 @@ namespace SGMatriculasMaestria.Controllers
         // POST: Aspirantes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var aspirante = await _context.Aspirantes.FindAsync(id);

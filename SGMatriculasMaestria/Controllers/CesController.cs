@@ -12,7 +12,7 @@ using SGMatriculasMaestria.Models;
 
 namespace SGMatriculasMaestria.Controllers
 {
-    [Authorize(Roles = "Especialista")]
+    [Authorize]
     public class CesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,14 +22,14 @@ namespace SGMatriculasMaestria.Controllers
             _context = context;
         }
 
-        [Authorize(Roles = "Tecnico,Especialista,Administrador")]
+       
         // GET: Ces
         public async Task<IActionResult> Index()
         {
             return View(await _context.Ces.ToListAsync());
         }
 
-        [Authorize(Roles = "Tecnico,Especialista,Administrador")]
+        
         // GET: Ces/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -49,6 +49,7 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: Ces/Create
+        [Authorize(Roles = "Especialista")]
         public IActionResult Create()
         {
             return View();
@@ -77,18 +78,19 @@ namespace SGMatriculasMaestria.Controllers
                 }
 
             }
-            catch (NegocioException nexp)
+            catch (Exception nexp)
             {
                 ViewBag.ErrorMessage = nexp.Message;
-            }
+            }/*
             catch (Exception exp)
             {
                 BadRequest(exp);
-            }
+            }*/
             return View(ces);
         }
 
         // GET: Ces/Edit/5
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -109,6 +111,7 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Descripcion")] Ces ces)
         {
             if (id != ces.Id)
@@ -141,6 +144,7 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: Ces/Delete/5
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -162,7 +166,7 @@ namespace SGMatriculasMaestria.Controllers
 
             if (count > 0)
             {
-                ViewBag.ErrorMessage = string.Format("No se puede eliminar el pais {0} porque esta asociado a {1} aspirante/s", ces.Nombre, count);
+                ViewBag.ErrorMessage = string.Format("No se puede eliminar la universidad {0} porque está asociada a {1} aspirante/s", ces.Nombre, count);
                 ViewBag.hidden = true;
             }
 
@@ -172,6 +176,7 @@ namespace SGMatriculasMaestria.Controllers
         // POST: Ces/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var ces = await _context.Ces.FindAsync(id);

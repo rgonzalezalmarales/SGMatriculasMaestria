@@ -12,7 +12,7 @@ using SGMatriculasMaestria.Models;
 
 namespace SGMatriculasMaestria.Controllers
 {
-    [Authorize(Roles = "Especialista")]
+    [Authorize]
     public class CategDocentesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,14 +22,14 @@ namespace SGMatriculasMaestria.Controllers
             _context = context;
         }
 
-        [Authorize(Roles = "Tecnico,Especialista,Administrador")]
+        
         // GET: CategDocentes
         public async Task<IActionResult> Index()
         {
             return View(await _context.CategDocentes.ToListAsync());
         }
 
-        [Authorize(Roles = "Tecnico,Especialista,Administrador")]
+        
         // GET: CategDocentes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -48,6 +48,7 @@ namespace SGMatriculasMaestria.Controllers
             return View(categDocente);
         }
 
+        [Authorize(Roles = "Especialista")]
         // GET: CategDocentes/Create
         public IActionResult Create()
         {
@@ -59,6 +60,7 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Create([Bind("Id,Nombre")] CategDocente categDocente)
         {
             try
@@ -88,6 +90,7 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: CategDocentes/Edit/5
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -108,6 +111,7 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre")] CategDocente categDocente)
         {
             if (id != categDocente.Id)
@@ -139,6 +143,7 @@ namespace SGMatriculasMaestria.Controllers
             return View(categDocente);
         }
 
+        [Authorize(Roles = "Especialista")]
         // GET: CategDocentes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -154,12 +159,25 @@ namespace SGMatriculasMaestria.Controllers
                 return NotFound();
             }
 
+            var count = _context.Entry(categDocente).
+               Collection(b => b.Matriculas).
+               Query().
+               Count();
+
+
+            if (count > 0)
+            {
+                ViewBag.ErrorMessage = string.Format("No se puede eliminar la categoría docente {0} porque está asociada a {1} matrícula(s)", categDocente.Nombre, count);
+                ViewBag.hidden = true;
+            }
+
             return View(categDocente);
         }
 
         // POST: CategDocentes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var categDocente = await _context.CategDocentes.FindAsync(id);

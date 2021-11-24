@@ -18,10 +18,10 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.Nombre)
                             </th>
-                            @if (User.IsInRole(SGMatriculasMaestria.Enums.Roles.Tecnico.ToString()) == false)
-                            {
-                                <th></th>
-                            }
+                            <th>
+                                @Html.DisplayNameFor(model => model.Pais)
+                            </th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,21 +31,20 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Nombre)
                             </td>
-                            @if (User.IsInRole(SGMatriculasMaestria.Enums.Roles.Tecnico.ToString()) == false)
-                            {
-                                <td>
-                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success btn-circle btn-sm">
-                                        <i class="fas fa-fw fa-wrench"></i>
-                                    </a>
-                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-circle btn-sm">
-                                        <i class="fas fa-info-circle"></i>
-                                    </a>
-                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-circle btn-sm">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                    </a>
-                                </td>
-                            }
+                            <td>
+                                @Html.DisplayFor(model => item.Pais.Nombre)
+                            </td>
+                            <td class="tb-accion">
+                                @if (User.IsInRole(SGMatriculasMaestria.Enums.Roles.Tecnico.ToString()) == false)
+                                {
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success btn-circle btn-sm"><i class="fas fa-fw fa-wrench"></i></a>
+                                }
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-circle btn-sm"><i class="fas fa-info-circle"></i></a>
+                                @if (User.IsInRole(SGMatriculasMaestria.Enums.Roles.Tecnico.ToString()) == false)
+                                {
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>
+                                }
+                            </td>
                         </tr>
                         }
                     </tbody>

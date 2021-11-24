@@ -11,7 +11,7 @@ using SGMatriculasMaestria.Models;
 
 namespace SGMatriculasMaestria.Controllers
 {
-    [Authorize(Roles = "Especialista")]
+    [Authorize]
     public class CentroTrabajosController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,14 +21,14 @@ namespace SGMatriculasMaestria.Controllers
             _context = context;
         }
 
-        [Authorize(Roles = "Tecnico,Especialista,Administrador")]
+        
         // GET: CentroTrabajoes
         public async Task<IActionResult> Index()
         {
             return View(await _context.CentroTrabajos.Include(m => m.Municipio).ToListAsync());
         }
 
-        [Authorize(Roles = "Tecnico,Especialista,Administrador")]
+        
         // GET: CentroTrabajoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -51,6 +51,7 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: CentroTrabajoes/Create
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Create()
         {
             ViewBag.Provincias = await _context.Provincias.ToListAsync();
@@ -64,6 +65,7 @@ namespace SGMatriculasMaestria.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         //[Bind("Id,Nombre,Departamento,Direccion")]
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Create(CentroTrabajo centroTrabajo)
         {
             if (ModelState.IsValid)
@@ -84,6 +86,7 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: CentroTrabajoes/Edit/5
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -110,6 +113,7 @@ namespace SGMatriculasMaestria.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         // [Bind("Id,Nombre,Departamento,Direccion")] 
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Edit(int id,CentroTrabajo centroTrabajo)
         {
             if (id != centroTrabajo.Id)
@@ -148,6 +152,7 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: CentroTrabajoes/Delete/5
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -166,12 +171,25 @@ namespace SGMatriculasMaestria.Controllers
                 return NotFound();
             }
 
+            var aspirantesCount = _context.Entry(centroTrabajo).
+               Collection(b => b.Matriculas).
+               Query().
+               Count();
+
+
+            if (aspirantesCount > 0)
+            {
+                ViewBag.ErrorMessage = string.Format("No se puede eliminar el centro de trabajo {0} porque está asociado a {1} matrícula(s)", centroTrabajo.Nombre, aspirantesCount);
+                ViewBag.hidden = true;
+            }
+
             return View(centroTrabajo);
         }
 
         // POST: CentroTrabajoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var centroTrabajo = await _context.CentroTrabajos.FindAsync(id);

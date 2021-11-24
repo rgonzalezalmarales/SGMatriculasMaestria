@@ -12,7 +12,7 @@ using SGMatriculasMaestria.Models;
 
 namespace SGMatriculasMaestria.Controllers
 {
-    [Authorize(Roles = "Especialista")]
+    [Authorize]
     public class ProvinciasController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,14 +22,13 @@ namespace SGMatriculasMaestria.Controllers
             _context = context;
         }
 
-        [Authorize(Roles = "Tecnico,Especialista,Administrador")]
+        
         // GET: Provincias
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Provincias.ToListAsync());
+            return View(await _context.Provincias.Include(x => x.Pais).ToListAsync());
         }
 
-        [Authorize(Roles = "Tecnico,Especialista,Administrador")]
         // GET: Provincias/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -38,7 +37,7 @@ namespace SGMatriculasMaestria.Controllers
                 return NotFound();
             }
 
-            var provincia = await _context.Provincias
+            var provincia = await _context.Provincias.Include(p => p.Pais)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (provincia == null)
             {
@@ -57,6 +56,7 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: Provincias/Create
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Create()
         {
             ViewBag.Paises = await _context.Paises.ToListAsync();
@@ -68,6 +68,7 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Create([Bind("Id,Nombre,PaisId")] Provincia provincia)
         {            
             try
@@ -77,38 +78,44 @@ namespace SGMatriculasMaestria.Controllers
                     var m = await _context.Provincias.Where(x => x.Nombre == provincia.Nombre).FirstOrDefaultAsync();
                     if (m is not null)
                         throw new NegocioException("Ya existe una provincia con este nombre");
-
+                    
+                    provincia.Creatat = DateTime.Now;
+                    provincia.Modifiat = DateTime.Now;
                     _context.Add(provincia);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
 
             }
-            catch (NegocioException nexp)
+            catch (Exception nexp)
             {
                 ViewBag.ErrorMessage = nexp.Message;
                 ViewBag.Paises = await _context.Paises.ToListAsync();
             }
-            catch (Exception exp)
+            /*catch (Exception exp)
             {
                 BadRequest(exp);
-            }
+            }*/
             return View(provincia);
         }
 
         // GET: Provincias/Edit/5
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            /*if (id == null)
             {
                 return NotFound();
-            }
+            }*/
 
             var provincia = await _context.Provincias.FindAsync(id);
             if (provincia == null)
             {
-                return NotFound();
+                ViewBag.ErrorMessage = "No existe una provincia con este identificador";
+                //return NotFound();
             }
+
+            ViewBag.Paises = await _context.Paises.ToListAsync();
             return View(provincia);
         }
 
@@ -117,7 +124,9 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre")] Provincia provincia)
+        [Authorize(Roles = "Especialista")]
+        //[Bind("Id,Nombre")]
+        public async Task<IActionResult> Edit(int id,  Provincia provincia)
         {
             if (id != provincia.Id)
             {
@@ -128,6 +137,7 @@ namespace SGMatriculasMaestria.Controllers
             {
                 try
                 {
+                    provincia.Modifiat = DateTime.Now;
                     _context.Update(provincia);
                     await _context.SaveChangesAsync();
                 }
@@ -148,6 +158,7 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: Provincias/Delete/5
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -167,11 +178,34 @@ namespace SGMatriculasMaestria.Controllers
                Query().
                Count();
 
+            var countCt = _context.Entry(provincia).
+                Collection(b => b.CentroTrabajos).
+                Query().
+                Count();
+
+            var countCes = _context.Entry(provincia).
+                Collection(b => b.Ces).
+                Query().
+                Count();
+
+
             if (count > 0)
             {
-                ViewBag.ErrorMessage = string.Format("No se puede eliminar el provincia {0} porque esta asociado a {1} aspirante/s", provincia.Nombre, count);
+                ViewBag.ErrorMessage = string.Format("No se puede eliminar la provincia {0} porque está asociada a {1} aspirante(s).", provincia.Nombre, count);
                 ViewBag.hidden = true;
             }
+            else if (countCt > 0)
+            {
+                ViewBag.ErrorMessage = string.Format("No se puede eliminar la provincia {0} porque está asociada a {1} centro(s) de trabajo.", provincia.Nombre, countCt);
+                ViewBag.hidden = true;
+            }
+            else if (countCes > 0)
+            {
+                ViewBag.ErrorMessage = string.Format("No se puede eliminar la provincia {0} porque está asociada a {1} universidad(es).", provincia.Nombre, countCes);
+                ViewBag.hidden = true;
+            }
+
+
 
             return View(provincia);
         }
@@ -179,6 +213,7 @@ namespace SGMatriculasMaestria.Controllers
         // POST: Provincias/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             

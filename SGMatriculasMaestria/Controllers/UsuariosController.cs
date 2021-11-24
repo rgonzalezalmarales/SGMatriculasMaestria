@@ -238,6 +238,11 @@ namespace SGMatriculasMaestria.Controllers
                         }
                         await _userManager.AddToRoleAsync(user, userDto.Role);
                     }
+                    if(userDto.Password is not null)
+                    {
+                        await _userManager.RemovePasswordAsync(user);
+                        await _userManager.AddPasswordAsync(user, userDto.Password);
+                    }
 
                     await _userManager.UpdateAsync(user);
                     return RedirectToAction(nameof(Index));

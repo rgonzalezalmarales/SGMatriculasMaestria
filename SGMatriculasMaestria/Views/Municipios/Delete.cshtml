@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3 class="text-center">Estás seguro de eliminar esto?</h3>
+<h3 class="text-center">Estás seguro de eliminar es municipio?</h3>
 <div>
     <hr />
     @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
@@ -24,9 +24,9 @@
         </dd>
     </dl>
 
-    <form asp-action="Delete"  hidden="@ViewBag.hidden">
+    <form asp-action="Delete" >
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Eliminar" class="btn btn-danger" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" hidden="@ViewBag.hidden" />
         <a asp-action="Index" class="btn btn-secondary btn-icon-split">
             <span class="icon text-white-50">
                 <i class="fas fa-arrow-left"></i>

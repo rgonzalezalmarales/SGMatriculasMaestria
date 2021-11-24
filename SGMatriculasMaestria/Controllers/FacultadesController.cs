@@ -12,7 +12,7 @@ using SGMatriculasMaestria.Models;
 
 namespace SGMatriculasMaestria.Controllers
 {
-    [Authorize(Roles = "Especialista")]
+    [Authorize]
     public class FacultadesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,13 +22,13 @@ namespace SGMatriculasMaestria.Controllers
             _context = context;
         }
 
-        [Authorize(Roles = "Tecnico,Especialista,Administrador")]
+        
         // GET: Facultades
         public async Task<IActionResult> Index()
         {
             return View(await _context.Facultades.ToListAsync());
         }
-        [Authorize(Roles = "Tecnico,Especialista,Administrador")]
+        
         // GET: Facultades/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -48,6 +48,7 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: Facultades/Create
+        [Authorize(Roles = "Especialista")]
         public IActionResult Create()
         {
             return View();
@@ -58,6 +59,7 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Create([Bind("Id,Nombre")] Facultad facultad)
         {
 
@@ -95,6 +97,7 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: Facultades/Edit/5
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -115,6 +118,7 @@ namespace SGMatriculasMaestria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre")] Facultad facultad)
         {
             if (id != facultad.Id)
@@ -147,6 +151,7 @@ namespace SGMatriculasMaestria.Controllers
         }
 
         // GET: Facultades/Delete/5
+        [Authorize(Roles = "Especialista")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -161,10 +166,23 @@ namespace SGMatriculasMaestria.Controllers
                 return NotFound();
             }
 
+            var count = _context.Entry(facultad).
+               Collection(b => b.Maestrias).
+               Query().
+               Count();
+
+
+            if (count > 0)
+            {
+                ViewBag.ErrorMessage = string.Format("No se puede eliminar la facultad {0} porque está asociada a {1} matrícula(s)", facultad.Nombre, count);
+                ViewBag.hidden = true;
+            }
+
             return View(facultad);
         }
 
         // POST: Facultades/Delete/5
+        [Authorize(Roles = "Especialista")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
