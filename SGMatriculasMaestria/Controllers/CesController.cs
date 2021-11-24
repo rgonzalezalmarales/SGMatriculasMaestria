@@ -85,7 +85,7 @@ namespace SGMatriculasMaestria.Controllers
             }
             catch (Exception nexp)
             {
-                //ViewBag.ErrorMessage = nexp.Message;
+                ViewBag.ErrorMessage = nexp.Message;
             }/*
             catch (Exception exp)
             {

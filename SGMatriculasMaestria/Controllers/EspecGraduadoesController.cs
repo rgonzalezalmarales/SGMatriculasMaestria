@@ -45,6 +45,18 @@ namespace SGMatriculasMaestria.Controllers
                 return NotFound();
             }
 
+            var count = _context.Entry(especGraduado).
+              Collection(b => b.Aspirantes).
+              Query().
+              Count();
+
+
+            if (count > 0)
+            {
+                ViewBag.ErrorMessage = string.Format("No se puede eliminar la especialidad {0} porque está asociado a {1} aspirante(s)", especGraduado.Nombre, count);
+                ViewBag.hidden = true;
+            }
+
             return View(especGraduado);
         }
 
