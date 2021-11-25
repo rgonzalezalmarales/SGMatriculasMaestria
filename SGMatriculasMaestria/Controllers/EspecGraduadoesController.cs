@@ -178,6 +178,7 @@ namespace SGMatriculasMaestria.Controllers
 
             if (count > 0)
             {
+                ViewBag.ErrorMessage = string.Format("No se puede eliminar la especialidad {0} porque está asociada a {1} aspirante(s)", especGraduado.Nombre, count);
                 ViewBag.hidden = true;
             }
 
