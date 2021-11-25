@@ -40,6 +40,13 @@ namespace SGMatriculasMaestria.Controllers
             return Json(tempo);
         }
 
+        [HttpPost]
+        public async Task<JsonResult> GraficaPorProv()
+        {
+            var a = await _reporteService.ProvinciasAspirantes();
+            return Json(a);
+        }
+
         // GET: ReportesController/Details/5
         public ActionResult Details(int id)
         {

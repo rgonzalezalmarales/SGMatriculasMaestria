@@ -2,6 +2,7 @@
 using SGMatriculasMaestria.Data;
 using SGMatriculasMaestria.Enums;
 using SGMatriculasMaestria.Interfaces;
+using SGMatriculasMaestria.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,13 @@ using System.Threading.Tasks;
 
 namespace SGMatriculasMaestria.Servicios
 {
+    public class Par
+    {
+        public string Key { get; set; }
+        public int Value { get; set; }
+
+    }
+
     public class ReporteService : IReporteService
     {
         private readonly ApplicationDbContext _context;
@@ -33,29 +41,38 @@ namespace SGMatriculasMaestria.Servicios
             return await _context.Aspirantes.Where(x => x.MunicipioId == municipioId).CountAsync();
         }
 
-        public async Task<long> TotalAspirantesAsync()
+        public async Task<int> TotalAspirantesAsync()
         {
-            return await _context.Aspirantes.LongCountAsync();
+            var result = await _context.Aspirantes.CountAsync();
+            return result;
         }
 
-        public async Task<long> TotalMaestriasAsync()
+        public async Task<int> TotalMaestriasAsync()
         {
-            return await _context.Aspirantes.LongCountAsync();
+            var result = await _context.Maestrias.CountAsync();
+            return result;
         }
 
-        public async Task<long> TotalMatriculasAsync()
+        public async Task<int> TotalMatriculasActivasAsync()
         {
-            return await _context.Aspirantes.LongCountAsync();
+            var result = await _context.Matricula.Where(x => x.FechaInicio < DateTime.Now && x.FechaCulminacion > DateTime.Now).CountAsync();
+            return result;
         }
 
-        public async Task<long> TotalAspirantesPendientesAsync()
+        public async Task<int> TotalAspirantesPendientesAsync()
         {
-            return await _context.Aspirantes.Where(x=> x.Matriculas.Count() == 0).LongCountAsync();
+            var result = await _context.Aspirantes.Where(x => x.Matriculas.Count() == 0).CountAsync();
+            //if (result is null)
+                //return 0;
+
+            return result;
         }
 
-        public async Task<long> TotalMaestriasSinMatriculaAsync()
+        public async Task<List<Par>> ProvinciasAspirantes()
         {
-            return await _context.Maestrias.Where(x => x.Matriculas.Count() == 0).LongCountAsync();
+            var a = await  _context.Provincias.Select(x => new Par (){ Value = x.Aspirantes.Count, Key = x.Nombre }).ToListAsync();
+
+            return a;
         }
     }
 }

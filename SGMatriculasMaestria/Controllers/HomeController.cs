@@ -69,15 +69,22 @@ namespace SGMatriculasMaestria.Controllers
             reporte.AspirantesFemeninos = aspirantes.Count() - reporte.AspirantesMasculinos;
             ViewBag.AspiranteReporte = reporte;*/
 
-            var reporte = new AspiranteReporteDto()
+            /*var reporte = new AspiranteReporteDto()
             {
                 TotalAspirantes = await _resporteService.TotalAspirantesAsync(),
                 TotalAspirantesPendientes = await _resporteService.TotalAspirantesPendientesAsync(),
                 TotalMatriculas = await _resporteService.TotalMatriculasAsync(),
                 TotalMaestriasSinMatricula = await _resporteService.TotalMaestriasSinMatriculaAsync()
-            };
+            };*/
 
-            return View(reporte);
+
+           
+            ViewBag.TotalAspirantesPendientes = await _resporteService.TotalAspirantesPendientesAsync();
+            ViewBag.TotalMatriculasActivas = await _resporteService.TotalMatriculasActivasAsync();
+            ViewBag.TotalMaestrias = await _resporteService.TotalMaestriasAsync();
+            ViewBag.TotalAspirantes = await _resporteService.TotalAspirantesAsync();
+
+            return View();
         }
 
         public IActionResult Privacy()
