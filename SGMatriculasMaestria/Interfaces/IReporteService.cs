@@ -10,6 +10,7 @@ namespace SGMatriculasMaestria.Interfaces
     public interface IReporteService
     {
         Task<int> CountAspirantesPorSexoAsync(Sexo sexo);
+        Task<List<Par>> MunicipiosAspirantes(int provinciaId);
         Task<List<Par>> ProvinciasAspirantes();
         Task<int> TotalAspirantesAsync();
         Task<int> TotalAspirantesPendientesAsync();

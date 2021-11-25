@@ -74,5 +74,12 @@ namespace SGMatriculasMaestria.Servicios
 
             return a;
         }
+
+        public async Task<List<Par>> MunicipiosAspirantes(int provinciaId)
+        {
+            return await _context.Municipios.
+                Where(x => x.ProvinciaId == provinciaId).
+                Select(x => new Par() { Value = x.Aspirantes.Count, Key = x.Nombre }).ToListAsync();
+        }
     }
 }

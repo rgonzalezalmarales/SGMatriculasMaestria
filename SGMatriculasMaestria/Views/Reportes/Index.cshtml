@@ -30,6 +30,32 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-normal">Gráfica de aspirantes por municios</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <form>
+                                <div class="form-group">
+                                    <label class="control-label">Provincia</label>
+                                    <select asp-items="@(new SelectList(ViewBag.Provincias,"Id","Nombre"))" id="provincia-select" class="form-control">
+                                        <option value="">-- Seleccione una provincia --</option>
+                                    </select>
+                                </div>                                
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <canvas id="municipios-chart" width="800" height="400"></canvas>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -52,164 +78,6 @@
 @section scripts
 {
     <script src="~/lib/chart.js-3.6.0/package/dist/chart.js"></script>
-
-    <script>
-        /*window.onload = function () {
-            var ctx = document.getElementById("myChart").getContext("2d");
-            var myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-                    datasets: [
-                        {
-                            label: "My First dataset",
-                            data: [1, 2, 3, 2, 1, 2, 3, 4, 5, 4]
-                        }
-                    ]
-                },
-                options: {
-                    responsive: false
-                }
-            });
-        }*/
-    </script>
-
-
-    <script>
-        /*
-         *  OK
-
-        window.onload = function () {
-            var ctx = document.getElementById("myChart").getContext("2d");
-            var myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-                    datasets: [
-                        {
-                            label: "My First dataset",
-                            data: [1, 2, 3, 2, 1, 2, 3, 4, 5, 4]
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                }
-            });
-        }*/
-
-
-
-        $(document).ready(function () {
-
-            $.ajax({
-                url: "/Reportes/GraficaPorSexo",
-                type: 'POST',
-                dataType: 'json',
-                //data: { search: request.term },
-                success: function (data) {
-
-                    const ctx = document.getElementById('myChart').getContext('2d');
-                    const myChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: [`Mujeres (${data.mujeres})`, `Hombres (${data.hombres})`],
-                            datasets: [{
-                                label: 'Aspirantes por sexo',
-                                data: [data.mujeres, data.hombres],
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)'
-                                ],
-                                borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',],
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
-                            }
-                        }
-                    });
-
-                }
-            });
-
-
-
-
-            const ctx1 = document.getElementById('provincia-chart').getContext('2d');
-            const myChart1 = new Chart(ctx1, {
-                type: 'pie',
-                data: {
-                    labels: [],
-                    datasets: [{
-                        label: 'Aspirantes por provincia',
-                        data: [],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgb(255, 99, 132, 0.2)',
-                            'rgb(255, 159, 64, 0.2)',
-                            'rgb(255, 205, 86, 0.2)',
-                            'rgb(75, 192, 192, 0.2)',
-                            'rgb(54, 162, 235, 0.2)',
-                            'rgb(153, 102, 255, 0.2)',
-                            'rgb(201, 203, 207, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-
-
-            $.ajax({
-                url: "/Reportes/GraficaPorProv",
-                type: 'POST',
-                dataType: 'json',
-                //data: { search: request.term },
-                success: function (data) {
-                    console.log(data)
-                    data.forEach((value, index) => {
-                        if (value.value > 0) {
-                            myChart1.data.labels.push(`${value.key} (${value.value})`);
-                            myChart1.data.datasets[0].data.push(value.value);
-                        }
-                    });
-
-                    myChart1.update();
-                }
-            });
-
-
-
-
-
-
-
-
-        });
-
-
-
-
-    </script>
-
-
+    <script src="~/js/chartjs-reports/Graficas.js"></script>
 
 }

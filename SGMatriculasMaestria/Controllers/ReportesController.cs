@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SGMatriculasMaestria.Data;
 using SGMatriculasMaestria.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,10 +15,12 @@ namespace SGMatriculasMaestria.Controllers
     public class ReportesController : Controller
     {
         private readonly IReporteService _reporteService;
+        private readonly ApplicationDbContext _context;
 
-        public ReportesController(IReporteService reporteService)
+        public ReportesController(IReporteService reporteService, ApplicationDbContext context)
         {
-            _reporteService = reporteService;                
+            _reporteService = reporteService;
+            _context = context;
         }
         // GET: ReportesController
         public async Task<ActionResult> Index()
@@ -25,6 +29,9 @@ namespace SGMatriculasMaestria.Controllers
             ViewBag.Mujeres = await _reporteService.CountAspirantesPorSexoAsync(Enums.Sexo.Femenino);
             ViewBag.Hombres = await _reporteService.CountAspirantesPorSexoAsync(Enums.Sexo.Masculino);
             */
+
+            ViewBag.Provincias = await _context.Provincias.ToListAsync();
+
             return View();
         }
 
@@ -45,6 +52,21 @@ namespace SGMatriculasMaestria.Controllers
         {
             var a = await _reporteService.ProvinciasAspirantes();
             return Json(a);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> GraficaPorMunic(int provinciaId)
+        {
+            try
+            {
+                var a = await _reporteService.MunicipiosAspirantes(provinciaId);
+                return Json(a);
+            }
+            catch (Exception)
+            {
+                return Json("[]");
+            }
+            
         }
 
         // GET: ReportesController/Details/5
