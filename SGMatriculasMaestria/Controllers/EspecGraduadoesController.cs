@@ -170,6 +170,17 @@ namespace SGMatriculasMaestria.Controllers
                 return NotFound();
             }
 
+            var count = _context.Entry(especGraduado).
+             Collection(b => b.Aspirantes).
+             Query().
+             Count();
+
+
+            if (count > 0)
+            {
+                ViewBag.hidden = true;
+            }
+
             return View(especGraduado);
         }
 
